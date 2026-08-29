@@ -1,0 +1,11 @@
+{
+  "l4t": "# R39 (release), REVISION: 2.1, GCID: 46758480, BOARD: generic, EABI: aarch64, DATE: Fri Aug  7 05:54:22 AM UTC 2026\n# KERNEL_VARIANT: oot\nTARGET_USERSPACE_LIB_DIR=nvidia\nTARGET_USERSPACE_LIB_DIR_PATH=usr/lib/aarch64-linux-gnu/nvidia",
+  "tensorrt": "TensorRT v101602",
+  "cuda": "release 13.2",
+  "python": "Python 3.12.3",
+  "torch": "2.13.0+cu130",
+  "gpu_name": "Orin",
+  "pip_freeze_hash": "c9a2a600eac6a658",
+  "nvpmodel_q": "NV Power Mode: MAXN\n0",
+  "jetson_clocks_show": "SOC family:tegra234  Machine:NVIDIA Jetson Orin NX Engineering Reference Developer Kit\nOnline CPUs: 0-5, Offline CPUs: \ncpu0:  Governor=schedutil MinFreq=729600 MaxFreq=1984000 CurrentFreq=1497600 IdleStates: WFI=1 c7=1 \ncpu1:  Governor=schedutil MinFreq=729600 MaxFreq=1984000 CurrentFreq=1420800 IdleStates: WFI=1 c7=1 \ncpu2:  Governor=schedutil MinFreq=729600 MaxFreq=1984000 CurrentFreq=1420800 IdleStates: WFI=1 c7=1 \ncpu3:  Governor=schedutil MinFreq=729600 MaxFreq=1984000 CurrentFreq=1267200 IdleStates: WFI=1 c7=1 \ncpu4:  Governor=schedutil MinFreq=729600 MaxFreq=1984000 CurrentFreq=729600 IdleStates: WFI=1 c7=1 \ncpu5:  Governor=schedutil MinFreq=729600 MaxFreq=1984000 CurrentFreq=729600 IdleStates: WFI=1 c7=1 \nGPU MinFreq=306000000 MaxFreq=765000000 CurrentFreq=765000000\nActive GPU TPCs: 8\nEMC MinFreq=204000000 MaxFreq=3199000000 CurrentFreq=2133000000\nDLA0_CORE:   Online=1 MinFreq=0 MaxFreq=614400000 CurrentFreq=614400000\nDLA0_FALCON: Online=1 MinFreq=0 MaxFreq=294400000 CurrentFreq=294400000\nPVA0_VPS0: Online=1 MinFreq=0 MaxFreq=1190400000 CurrentFreq=1190400000\nPVA0_AXI:  Online=1 MinFreq=0 MaxFreq=857600000 CurrentFreq=857600000\nFAN Dynamic Speed Control=nvfancontrol hwmon0_pwm1=91\nFAN Dynamic Speed Control=nvfancontrol hwmon0_pwm1_enable=1\nNV Power Mode: MAXN"
+}

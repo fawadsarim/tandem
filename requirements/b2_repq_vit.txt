@@ -1,0 +1,19 @@
+# Pinned per RepQ-ViT's own README (zkkli/RepQ-ViT, commit
+# a160561b9233945e6680132f129d13041b787318 -- see ../commits.md).
+# They recommend timm==0.4.12 but do NOT pin an exact torch version in
+# their docs (confirmed: their own requirements are README-prose only, no
+# floor stated). torch==1.12.1/torchvision==0.13.1 chosen to match B1/B4's
+# exactly-verified pin (same "era" of PyTorch as ToMe, well past
+# timm==0.4.12's own 2021-era baseline, official companion pair confirmed
+# via PyPI release timestamps) -- NOT a verified-by-RepQ-ViT's-own-docs
+# pin, flagged as such in deviations.md #1. numpy/tqdm/Pillow pinned to
+# releases contemporaneous with torch 1.12.1 (Aug 2022) -- verified to
+# exist on PyPI, not execution-tested against RepQ-ViT's actual code (no
+# GPU in this environment); the host-equivalence gate (experiments/phase2_2_baselines/common/
+# equivalence_gate.py) is the real cross-host verification mechanism.
+torch==1.12.1
+torchvision==0.13.1
+timm==0.4.12
+numpy==1.23.5
+tqdm==4.64.1
+Pillow==9.2.0

@@ -1,0 +1,14 @@
+[Unit]
+Description=TANDEM: re-apply MAXN SUPER power-mode fix (JetPack 7.2 ISO-installer bug) on every boot
+ConditionPathExists=/etc/nvpmodel.conf
+After=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/maxn_super_autofix.sh
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

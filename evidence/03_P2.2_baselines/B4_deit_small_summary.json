@@ -1,0 +1,96 @@
+{
+  "model": "deit_small_patch16_224",
+  "c_id": 1162418061312.0,
+  "structural_cost_split": {
+    "linear_frac_pct": 92.1232,
+    "attention_frac_pct": 7.8768,
+    "w8a8_at_r0_pct": 30.9076,
+    "w6a6_at_r0_pct": 20.8317,
+    "w8a16_at_r0_pct": 53.9384
+  },
+  "composite_attention_skip_bias_pp": {
+    "floor": 0.052,
+    "est_range": [
+      0.08,
+      0.15
+    ]
+  },
+  "staged_frontier_saturation": {
+    "saturating_config": "r2_w8a8_best",
+    "saturating_bops_frac_pct": 28.78,
+    "dominated_configs": [
+      "r15_w16a16_best",
+      "r22_w16a16_best",
+      "r7_w16a16_best"
+    ]
+  },
+  "staged_pareto_frontier": [
+    "r17_w8a8_best",
+    "r10_w8a8_best",
+    "r2_w8a8_best",
+    "r0"
+  ],
+  "comparison_table": [
+    {
+      "config": "r17_w8a8_best",
+      "staged_bops": 174522200000.0,
+      "staged_top1_pct": 77.434,
+      "tandem_bops_note": "interpolated at staged's exact BOPs (TANDEM's own measured C values, programmatically loaded from plans.csv)",
+      "tandem_top1_pct": 77.4256,
+      "delta_tandem_minus_staged_pp": -0.0084,
+      "extrapolated": false,
+      "attention_skip_bias_flag": true
+    },
+    {
+      "config": "r10_w8a8_best",
+      "staged_bops": 243355900000.0,
+      "staged_top1_pct": 79.272,
+      "tandem_bops_note": "interpolated at staged's exact BOPs (TANDEM's own measured C values, programmatically loaded from plans.csv)",
+      "tandem_top1_pct": 78.7057,
+      "delta_tandem_minus_staged_pp": -0.5663,
+      "extrapolated": false,
+      "attention_skip_bias_flag": true
+    },
+    {
+      "config": "r2_w8a8_best",
+      "staged_bops": 334500200000.0,
+      "staged_top1_pct": 79.704,
+      "tandem_bops_note": "interpolated at staged's exact BOPs (TANDEM's own measured C values, programmatically loaded from plans.csv)",
+      "tandem_top1_pct": 79.2334,
+      "delta_tandem_minus_staged_pp": -0.4706,
+      "extrapolated": false,
+      "attention_skip_bias_flag": true
+    },
+    {
+      "config": "r22_w16a16_best",
+      "staged_bops": 482031900000.0,
+      "staged_top1_pct": 70.206,
+      "tandem_bops_note": "interpolated at staged's exact BOPs (TANDEM's own measured C values, programmatically loaded from plans.csv)",
+      "tandem_top1_pct": 79.601,
+      "delta_tandem_minus_staged_pp": 9.395,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false
+    },
+    {
+      "config": "r15_w16a16_best",
+      "staged_bops": 659658000000.0,
+      "staged_top1_pct": 78.3,
+      "tandem_bops_note": "interpolated at staged's exact BOPs (TANDEM's own measured C values, programmatically loaded from plans.csv)",
+      "tandem_top1_pct": 79.6627,
+      "delta_tandem_minus_staged_pp": 1.3627,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false
+    },
+    {
+      "config": "r7_w16a16_best",
+      "staged_bops": 922225600000.0,
+      "staged_top1_pct": 79.564,
+      "tandem_bops_note": "interpolated at staged's exact BOPs (TANDEM's own measured C values, programmatically loaded from plans.csv)",
+      "tandem_top1_pct": 79.826,
+      "delta_tandem_minus_staged_pp": 0.262,
+      "extrapolated": true,
+      "attention_skip_bias_flag": false
+    }
+  ],
+  "figure_path": "B4_deit_small_pareto.png"
+}

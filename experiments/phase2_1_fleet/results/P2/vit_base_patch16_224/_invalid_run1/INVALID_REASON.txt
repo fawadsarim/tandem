@@ -1,0 +1,1 @@
+invalid_preprocessing: this run used a hardcoded ImageNet-norm/bilinear/crop_pct~0.875 transform instead of this checkpoint's own resolved data config (augreg ViT expects 0.5-norm/bicubic/crop_pct=0.9). Superseded by a fresh full S0-S9 run with the corrected, checkpoint-derived transform. Adjudication: old FP top-1 (50k)=0.8109, new FP top-1 (50k)=0.8510, published=85.108.

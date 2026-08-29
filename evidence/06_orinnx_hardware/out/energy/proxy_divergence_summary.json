@@ -1,0 +1,83 @@
+{
+  "model_scope": "deit_small_patch16_224, batch=1",
+  "r2_bops_vs_energy": 0.02431942130583209,
+  "r2_latency_vs_energy": 0.992118332931897,
+  "n_divergence_factors_differ": 8,
+  "n_total_configs": 10,
+  "reprice": [
+    {
+      "budget_fraction": 0.15,
+      "bops_latency_ms": 3.8513024992425926,
+      "joint_latency_ms": 3.7201559971435927,
+      "staged_latency_ms": 3.7201559971435927,
+      "bops_energy_mJ": 47.472433585851675,
+      "joint_energy_mJ": 45.093692114437914,
+      "staged_energy_mJ": 45.093692114437914,
+      "latency_cheapest_plan": "joint",
+      "energy_cheapest_plan": "joint",
+      "ranking_differs": false
+    },
+    {
+      "budget_fraction": 0.21,
+      "bops_latency_ms": 4.032540999105549,
+      "joint_latency_ms": 3.7201559971435927,
+      "staged_latency_ms": 3.7201559971435927,
+      "bops_energy_mJ": 51.8337341576885,
+      "joint_energy_mJ": 45.093692114437914,
+      "staged_energy_mJ": 45.093692114437914,
+      "latency_cheapest_plan": "joint",
+      "energy_cheapest_plan": "joint",
+      "ranking_differs": false
+    },
+    {
+      "budget_fraction": 0.293,
+      "bops_latency_ms": 4.369224508991465,
+      "joint_latency_ms": 3.7201559971435927,
+      "staged_latency_ms": 3.7201559971435927,
+      "bops_energy_mJ": 58.481739541537955,
+      "joint_energy_mJ": 45.093692114437914,
+      "staged_energy_mJ": 45.093692114437914,
+      "latency_cheapest_plan": "joint",
+      "energy_cheapest_plan": "joint",
+      "ranking_differs": false
+    },
+    {
+      "budget_fraction": 0.41,
+      "bops_latency_ms": 5.206014000577852,
+      "joint_latency_ms": 3.7201559971435927,
+      "staged_latency_ms": 3.7201559971435927,
+      "bops_energy_mJ": 71.35362171759138,
+      "joint_energy_mJ": 45.093692114437914,
+      "staged_energy_mJ": 45.093692114437914,
+      "latency_cheapest_plan": "joint",
+      "energy_cheapest_plan": "joint",
+      "ranking_differs": false
+    },
+    {
+      "budget_fraction": 0.572,
+      "bops_latency_ms": 4.800779999641236,
+      "joint_latency_ms": 3.7201559971435927,
+      "staged_latency_ms": 3.7201559971435927,
+      "bops_energy_mJ": 64.19182273491316,
+      "joint_energy_mJ": 45.093692114437914,
+      "staged_energy_mJ": 45.093692114437914,
+      "latency_cheapest_plan": "joint",
+      "energy_cheapest_plan": "joint",
+      "ranking_differs": false
+    },
+    {
+      "budget_fraction": 0.8,
+      "bops_latency_ms": 4.260467998392414,
+      "joint_latency_ms": 3.7201559971435927,
+      "staged_latency_ms": 3.7201559971435927,
+      "bops_energy_mJ": 54.64275742467554,
+      "joint_energy_mJ": 45.093692114437914,
+      "staged_energy_mJ": 45.093692114437914,
+      "latency_cheapest_plan": "joint",
+      "energy_cheapest_plan": "joint",
+      "ranking_differs": false
+    }
+  ],
+  "n_budgets_ranking_differs": 0,
+  "pre_registered_interpretation_ref": "See out/energy/PREREGISTRATION.md, written before Part 1 ran."
+}

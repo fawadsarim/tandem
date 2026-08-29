@@ -1,0 +1,84 @@
+{
+  "rails": {
+    "VDD_CPU_GPU_CV": {
+      "power_mw": 1669,
+      "volt_mv": 4968,
+      "curr_ma": 336
+    },
+    "VDD_SOC": {
+      "power_mw": 1430,
+      "volt_mv": 4968,
+      "curr_ma": 288
+    }
+  },
+  "primary_rail": {
+    "name": "VDD_IN",
+    "power_mw": 6001,
+    "volt_mv": 4968,
+    "curr_ma": 1208
+  },
+  "sampling_rate": {
+    "code_level_floor_s": 0.25,
+    "code_level_max_hz": 4.0,
+    "source": "jetsonpower_provider.py, this device's installed jetson-stats, confirmed by direct source inspection, 2026-07/08",
+    "consequence_note": "4Hz (250ms) cannot resolve a single ~0.4-0.95ms inference (roughly 260-2400x coarser). Per-inference energy is ALWAYS derived from sustained-loop average power and concurrent throughput, never from a single-shot measurement."
+  },
+  "idle_baseline": {
+    "mean_power_w": 5.275536666666666,
+    "median_power_w": 5.254,
+    "p99_power_w": 6.08,
+    "n_samples": 600,
+    "mean_temp_c": 54.512344999999996,
+    "duration_s": 60.0
+  },
+  "monotonic_ladder": {
+    "loop_duration_s": 15.0,
+    "discard_s": 5.0,
+    "ladder": [
+      {
+        "label": "idle",
+        "mean_power_w": 5.275536666666666
+      },
+      {
+        "label": "fp16_n69",
+        "mean_power_w": 8.156199999999998
+      },
+      {
+        "label": "fp16_n197",
+        "mean_power_w": 9.718960000000003
+      }
+    ],
+    "monotonic": true,
+    "fp16_n69_full": {
+      "mean_power_w": 8.156199999999998,
+      "median_power_w": 8.16,
+      "p99_power_w": 8.2,
+      "n_power_samples": 100,
+      "achieved_poll_rate_hz": 9.999985800019358,
+      "mean_temp_c": 55.30021000000001,
+      "median_temp_c": 55.312,
+      "p99_temp_c": 55.562,
+      "throughput_per_s": 3331.295269560449,
+      "n_inferences_kept": 33313,
+      "n_inferences_total": 49916,
+      "loop_duration_s": 15.000016280000636,
+      "discard_s": 5.0
+    },
+    "fp16_n197_full": {
+      "mean_power_w": 9.718960000000003,
+      "median_power_w": 9.729,
+      "p99_power_w": 9.769,
+      "n_power_samples": 100,
+      "achieved_poll_rate_hz": 9.999596227304504,
+      "mean_temp_c": 56.586479999999995,
+      "median_temp_c": 56.656,
+      "p99_temp_c": 56.906,
+      "throughput_per_s": 2420.0022829699633,
+      "n_inferences_kept": 24201,
+      "n_inferences_total": 36275,
+      "loop_duration_s": 15.000407117000577,
+      "discard_s": 5.0
+    }
+  },
+  "validation_passed": true
+}

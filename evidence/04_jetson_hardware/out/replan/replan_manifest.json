@@ -1,0 +1,40 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "latency_id_ms": 4.966751948813908,
+  "min_achievable_latency_ms": 3.795801996602677,
+  "min_achievable_fraction_of_identity": 0.7642423128276294,
+  "budget_fractions": [
+    0.15,
+    0.21,
+    0.293,
+    0.41,
+    0.572,
+    0.8
+  ],
+  "taus_ms": [
+    4.79683496087091,
+    4.980120495019946,
+    5.488686001626775,
+    6.534262964123627,
+    6.106759959948249,
+    5.5367559543810785
+  ],
+  "budget_pairing_note": "tau_b = measured latency of P2.1's own BOPs-selected plan at budget b (NOT fraction x Latency_id -- that pairing made 5/6 budgets mathematically infeasible, a confound from BOPs cost's much wider achievable dynamic range than real latency's, not a hardware-reality finding -- see README.md's Budget pairing section). Guarantees feasibility by construction.",
+  "n_schedules": 85,
+  "bits_to_precision_mapping": {
+    "16": "fp16",
+    "8": "int8",
+    "6": "int8"
+  },
+  "bits_to_precision_note": "bits=8 and bits=6 both execute at measured INT8 engine latency (BEST ACHIEVABLE, explicit Q/DQ -- see jetson/README.md's INT8 findings) -- there is no distinct hardware datapath per bit count on this device. See this file's module docstring.",
+  "token_buckets": [
+    197,
+    165,
+    133,
+    101,
+    69
+  ],
+  "n_joint_staged_collapsed": 6,
+  "n_degenerate_budgets": 5,
+  "joint_staged_note": "CORRECTED on review, 2026-07 -- do NOT read n_joint_staged_collapsed as a re-test of experiments/phase1_E1-E5_E4a/E5_allocator_G1.py's 'staging collapse' finding. At this run's 6 budgets (paired to P2.1's own BOPs-selected plans' measured latency -- see 'Budget pairing'), tau_b >= Latency_id at n_degenerate_budgets of them -- looser than doing nothing, so the identity plan is trivially optimal for every selection rule there, a degenerate coincidence, not a genuine joint-vs-staged test. Joint vs staged under real hardware cost remains UNTESTED until a budget sweep set directly INSIDE the achievable range (min_achievable_fraction_of_identity above 1.0, i.e. compression genuinely forced) is run -- see jetson/README.md's 'Joint vs staged' section for the planned follow-up."
+}

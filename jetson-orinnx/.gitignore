@@ -1,0 +1,99 @@
+out/*
+venv/
+__pycache__/
+*.pyc
+
+# Real-device result artifacts (small, human-readable) are tracked; large
+# regenerable/device-specific build products (engines, ONNX, calib .npy,
+# build/bench logs) stay ignored. A trailing-slash ignore on out/ itself
+# would stop git from ever descending into it, so out/* + nested
+# re-ignore/un-ignore pairs are required for these negations to take effect.
+!out/replan/
+out/replan/*
+!out/replan/*.csv
+!out/replan/*.json
+
+!out/lut/
+out/lut/*
+!out/lut/latency_lut.json
+
+!out/paired_eval/
+out/paired_eval/*
+!out/paired_eval/paired_eval_result.json
+
+# G1-HW final phase (frontier.py / pilot_b8 -- see README.md/CHARACTERIZATION.md): small,
+# real result artifacts tracked; ONNX/engines (regenerable, device-specific) stay ignored.
+!out/frontier/
+out/frontier/*
+!out/frontier/*.csv
+!out/frontier/*.json
+!out/frontier/*.png
+
+!out/pilot_b8/
+out/pilot_b8/*
+!out/pilot_b8/*.json
+
+!out/reviewer_release/
+out/reviewer_release/*
+!out/reviewer_release/*.png
+!out/reviewer_release/*.json
+!out/reviewer_release/*.txt
+
+# Two specific pilot_b8 calibration files, tracked by explicit user request (2026-07) --
+# deliberately narrower than "all calib data": ONLY the two buckets pilot_b8_export.py needs
+# (N=197, N=69), not the other 3 buckets' calib .npy or any ONNX/engine output, which stay
+# ignored above. ~50MB combined -- an explicit exception to this file's normal "small results
+# only" rule, so a future Colab pilot_b8_export_colab.ipynb run can skip the manual upload cell.
+!out/segments/
+out/segments/*
+!out/segments/calib/
+out/segments/calib/*
+!out/segments/calib/calib_n197.npy
+!out/segments/calib/calib_n69.npy
+
+# LUT extension (see README.md's "LUT extension" section / CHARACTERIZATION.md): small,
+# real result artifacts tracked; ONNX/engines/build+bench logs (regenerable, device-specific)
+# stay ignored -- same split as out/segments/ and out/pilot_b8/ above.
+!out/lut_ext/
+out/lut_ext/*
+!out/lut_ext/*.json
+
+!out/frontier_v2/
+out/frontier_v2/*
+!out/frontier_v2/*.csv
+!out/frontier_v2/*.json
+
+!out/pilot_deitb/
+out/pilot_deitb/*
+!out/pilot_deitb/*.json
+!out/pilot_deitb/*.md
+
+!out/pilot_deitb_ext/
+out/pilot_deitb_ext/*
+!out/pilot_deitb_ext/*.json
+
+!out/energy/
+out/energy/*
+!out/energy/*.json
+!out/energy/*.csv
+!out/energy/*.md
+
+!out/energy_replan/
+out/energy_replan/*
+!out/energy_replan/*.json
+!out/energy_replan/*.csv
+!out/energy_replan/*.md
+
+# Power-mode sweep (see README.md/CHARACTERIZATION.md's hardware-scope section): small, real
+# result artifacts tracked -- same split as every other out/ subdir above. Real bug found and
+# fixed during public-release prep (2026-07): this subdir was created without ever being added
+# here, so the whole power-mode sweep's evidence was silently gitignored despite being cited as
+# committed throughout README.md/evidence/ -- confirmed via `git ls-files` returning empty for
+# this directory before this entry was added.
+!out/powersweep/
+out/powersweep/*
+!out/powersweep/*.json
+!out/powersweep/*.csv
+!out/powersweep/*.md
+
+!out/versions.json

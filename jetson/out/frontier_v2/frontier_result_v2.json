@@ -1,0 +1,73 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "checkpoint_hash": "a17d00754ef1e5401cf33cf61af23094c48b8f4a4f5f8898d8ae36b9d81925e1",
+  "manifest_hash": "8a2c5f38ff1a3a6100a88c465d7fce9c2ccf5a176e396e04f53bc0ef02a1a1b2",
+  "calib_n": 512,
+  "paired_eval_n": 20000,
+  "verbatim_note": "The original ARM B feasibility bound at r<=11 was set by the measured LUT's floor (N=69), not by any property of uniform merging. The LUT was extended to N=21 to remove that confound; the feasibility results below supersede the earlier ones.",
+  "jointly_feasible_budgets": [
+    0.82,
+    0.85,
+    0.89,
+    0.94
+  ],
+  "per_budget": [
+    {
+      "budget_fraction": 0.82,
+      "arm_b_r": 16,
+      "arm_a_top1_pct": 78.435,
+      "arm_b_top1_pct": 77.875,
+      "mean_diff_ab_pp": 0.56,
+      "newly_feasible_in_v2": true
+    },
+    {
+      "budget_fraction": 0.85,
+      "arm_b_r": 14,
+      "arm_a_top1_pct": 79.06,
+      "arm_b_top1_pct": 78.58500000000001,
+      "mean_diff_ab_pp": 0.475,
+      "newly_feasible_in_v2": true
+    },
+    {
+      "budget_fraction": 0.89,
+      "arm_b_r": 11,
+      "arm_a_top1_pct": 79.235,
+      "arm_b_top1_pct": 79.19,
+      "mean_diff_ab_pp": 0.045,
+      "newly_feasible_in_v2": false
+    },
+    {
+      "budget_fraction": 0.94,
+      "arm_b_r": 8,
+      "arm_a_top1_pct": 79.39500000000001,
+      "arm_b_top1_pct": 79.235,
+      "mean_diff_ab_pp": 0.16,
+      "newly_feasible_in_v2": false
+    }
+  ],
+  "pooled_mean_diff_ab_pp": 0.31,
+  "pooled_ci_low_pp": 0.17790067338543422,
+  "pooled_ci_high_pp": 0.44209932661456575,
+  "n_pooled_pairs": 80000,
+  "no_gate_registered_note": "Descriptive comparison only -- no pass/fail gate was registered for ARM A vs ARM B.",
+  "v1_reproducibility_cross_check": [
+    {
+      "budget_fraction": 0.89,
+      "match": true,
+      "v1_arm_a_top1_pct": 79.235,
+      "v2_arm_a_top1_pct": 79.235,
+      "v1_arm_b_top1_pct": 79.19,
+      "v2_arm_b_top1_pct": 79.19
+    },
+    {
+      "budget_fraction": 0.94,
+      "match": true,
+      "v1_arm_a_top1_pct": 79.39500000000001,
+      "v2_arm_a_top1_pct": 79.39500000000001,
+      "v1_arm_b_top1_pct": 79.235,
+      "v2_arm_b_top1_pct": 79.235
+    }
+  ],
+  "arm_a_frontier_unchanged_note": "ARM A's plans at all 6 budgets are unchanged from v1 (frontier.py confirmed this structurally) -- see out/frontier/frontier_result.json's arm_a_frontier for the full 6-budget accuracy curve, not re-measured here.",
+  "timestamp": "2026-07-30T10:01:52Z"
+}

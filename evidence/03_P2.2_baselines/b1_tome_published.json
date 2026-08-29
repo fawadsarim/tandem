@@ -1,0 +1,41 @@
+{
+  "source": "facebookresearch/ToMe README.md @ af95e4b1befa172dadccd8c81e223b10090f9579",
+  "source_url": "https://github.com/facebookresearch/ToMe/blob/af95e4b1befa172dadccd8c81e223b10090f9579/README.md",
+  "note": "README has TWO tables. Off-the-shelf table (ViT-S/B/L only, caption 'expected results when using the timm implementation off-the-shelf') contains NO DeiT rows. The DeiT table (DeiT-S/16, DeiT-Ti/16) is TRAINED-with-ToMe and ships checkpoints ('We've trained some DeiT (v1) models using the official implementation'). Therefore no off-the-shelf DeiT-S reference exists in the README. Paper appendix (arXiv:2210.09461) searched (2026-07): Table 11 'Full DeiT Results' (Appendix A.1.4) also gives TRAINED-only numbers ('Results from running a standard 300 epoch DeiT-S ... training run with the official codebase'), including r=8 (79.68), r=13 (79.42 -- differs from the README's 79.36 for the same trained setting; no checkpoint provided for this exact number, likely run-to-run training variance), and r=16 (79.13); no off-the-shelf DeiT-S r-sweep exists anywhere in the paper (main text or appendix). Prior r13 gate vs 79.36 was a setting mismatch (trained ref vs our off-the-shelf run) -- corrected 2026-07.",
+  "deit_small_patch16_224": {
+    "original_top1_pct": 79.8,
+    "r0_baseline": {
+      "top1_pct": 79.8,
+      "gate": true,
+      "setting": "plain model, README 'original acc' column",
+      "setting_verbatim_quote": "README DeiT table, column header 'original acc', row 'DeiT-S/16 | 79.8 | 930 | 13 | 79.36 | 1550 | deit_S_r13'. 'original acc' is the checkpoint's own accuracy with NO ToMe merging applied at all -- setting-invariant (true whether merging is later applied post-hoc or trained-in), so directly comparable to our r0 (plain/unpatched) measurement."
+    },
+    "r13": {
+      "off_the_shelf": {
+        "top1_pct": null,
+        "gate": false,
+        "reason": "no published off-the-shelf DeiT-S reference located in README or paper (incl. appendix Table 11, which is trained-only)",
+        "setting_verbatim_quote": "Off-the-shelf table caption: 'Here are some expected results when using the timm implementation off-the-shelf on ImageNet-1k val using a V100:' -- rows are 'ViT-S/16, ViT-B/16, ViT-L/16, ViT-L/16 @ 384' only, no DeiT-S row. Paper Table 11 caption: 'Results from running a standard 300 epoch DeiT-S and DeiT-Ti training run with the official codebase on ImageNet-1k' -- trained, not off-the-shelf."
+      },
+      "trained_with_tome": {
+        "top1_pct": 79.36,
+        "gate": true,
+        "setting": "TRAINED checkpoint deit_S_r13.pth",
+        "checkpoint_url": "https://dl.fbaipublicfiles.com/tome/f367470145_deit_S_r13.pth",
+        "setting_verbatim_quote": "README: \"We've trained some DeiT (v1) models using the official implementation. To use, instantiate a DeiT timm model, patch it with the timm patch (prop_attn=True), and use ImageNet mean and variance for data loading.\" Table row: 'DeiT-S/16 | 79.8 | 930 | 13 | 79.36 | 1550 | deit_S_r13 [checkpoint link]'."
+      }
+    },
+    "r8":  {
+      "top1_pct": null,
+      "gate": false,
+      "reason": "no published off-the-shelf reference located (paper Table 11 has a TRAINED r=8 number, 79.68, but no off-the-shelf sweep)",
+      "setting_verbatim_quote": "Off-the-shelf table (see r13.off_the_shelf) has no DeiT rows at all. Paper Table 11 (trained-only) row for DeiT-S at r=8: 'r=8 | acc=79.68 | drop=-0.28 | gflops=3.43 | speedup=1.34x' -- trained setting, not usable as an off-the-shelf gate target."
+    },
+    "r16": {
+      "top1_pct": null,
+      "gate": false,
+      "reason": "no published off-the-shelf reference located (paper Table 11 has a TRAINED r=16 number, 79.13, but no off-the-shelf sweep)",
+      "setting_verbatim_quote": "Off-the-shelf table (see r13.off_the_shelf) has no DeiT rows at all. Paper Table 11 (trained-only) row for DeiT-S at r=16: 'r=16 | acc=79.13 | drop=-0.83 | gflops=2.30 | speedup=2.00x' -- trained setting, not usable as an off-the-shelf gate target."
+    }
+  }
+}

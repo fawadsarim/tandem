@@ -1,0 +1,58 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "resolved_pretrained_tag": "deit_small_patch16_224.fb_in1k",
+  "checkpoint_state_hash": "a17d00754ef1e5401cf33cf61af23094c48b8f4a4f5f8898d8ae36b9d81925e1",
+  "block_idx_exported": 0,
+  "block_homogeneity_assumption": "All 12 blocks of deit_small_patch16_224 share identical architecture (dims, head count, MLP ratio); only trained weight VALUES differ, which do not affect latency. One block (index above) is exported and assumed representative of all 12 for LATENCY purposes only -- this manifest is never used for accuracy, only for the latency LUT.",
+  "d_model": 384,
+  "n_blocks": 12,
+  "n_patches": 196,
+  "n_tokens_total": 197,
+  "onnx_opset": 17,
+  "max_abs_diff_tol": 0.0001,
+  "segments": [
+    {
+      "n_tokens": 197,
+      "onnx_path": "out/segments/block_seg_n197.onnx",
+      "max_abs_diff": 5.7220458984375e-06,
+      "verified": true
+    },
+    {
+      "n_tokens": 165,
+      "onnx_path": "out/segments/block_seg_n165.onnx",
+      "max_abs_diff": 6.794929504394531e-06,
+      "verified": true
+    },
+    {
+      "n_tokens": 133,
+      "onnx_path": "out/segments/block_seg_n133.onnx",
+      "max_abs_diff": 6.318092346191406e-06,
+      "verified": true
+    },
+    {
+      "n_tokens": 101,
+      "onnx_path": "out/segments/block_seg_n101.onnx",
+      "max_abs_diff": 6.198883056640625e-06,
+      "verified": true
+    },
+    {
+      "n_tokens": 69,
+      "onnx_path": "out/segments/block_seg_n69.onnx",
+      "max_abs_diff": 5.0067901611328125e-06,
+      "verified": true
+    }
+  ],
+  "calibration": {
+    "n_calib_images": 128,
+    "calib_hash": "7a7339482e60554c29b530ac250087295c4c2eee09d6d24058330a32eb02e111",
+    "imagenet_dir": "/content/calib_imagenet",
+    "approximation_note": "Sub-197-token buckets are strided subsamples of the real 197-token activations, not true Ward-merge outputs -- adequate for INT8 range calibration only. See export_segments.py's capture_calibration_activations docstring.",
+    "calib_paths": {
+      "197": "out/segments/calib/calib_n197.npy",
+      "165": "out/segments/calib/calib_n165.npy",
+      "133": "out/segments/calib/calib_n133.npy",
+      "101": "out/segments/calib/calib_n101.npy",
+      "69": "out/segments/calib/calib_n69.npy"
+    }
+  }
+}

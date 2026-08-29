@@ -1,0 +1,594 @@
+{
+  "config": {
+    "N_IMAGES": 5000,
+    "BATCH_SIZE": 128,
+    "SEEDS": [
+      0,
+      1,
+      2
+    ],
+    "MODEL": "deit_small_patch16_224"
+  },
+  "config_hash": "1bd3b167ec62",
+  "environment": {
+    "torch_version": "2.11.0+cu128",
+    "timm_version": "1.0.28",
+    "cuda_version": "12.8",
+    "gpu_name": "Tesla T4",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "python_version": "3.12.13"
+  },
+  "data_source": "imagenet-1k",
+  "n_images_used": 5000,
+  "labels_available": true,
+  "gate_results": {
+    "a_data_source": {
+      "passed": true,
+      "data_source": "imagenet-1k"
+    },
+    "b_m_l_consistency": {
+      "passed": true,
+      "max_rel_err": 0.0
+    },
+    "c_units_identity": {
+      "passed": true,
+      "rel_err": 1.5571468997190537e-16
+    },
+    "d_sanity_gate": {
+      "passed": true
+    },
+    "e_grid_coverage": {
+      "passed": true,
+      "n_checked": 109
+    }
+  },
+  "acceptance": {
+    "predictor": "pred_measured_mse",
+    "criterion": "slope in [0.85,1.15] and r2 >= 0.9",
+    "result": {
+      "slope": 1.0067926899581823,
+      "r2": 0.9986819876244782,
+      "n_points": 129
+    },
+    "passed": true
+  },
+  "fit_results": {
+    "pred_measured_mse": {
+      "slope": 1.0067926899581823,
+      "r2": 0.9986819876244782,
+      "n_points": 129
+    },
+    "pred_fitted_mse": {
+      "slope": 1.0257581696224514,
+      "r2": 0.9990978462513598,
+      "n_points": 129
+    },
+    "pred_measured_kl": {
+      "slope": 1.041718973226996,
+      "r2": 0.9985915652144651,
+      "n_points": 129
+    },
+    "pred_fitted_kl": {
+      "slope": 1.03577512684481,
+      "r2": 0.9977530422646245,
+      "n_points": 129
+    }
+  },
+  "error_table": [
+    {
+      "config_id": "A_p1-12_e1e-2",
+      "family": "A",
+      "in_regime": false,
+      "rel_error": 0.010169738364803976,
+      "total_eps": 0.02,
+      "min_block_distance": 11,
+      "has_block_1": true
+    },
+    {
+      "config_id": "A_p1-12_e1e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.002733216930972133,
+      "total_eps": 0.002,
+      "min_block_distance": 11,
+      "has_block_1": true
+    },
+    {
+      "config_id": "A_p1-12_e3e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0032133277211864853,
+      "total_eps": 0.006,
+      "min_block_distance": 11,
+      "has_block_1": true
+    },
+    {
+      "config_id": "A_p1-6_e1e-2",
+      "family": "A",
+      "in_regime": false,
+      "rel_error": 0.007099018759522023,
+      "total_eps": 0.02,
+      "min_block_distance": 5,
+      "has_block_1": true
+    },
+    {
+      "config_id": "A_p1-6_e1e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0036497092877517067,
+      "total_eps": 0.002,
+      "min_block_distance": 5,
+      "has_block_1": true
+    },
+    {
+      "config_id": "A_p1-6_e3e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.004772860318042925,
+      "total_eps": 0.006,
+      "min_block_distance": 5,
+      "has_block_1": true
+    },
+    {
+      "config_id": "A_p11-12_e1e-2",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.030556541197324493,
+      "total_eps": 0.02,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p11-12_e1e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0022167369218795453,
+      "total_eps": 0.002,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p11-12_e3e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.009670375849251811,
+      "total_eps": 0.006,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p2-10_e1e-2",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0009288732424742916,
+      "total_eps": 0.02,
+      "min_block_distance": 8,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p2-10_e1e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0028516840176192487,
+      "total_eps": 0.002,
+      "min_block_distance": 8,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p2-10_e3e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0036875726939486395,
+      "total_eps": 0.006,
+      "min_block_distance": 8,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p3-4_e1e-2",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0016237614414222011,
+      "total_eps": 0.02,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p3-4_e1e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.007184851312023055,
+      "total_eps": 0.002,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p3-4_e3e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0038727813332990516,
+      "total_eps": 0.006,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p4-8_e1e-2",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.004879985701083187,
+      "total_eps": 0.02,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p4-8_e1e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.002044109328253623,
+      "total_eps": 0.002,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p4-8_e3e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.005293458609213569,
+      "total_eps": 0.006,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p6-12_e1e-2",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.001592632308058189,
+      "total_eps": 0.02,
+      "min_block_distance": 6,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p6-12_e1e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0017774537605414068,
+      "total_eps": 0.002,
+      "min_block_distance": 6,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p6-12_e3e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.00180262713889596,
+      "total_eps": 0.006,
+      "min_block_distance": 6,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p7-8_e1e-2",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.019453480173805663,
+      "total_eps": 0.02,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p7-8_e1e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.0021329793245762423,
+      "total_eps": 0.002,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p7-8_e3e-3",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.008946929779168786,
+      "total_eps": 0.006,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "B_p4-10_e1e-2-1e-3",
+      "family": "B",
+      "in_regime": true,
+      "rel_error": 0.00321263829952387,
+      "total_eps": 0.011,
+      "min_block_distance": 6,
+      "has_block_1": false
+    },
+    {
+      "config_id": "B_p4-10_e1e-3-1e-2",
+      "family": "B",
+      "in_regime": true,
+      "rel_error": 0.0014121102060662433,
+      "total_eps": 0.011,
+      "min_block_distance": 6,
+      "has_block_1": false
+    },
+    {
+      "config_id": "B_p6-12_e1e-2-1e-3",
+      "family": "B",
+      "in_regime": true,
+      "rel_error": 0.0033544091243603914,
+      "total_eps": 0.011,
+      "min_block_distance": 6,
+      "has_block_1": false
+    },
+    {
+      "config_id": "B_p6-12_e1e-3-1e-2",
+      "family": "B",
+      "in_regime": true,
+      "rel_error": 0.0012816681331472093,
+      "total_eps": 0.011,
+      "min_block_distance": 6,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p10-11-12_e1e-2",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.04219132301463379,
+      "total_eps": 0.03,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p10-11-12_e1e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.003983388614038333,
+      "total_eps": 0.003,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p10-11-12_e3e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.01080870668882615,
+      "total_eps": 0.009000000000000001,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p2-6-10_e1e-2",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.00214278053058811,
+      "total_eps": 0.03,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p2-6-10_e1e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.0021975606282818097,
+      "total_eps": 0.003,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p2-6-10_e3e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.0037763584027184147,
+      "total_eps": 0.009000000000000001,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p3-7-11_e1e-2",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.0009696818647408075,
+      "total_eps": 0.03,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p3-7-11_e1e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.003330923576009422,
+      "total_eps": 0.003,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p3-7-11_e3e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.001253838180735577,
+      "total_eps": 0.009000000000000001,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p4-8-12_e1e-2",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.005121222988840585,
+      "total_eps": 0.03,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p4-8-12_e1e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.0005527824063633305,
+      "total_eps": 0.003,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p4-8-12_e3e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.00335180052187347,
+      "total_eps": 0.009000000000000001,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p5-6-7_e1e-2",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.015668622804689145,
+      "total_eps": 0.03,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p5-6-7_e1e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.0031092094081680154,
+      "total_eps": 0.003,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p5-6-7_e3e-3",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.007455860691506194,
+      "total_eps": 0.009000000000000001,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "D_p4-8_e1e-1",
+      "family": "D",
+      "in_regime": false,
+      "rel_error": NaN,
+      "total_eps": 0.2,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "D_p4-8_e3e-2",
+      "family": "D",
+      "in_regime": true,
+      "rel_error": 0.01303148013615052,
+      "total_eps": 0.06,
+      "min_block_distance": 4,
+      "has_block_1": false
+    },
+    {
+      "config_id": "D_p7-8_e1e-1",
+      "family": "D",
+      "in_regime": false,
+      "rel_error": NaN,
+      "total_eps": 0.2,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "D_p7-8_e3e-2",
+      "family": "D",
+      "in_regime": true,
+      "rel_error": 0.06067017851336481,
+      "total_eps": 0.06,
+      "min_block_distance": 1,
+      "has_block_1": false
+    }
+  ],
+  "worst_5_offenders": [
+    {
+      "config_id": "D_p7-8_e3e-2",
+      "family": "D",
+      "in_regime": true,
+      "rel_error": 0.06067017851336481,
+      "total_eps": 0.06,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p10-11-12_e1e-2",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.04219132301463379,
+      "total_eps": 0.03,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p11-12_e1e-2",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.030556541197324493,
+      "total_eps": 0.02,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "A_p7-8_e1e-2",
+      "family": "A",
+      "in_regime": true,
+      "rel_error": 0.019453480173805663,
+      "total_eps": 0.02,
+      "min_block_distance": 1,
+      "has_block_1": false
+    },
+    {
+      "config_id": "C_p5-6-7_e1e-2",
+      "family": "C",
+      "in_regime": true,
+      "rel_error": 0.015668622804689145,
+      "total_eps": 0.03,
+      "min_block_distance": 1,
+      "has_block_1": false
+    }
+  ],
+  "interaction_stats": {
+    "mean": 0.0010202252797214021,
+    "std": 0.005809375441342533,
+    "per_pair": [
+      {
+        "pair": "3-4",
+        "interaction_ratio": 0.003891172107693437
+      },
+      {
+        "pair": "7-8",
+        "interaction_ratio": 0.009030902009284879
+      },
+      {
+        "pair": "11-12",
+        "interaction_ratio": -0.00957726308708366
+      },
+      {
+        "pair": "2-10",
+        "interaction_ratio": 0.0037016866931628683
+      },
+      {
+        "pair": "4-8",
+        "interaction_ratio": 0.0053223401076877876
+      },
+      {
+        "pair": "6-12",
+        "interaction_ratio": -0.0017993184383583276
+      },
+      {
+        "pair": "1-6",
+        "interaction_ratio": 0.0007937039374825771
+      },
+      {
+        "pair": "1-12",
+        "interaction_ratio": -0.0032014210920983444
+      }
+    ]
+  },
+  "correlations": {
+    "n_points": 45,
+    "rel_error_vs_total_eps": 0.6210342590076896,
+    "rel_error_vs_min_block_distance": -0.3587353809508253,
+    "rel_error_vs_block_1_inclusion": -0.07325506409138322
+  },
+  "wall_clock_seconds_this_run": 783.3606946860002
+}

@@ -1,0 +1,11 @@
+{
+  "source": "megvii-research/FQ-ViT README.md, 'Results on ImageNet' table, 'Ours' row at W/A/Attn=8/8/8, as of pinned commit 5daf5915c715dc21d6afcd64e661652030e640ab",
+  "source_url": "https://github.com/megvii-research/FQ-ViT/blob/5daf5915c715dc21d6afcd64e661652030e640ab/README.md",
+  "note": "'Ours' = --quant --ptf --lis --quant-method minmax (their proposed method); other rows in the same table (MinMax/EMA/Percentile/OMSE/Bit-Split/PTQ-for-ViT) are competitor baselines FROM WITHIN FQ-ViT's own paper, not this method -- not used here.",
+  "checkpoint_identity_note": "original_top1_pct below is what THEIR checkpoint (Step A) measures at FP -- for deit_* this equals TANDEM's pinned tag (Step A==B). For vit_base_patch16_224, original_top1_pct=84.53 matches augreg_in21k_ft_in1k (FP 84.534), NOT TANDEM's pinned augreg2_in21k_ft_in1k (FP 85.108, P2.1 S8 measured 85.10) -- see common/checkpoint_pin.py's module docstring for the full source-verified evidence (their vit_base_patch16_224() loader calls load_weights_from_npz on the exact same augreg_in21k_ft_in1k URL as RepQ-ViT's). Step B (comparison, pinned checkpoint) rows carry gate_status=not_applicable, not a number from this file.",
+  "setting_verbatim_quote": "README title: 'FQ-ViT: Post-Training Quantization for Fully Quantized Vision Transformer'. Table caption: 'The following results are evaluated on ImageNet.' Evaluation protocol sentence: 'We compare our methods with several post-training quantization strategies, including MinMax, EMA, Percentile, OMSE, Bit-Split, and PTQ for ViT.' -- a post-training (no retraining/fine-tuning) method applied to an off-the-shelf pretrained checkpoint, exactly matching what our harness runs (test_quant.py's model constructors default to quant=False and are only quantized post-construction). Applies to every reference in this file -- no per-config setting variation exists for a pure-PTQ method.",
+  "deit_tiny_patch16_224": {"original_top1_pct": 72.21, "w8a8": {"top1_pct": 71.61, "gate": true}},
+  "deit_small_patch16_224": {"original_top1_pct": 79.85, "w8a8": {"top1_pct": 79.17, "gate": true}},
+  "deit_base_patch16_224": {"original_top1_pct": 81.85, "w8a8": {"top1_pct": 81.20, "gate": true}},
+  "vit_base_patch16_224": {"original_top1_pct": 84.53, "w8a8": {"top1_pct": 83.31, "gate": true}}
+}

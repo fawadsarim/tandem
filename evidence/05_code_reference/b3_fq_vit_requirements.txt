@@ -1,0 +1,31 @@
+# Pinned per FQ-ViT's own README (megvii-research/FQ-ViT, commit
+# 5daf5915c715dc21d6afcd64e661652030e640ab -- see ../commits.md):
+#   conda install pytorch=1.7.1 torchvision cudatoolkit=10.1 -c pytorch
+# torchvision==0.8.2 is torch==1.7.1's own official companion release
+# (confirmed: both published within the same minute on PyPI, 2020-12-10).
+# numpy/tqdm/Pillow pinned to releases contemporaneous with torch 1.7.1
+# (Dec 2020) rather than TANDEM's own modern floors -- a numpy this old
+# codebase was never tested against is a real fidelity risk, not a
+# theoretical one. Verified to exist on PyPI, not execution-tested against
+# FQ-ViT's actual code (no GPU in this environment); the host-equivalence
+# gate (experiments/phase2_2_baselines/common/equivalence_gate.py) is the real cross-host
+# verification mechanism.
+#
+# OPERATIONAL NOTE (unresolved here, hardware-dependent -- see
+# deviations.md #1): cudatoolkit=10.1 predates most current GPU driver
+# stacks. On the actual university GPU box, install torch==1.7.1 with
+# whichever CUDA build your driver supports (check `nvidia-smi`'s reported
+# CUDA version), e.g. the cu101/cu110/cu111 wheels from
+# https://download.pytorch.org/whl/torch_stable.html -- the exact
+# torch/torchvision VERSION stays 1.7.1/0.8.2 either way, only the CUDA
+# build tag changes. If none installs cleanly, the next thing to try --
+# BEFORE assuming FQ-ViT is unusable on this hardware -- is a newer torch
+# 1.x (their code is plain nn.Module PTQ, not CUDA-extension-heavy) and
+# re-running gate B3's reproduction check to confirm the published numbers
+# still hold under that substitution; record the actual torch version used
+# in results.csv's notes column either way.
+torch==1.7.1
+torchvision==0.8.2
+numpy==1.19.5
+tqdm==4.62.3
+Pillow==8.0.1

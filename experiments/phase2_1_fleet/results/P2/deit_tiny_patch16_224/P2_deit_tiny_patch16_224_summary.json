@@ -1,0 +1,131 @@
+{
+  "model_name": "deit_tiny_patch16_224",
+  "pipeline_version": "2.2",
+  "resolved_pretrained_tag": "deit_tiny_patch16_224.fb_in1k",
+  "environment": {
+    "torch_version": "2.11.0+cu128",
+    "timm_version": "1.0.28",
+    "cuda_version": "12.8",
+    "gpu_name": "Tesla T4",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "python_version": "3.12.13"
+  },
+  "config": {
+    "MODEL_NAME": "deit_tiny_patch16_224",
+    "N_IMAGES": 5000,
+    "N_IMAGES_FINAL": 50000,
+    "BATCH_SIZE": 128,
+    "BATCH_SIZE_50K": 64,
+    "CALIB_IMAGES": 512,
+    "PHASE1_E3_RAW_CSV": "results/E3/E3_raw.csv",
+    "PHASE1_E4_RAW_CSV": "results/E4/E4_raw.csv",
+    "PHASE1_E5_SUMMARY_JSON": "results/E5/E5_summary.json"
+  },
+  "model_dims": {
+    "d": 192,
+    "n_patches": 196,
+    "n_tokens_total": 197,
+    "n_params": 5717416
+  },
+  "preprocessing": {
+    "input_size": [
+      3,
+      224,
+      224
+    ],
+    "interpolation": "bicubic",
+    "crop_pct": 0.9,
+    "mean": [
+      0.48500001430511475,
+      0.4560000002384186,
+      0.4059999883174896
+    ],
+    "std": [
+      0.2290000021457672,
+      0.2240000069141388,
+      0.22499999403953552
+    ]
+  },
+  "phase1_regression": null,
+  "data_source_working_set": "imagenet-1k",
+  "calibration": {
+    "source": "imagenet-1k-train",
+    "skip_n_applied_to_50k": 0
+  },
+  "data_source_50k": "imagenet-1k",
+  "s8_memory_note_mb": {
+    "peak_rss_before": 5385.22265625,
+    "peak_rss_after": 6610.15234375
+  },
+  "c_id": 313494994944.0,
+  "c_min": 24187895808.0,
+  "budgets": [
+    47024249241.6,
+    65833948938.24,
+    91854033518.592,
+    128532947927.04,
+    179319137107.968,
+    250795995955.2
+  ],
+  "budget_fractions": [
+    0.15,
+    0.21,
+    0.293,
+    0.41,
+    0.572,
+    0.8
+  ],
+  "fp_top1_5k": 0.7282000184059143,
+  "fp_top1_50k": 0.72166,
+  "sanity_gate_s8": {
+    "resolved_tag": "deit_tiny_patch16_224.fb_in1k",
+    "measured_top1_pct": 72.166,
+    "published_top1_pct": 72.19,
+    "diff_pct_points": 0.02400000000000091,
+    "waived": false,
+    "waiver_reason": null,
+    "passed": true
+  },
+  "family_x_gate": {
+    "slope": 0.8376682792752252,
+    "r2": 0.9868636079613714,
+    "n_points": 8,
+    "passed": true,
+    "exempted": false
+  },
+  "s7_binding_gate": {
+    "mode": "report_only",
+    "model_name": "deit_tiny_patch16_224",
+    "passed": null,
+    "per_budget_ratios": {
+      "4.7024e+10": 1.136266856315844,
+      "6.5834e+10": 1.0096557847353285,
+      "9.1854e+10": 1.014798016627666,
+      "1.2853e+11": 1.0002974279115655,
+      "1.7932e+11": 1.0208486500939595,
+      "2.5080e+11": 0.9918847643636634
+    }
+  },
+  "model_specific_measured_refinements": null,
+  "budget_utilization": {
+    "47024249241.6": 0.9933827442943051,
+    "65833948938.24": 0.9937859113597487,
+    "91854033518.592": 0.9708819450149608,
+    "128532947927.04": 0.9911612099981953,
+    "179319137107.968": 0.9084688476830806,
+    "250795995955.2": 0.9831356560415122
+  },
+  "plan_audit_fidelity_5k": {
+    "slope": 1.1020366636267283,
+    "r2": 0.9974228182567817,
+    "n_points": 6
+  },
+  "wall_clock_seconds": {
+    "s2_quant_table": 106.12130958699993,
+    "s3_merge_table": 97.65027669200003,
+    "s6_allocator": 0.04058197799986374
+  },
+  "run_status": "pass",
+  "overall_pass": true,
+  "fidelity_scale_finding": "Per-budget prediction-fidelity excursions grow with model scale at heavy-merge budgets -- Tiny worst 1.136, Small worst 0.897 (all in band), DeiT-B 1.199@21%, ViT-B 1.334@21%/0.819@15% -- consistent with the measured Sigma_r-context dependence of the merge-quant coupling (kappa 1.15->1.60 on DeiT-B probes); headline fits and 50k measured Pareto remain valid; prediction-fidelity claims at Base-scale heavy-merge budgets are reported per-budget, not aggregate."
+}

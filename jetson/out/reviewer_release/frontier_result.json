@@ -1,0 +1,93 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "checkpoint_hash": "a17d00754ef1e5401cf33cf61af23094c48b8f4a4f5f8898d8ae36b9d81925e1",
+  "manifest_hash": "8a2c5f38ff1a3a6100a88c465d7fce9c2ccf5a176e396e04f53bc0ef02a1a1b2",
+  "calib_n": 512,
+  "paired_eval_n": 20000,
+  "scope_note": "REDUCED SCOPE, directed 2026-07: ARM A evaluated at all 6 budgets (the frontier curve, see arm_a_frontier below); ARM A vs ARM B paired comparison restricted to budget_fraction in {0.89, 0.94}, the only budgets where ARM B is latency-feasible -- see arm_b_latency_infeasible_note.",
+  "identity_top1_pct": 79.825,
+  "arm_a_frontier": [
+    {
+      "budget_fraction": 0.77,
+      "tau_ms": 3.824399000586709,
+      "arm_a_cost_ms": 3.795801996602677,
+      "arm_a_d_pred": 0.4830992698242187,
+      "arm_a_top1_pct": 63.324999999999996,
+      "arm_a_vs_identity_pp": -16.500000000000007
+    },
+    {
+      "budget_fraction": 0.79,
+      "tau_ms": 3.923734039562987,
+      "arm_a_cost_ms": 3.836061983520267,
+      "arm_a_d_pred": 0.1897114429687499,
+      "arm_a_top1_pct": 75.16000000000001,
+      "arm_a_vs_identity_pp": -4.664999999999992
+    },
+    {
+      "budget_fraction": 0.82,
+      "tau_ms": 4.072736598027404,
+      "arm_a_cost_ms": 4.004540987807559,
+      "arm_a_d_pred": 0.0746908626327512,
+      "arm_a_top1_pct": 78.435,
+      "arm_a_vs_identity_pp": -1.3900000000000006
+    },
+    {
+      "budget_fraction": 0.85,
+      "tau_ms": 4.221739156491822,
+      "arm_a_cost_ms": 4.209632981655886,
+      "arm_a_d_pred": 0.0435450008219908,
+      "arm_a_top1_pct": 79.06,
+      "arm_a_vs_identity_pp": -0.7650000000000006
+    },
+    {
+      "budget_fraction": 0.89,
+      "tau_ms": 4.420409234444378,
+      "arm_a_cost_ms": 4.414724975504214,
+      "arm_a_d_pred": 0.0326725603773498,
+      "arm_a_top1_pct": 79.235,
+      "arm_a_vs_identity_pp": -0.5900000000000034
+    },
+    {
+      "budget_fraction": 0.94,
+      "tau_ms": 4.668746831885073,
+      "arm_a_cost_ms": 4.6198169693525415,
+      "arm_a_d_pred": 0.0268666560023496,
+      "arm_a_top1_pct": 79.39500000000001,
+      "arm_a_vs_identity_pp": -0.4299999999999926
+    }
+  ],
+  "paired_comparison": {
+    "budgets": [
+      0.89,
+      0.94
+    ],
+    "per_budget": [
+      {
+        "budget_fraction": 0.89,
+        "tau_ms": 4.420409234444378,
+        "arm_a_top1_pct": 79.235,
+        "arm_b_top1_pct": 79.19,
+        "arm_b_vs_identity_pp": -0.6350000000000051,
+        "mean_diff_ab_pp": 0.045
+      },
+      {
+        "budget_fraction": 0.94,
+        "tau_ms": 4.668746831885073,
+        "arm_a_top1_pct": 79.39500000000001,
+        "arm_b_top1_pct": 79.235,
+        "arm_b_vs_identity_pp": -0.5900000000000034,
+        "mean_diff_ab_pp": 0.16
+      }
+    ],
+    "pooled_mean_diff_ab_pp": 0.1025,
+    "pooled_ci_low_pp": -0.05236994268100968,
+    "pooled_ci_high_pp": 0.25736994268100966,
+    "n_pooled_pairs": 40000,
+    "no_gate_registered_note": "Descriptive comparison only -- no pass/fail gate was registered for ARM A vs ARM B, unlike paired_eval.py's BOPs-vs-JOINT/JOINT-vs-STAGED comparisons."
+  },
+  "arm_b_latency_infeasible_note": "ARM B (uniform-r ToMe, r in 1..11) is LATENCY-INFEASIBLE at 77/79/82/85% of identity latency under the measured LUT: uniform merging pays this device's fixed per-merge overhead at 11 sites, whereas TANDEM's concentrated <=2-point schedules reach 76.5% of identity. This is a measured hardware finding about merge PLACEMENT granularity, independent of accuracy.",
+  "arm_b_d_pred_limitation_note": "ARM B's D_pred is not reported (null in frontier_plans.csv) -- P2.1's own Dm_table.csv only covers TANDEM's registered plan-space grid (MERGE_BLOCKS=(1,3,5,7,9,11) x MERGE_RS=(32,64,98,128), 24 rows total, confirmed by direct read), not ARM B's uniform-every-block r in {1..11}. Extrapolating a new accuracy-damage model here would be fabricating data this project has not measured; the real comparison is the MEASURED top-1 accuracy reported below, not a predicted proxy.",
+  "not_a_joint_vs_staged_test": true,
+  "pre_registered_interpretation": "This compares merge-PLACEMENT granularity (TANDEM's <=2-point schedules) against uniform-r merging at matched MEASURED latency -- the hardware analogue of the P2.2 saturation finding. It is NOT a joint-vs-staged test (void per CHARACTERIZATION.md).",
+  "timestamp": "2026-07-29T19:42:52Z"
+}

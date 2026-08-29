@@ -1,0 +1,301 @@
+# %% [markdown]
+# # B4 (sequential composites: ToMe -> RepQ-ViT) -- standalone Colab fallback
+#
+# **This notebook is a FALLBACK, not the primary path.** The primary path
+# for B4 is `experiments/phase2_2_baselines/b4_sequential_composites/run.py` on the university
+# 24GB GPU, against a local ImageNet-1k copy. Use this notebook only if
+# university GPU access is unavailable -- it invokes the EXACT SAME
+# `run.py`, unmodified.
+#
+# **This is the highest-risk runner in the whole `experiments/phase2_2_baselines/` project --
+# read `run.py`'s own module docstring (or `deviations.md` #10-11) before
+# trusting any number it produces.** It is new integration code composing
+# two upstream repos that were never designed to work together (ToMe's and
+# RepQ-ViT's conflicting `Attention.forward` monkey-patches, resolved by
+# skipping RepQ's `build_model()` -- see the docstring for the full
+# reasoning). Treat the first real run (Colab or university GPU, whichever
+# happens first) as a validation pass, not a trusted number, until it
+# produces non-degenerate accuracy.
+#
+# The only difference from the university-GPU path is where ImageNet-1k
+# comes from (see `common/colab_imagenet.py`).
+#
+# **Prerequisite**: push `experiments/phase2_2_baselines/` (including this notebook and
+# `common/colab_imagenet.py`) to your GitHub remote before opening this in
+# Colab.
+#
+# This repo is public -- cloning it needs no authentication.
+#
+# Runtime: Colab GPU runtime (Runtime -> Change runtime type -> GPU).
+
+# %%
+import torch
+print("CUDA available:", torch.cuda.is_available())
+if torch.cuda.is_available():
+    print("GPU:", torch.cuda.get_device_name(0))
+get_ipython().system('nvidia-smi')  # noqa: F821
+
+# %%
+import os
+
+REPO_URL = "https://github.com/fawadsarim/tandem.git"
+REPO_DIR = "/content/tandem"
+
+if not os.path.exists(REPO_DIR):
+    get_ipython().system(f'git clone -q {REPO_URL} {REPO_DIR}')  # noqa: F821
+else:
+    print(f"{REPO_DIR} already exists -- pulling latest instead of re-cloning.")
+    get_ipython().system(f'git -C {REPO_DIR} pull -q')  # noqa: F821
+
+get_ipython().run_line_magic('cd', REPO_DIR)  # noqa: F821
+
+# %% [markdown]
+# ## Install B4's own pinned environment
+#
+# Same pins as B1 (`torch==1.12.1`, `timm==0.4.12` -- ToMe's; RepQ-ViT is
+# imported as a library too but only needs `timm==0.4.12`, already
+# covered). Current Colab runtimes ship a Python too new for PyPI's
+# `torch==1.12.1` wheels (no compatible distribution -- a real upstream
+# constraint, not a pip-flag fix). Rather than bump the pin (which WOULD
+# change the standard baseline), this builds a dedicated Python 3.10 venv
+# inside the Colab VM and installs the exact pinned requirements into
+# THAT, same as B1/B2. B4 runs IN-PROCESS, so `run.py` itself must be
+# launched BY this venv's python -- see the run cell below.
+# `datasets`/`huggingface_hub` stay in the DEFAULT Colab kernel.
+
+# %%
+import subprocess
+
+get_ipython().system('apt-get -qq update && apt-get -qq install -y python3.10 python3.10-venv > /dev/null')  # noqa: F821, E501
+get_ipython().system('python3.10 -m venv /content/venv_b4')  # noqa: F821
+get_ipython().system('/content/venv_b4/bin/pip install -q --upgrade pip')  # noqa: F821
+get_ipython().system('/content/venv_b4/bin/pip install -q -r experiments/phase2_2_baselines/b4_sequential_composites/requirements.txt')  # noqa: F821, E501
+VENV_B4_PYTHON = "/content/venv_b4/bin/python"
+_check = subprocess.run(
+    [VENV_B4_PYTHON, "-c", "import torch; print('TANDEM_CUDA_CHECK', torch.__version__, torch.cuda.is_available())"],
+    capture_output=True, text=True,
+)
+print(_check.stdout)
+# Filtered to a single marker-prefixed line (not a fixed line-count unpack)
+# so a stray warning printed to stdout by torch/numpy/etc. during import
+# can never masquerade as a parse error -- if the marker line is simply
+# missing, the assert below reports the real stderr instead.
+_result_lines = [ln for ln in _check.stdout.splitlines() if ln.startswith("TANDEM_CUDA_CHECK")]
+assert _result_lines, f"venv torch import failed or produced no output. stderr:\n{_check.stderr[-2000:]}"
+_, _torch_version, _cuda_available = _result_lines[-1].split()
+assert _cuda_available == "True", (
+    f"venv torch {_torch_version} cannot see the GPU (torch.cuda.is_available()=False) -- do not "
+    "proceed past this check. Check Runtime -> Change runtime type -> GPU is actually selected, and "
+    "that this cell's apt/venv setup completed without errors above."
+)
+get_ipython().system('pip install -q datasets huggingface_hub')  # noqa: F821
+
+# %% [markdown]
+# ## HF_TOKEN (Colab Secrets only -- never paste a token into a cell)
+#
+# Add a Colab Secret named `HF_TOKEN` (key icon in the left sidebar) with a
+# read-token that has accepted the `ILSVRC/imagenet-1k` gated-dataset terms
+# on huggingface.co, and enable notebook access for it.
+
+# %%
+from google.colab import userdata  # noqa: E402
+
+HF_TOKEN = userdata.get("HF_TOKEN")
+assert HF_TOKEN, "Add an HF_TOKEN Colab Secret (see markdown above) before continuing."
+
+# %% [markdown]
+# ## Materialize ImageNet-1k (val + train calibration subset) as a local ImageFolder
+#
+# One-time per Colab runtime (idempotent). `run.py` reuses RepQ-ViT's OWN
+# `build_dataset` on this same directory for both the calibration draw and
+# the final 50k eval (see `run.py`'s docstring, "Preprocessing note") -- so
+# both materialized subsets are needed here, same as B2/B3.
+
+# %%
+import sys
+
+sys.path.insert(0, "experiments/phase2_2_baselines")
+from common.colab_imagenet import materialize_train_calib_subset, materialize_val_split  # noqa: E402
+
+IMAGENET_ROOT = "/content/imagenet"  # or e.g. "/content/drive/MyDrive/tandem_imagenet_cache" if Drive-mounted
+materialize_val_split(IMAGENET_ROOT, HF_TOKEN, n_images=50000)
+# B4's calibration batch is 32 images (RepQ-ViT's own default, unchanged).
+materialize_train_calib_subset(IMAGENET_ROOT, HF_TOKEN, images_per_class=10, max_images=5000)
+
+# %% [markdown]
+# ## P2.2 post-conversion self-test -- run BEFORE any real run cell
+#
+# Ten hard-assert checks (wrapper purity + repo HEAD, upstream commit
+# pinning for BOTH ToMe and RepQ-ViT, TF32/numeric environment, secrets
+# scan, data-manifest determinism, cost-ruler unit checks, results.csv
+# schema, a REAL interrupt-then-resume simulation on a 512-image slice, a
+# 256-image host-equivalence smoke check, and a gate-ordering guard),
+# printed as one PASS/FAIL banner. A FAILURE HALTS here (raises) -- "Run
+# All" cannot reach either composite cell below until every check passes.
+# Do not skip or comment out this cell. B4 runs IN-PROCESS, so this is
+# launched by the pinned venv's python directly, same as `run.py` itself.
+
+# %%
+get_ipython().system(f'{VENV_B4_PYTHON} experiments/phase2_2_baselines/common/notebook_self_test.py --baseline sequential_composite --imagenet-dir {IMAGENET_ROOT} --device cuda --host-tag colab')  # noqa: F821, E501
+
+# %% [markdown]
+# ## Run B4 -- the real, unmodified `run.py`, one operating point per cell
+#
+# Everything below is IDENTICAL to the university-GPU path: same pinned
+# ToMe + RepQ-ViT commits, same operating-point grid, same
+# `experiments/phase2_2_baselines/results.csv` schema. B4 runs IN-PROCESS, so it must be
+# LAUNCHED by the pinned venv's python (not the default Colab kernel) --
+# `{VENV_B4_PYTHON}`, built above.
+#
+# **Each cell runs BOTH orders (merge_first, quant_first) for ONE
+# operating point** -- the defining requirement (2026-07 ruling, spec
+# item #2): a staged baseline must be the STRONGER of the two orders
+# at each point, so both are always measured and recorded, never just one.
+# Split into **six separate cells, one per operating point**, so a session
+# limit or a transient failure on a later point never costs earlier ones.
+# Each cell is independently safe to re-run: `run.py` checks
+# `experiments/phase2_2_baselines/results.csv` before doing any work and skips an operating
+# point already fully recorded. The first cell you run also pays a
+# ONE-TIME full-50k FP-parity pass (plain DeiT-S vs. P2.1's own S8
+# reference) -- cached, so later cells skip it. Each operating point
+# writes 3 rows (2 `row_kind=reproduction`, one per order, + 1
+# `row_kind=comparison` = the best of the two, the only row
+# `compare_pareto.py`/B5 should read) -- 3 of the 6 points below are
+# order-degenerate (no quantization or no merging makes the two orders
+# mathematically identical, see `run.py`'s own docstring), so those cells
+# run ONE GPU pass but still record both order rows, explicitly noted as
+# such. All six cells together append 18 rows.
+
+# %% [markdown]
+# ### Operating point 1/6 -- budget=15.0% (r=17, W8A8)
+
+# %%
+get_ipython().system(f'{VENV_B4_PYTHON} experiments/phase2_2_baselines/b4_sequential_composites/run.py --imagenet-dir {IMAGENET_ROOT} --device cuda --host-tag colab --only-budget-fraction 0.15')  # noqa: F821, E501
+
+# %% [markdown]
+# ### Operating point 2/6 -- budget=21.0% (r=10, W8A8)
+
+# %%
+get_ipython().system(f'{VENV_B4_PYTHON} experiments/phase2_2_baselines/b4_sequential_composites/run.py --imagenet-dir {IMAGENET_ROOT} --device cuda --host-tag colab --only-budget-fraction 0.21')  # noqa: F821, E501
+
+# %% [markdown]
+# ### Operating point 3/6 -- budget=29.3% (r=2, W8A8)
+
+# %%
+get_ipython().system(f'{VENV_B4_PYTHON} experiments/phase2_2_baselines/b4_sequential_composites/run.py --imagenet-dir {IMAGENET_ROOT} --device cuda --host-tag colab --only-budget-fraction 0.293')  # noqa: F821, E501
+
+# %% [markdown]
+# ### Operating point 4/6 -- budget=41.0% (r=22, W16A16 -- order-degenerate, one GPU pass)
+
+# %%
+get_ipython().system(f'{VENV_B4_PYTHON} experiments/phase2_2_baselines/b4_sequential_composites/run.py --imagenet-dir {IMAGENET_ROOT} --device cuda --host-tag colab --only-budget-fraction 0.41')  # noqa: F821, E501
+
+# %% [markdown]
+# ### Operating point 5/6 -- budget=57.2% (r=15, W16A16 -- order-degenerate, one GPU pass)
+
+# %%
+get_ipython().system(f'{VENV_B4_PYTHON} experiments/phase2_2_baselines/b4_sequential_composites/run.py --imagenet-dir {IMAGENET_ROOT} --device cuda --host-tag colab --only-budget-fraction 0.572')  # noqa: F821, E501
+
+# %% [markdown]
+# ### Operating point 6/6 -- budget=80.0% (r=7, W16A16 -- order-degenerate, one GPU pass)
+
+# %%
+get_ipython().system(f'{VENV_B4_PYTHON} experiments/phase2_2_baselines/b4_sequential_composites/run.py --imagenet-dir {IMAGENET_ROOT} --device cuda --host-tag colab --only-budget-fraction 0.8')  # noqa: F821, E501
+
+# %% [markdown]
+# ### Audit point -- r=23, W16A16 (2026-07 follow-up, item #1)
+#
+# NOT part of the 6-point comparison grid -- evidence only. Confirms
+# whether the 41% budget's pathological result (r=22, final-block token
+# count collapses to 4) is specific to r=22 or structural to this budget
+# region. Order-degenerate (one GPU pass), writes two `row_kind=reproduction`
+# rows and deliberately NO `row_kind=comparison` row, so
+# `compare_pareto.py`/B5 never reads it -- see `run.py`'s own docstring
+# and `../deviations.md` #39-40.
+
+# %%
+get_ipython().system(f'{VENV_B4_PYTHON} experiments/phase2_2_baselines/b4_sequential_composites/run.py --imagenet-dir {IMAGENET_ROOT} --device cuda --host-tag colab --only-audit-r 23')  # noqa: F821, E501
+
+# %% [markdown]
+# ## Results + completeness check
+#
+# Confirms all six operating points actually landed in `results.csv`
+# before you treat this baseline as done. `EXPECTED_ROWS` is derived from
+# `run.py`'s own declared `PLAN` (spec item #6) -- read via a subprocess
+# through the pinned venv (`PLAN` lives in a module that imports
+# torch/timm), never a hardcoded literal -- so if the operating-point grid
+# ever changes, this check updates itself instead of silently drifting.
+
+# %%
+import json
+import subprocess
+
+import pandas as pd
+
+_plan_check = subprocess.run(
+    [VENV_B4_PYTHON, "-c",
+     "import sys; sys.path.insert(0, 'experiments/phase2_2_baselines'); "
+     "import importlib.util as u; "
+     "spec = u.spec_from_file_location('b4run', 'experiments/phase2_2_experiments/phase2_2_baselines/b4_sequential_composites/run.py'); "
+     "mod = u.module_from_spec(spec); spec.loader.exec_module(mod); "
+     "print('TANDEM_B4_PLAN ' + __import__('json').dumps(mod.PLAN))"],
+    capture_output=True, text=True,
+)
+_plan_lines = [ln for ln in _plan_check.stdout.splitlines() if ln.startswith("TANDEM_B4_PLAN ")]
+assert _plan_lines, f"Could not read run.py's PLAN. stderr:\n{_plan_check.stderr[-2000:]}"
+PLAN = json.loads(_plan_lines[-1][len("TANDEM_B4_PLAN "):])
+print(f"Declared plan: {PLAN}")
+
+results_df = pd.read_csv("experiments/phase2_2_experiments/phase2_2_baselines/results.csv")
+composite_rows = results_df[results_df["method"] == "sequential_composite"]
+print(composite_rows.to_string(index=False))
+
+# Core 6-point grid and audit points (item #1, 2026-07 follow-up)
+# are counted SEPARATELY -- audit points (currently just r=23) write
+# row_kind=reproduction only, no "_best" comparison row, so they must not
+# be lumped into one raw count with the core grid (a prior version of
+# this check did exactly that, which would have started failing
+# incorrectly the moment anyone ran the audit-point cell). Matched by
+# config prefix ("r23_") rather than a generic "23" substring search --
+# "r22_..." legitimately contains "2" and "2" but never the "r23_" prefix.
+AUDIT_CONFIG_PREFIXES = ("r23_",)  # keep in sync with run.py's AUDIT_POINTS
+audit_rows = composite_rows[composite_rows["config"].str.startswith(AUDIT_CONFIG_PREFIXES)]
+core_rows = composite_rows[~composite_rows["config"].str.startswith(AUDIT_CONFIG_PREFIXES)]
+EXPECTED_CORE_ROWS = PLAN["expected_results_csv_rows"]
+EXPECTED_AUDIT_ROWS = PLAN["expected_audit_rows"]
+assert len(core_rows) == EXPECTED_CORE_ROWS, (
+    f"Expected {EXPECTED_CORE_ROWS} core sequential_composite rows ({PLAN['n_operating_points']} "
+    f"operating points x {PLAN['rows_per_operating_point']} rows), found {len(core_rows)} -- re-run "
+    "whichever --only-budget-fraction cell above is missing before treating B4's core grid as complete."
+)
+print(f"\nAll {EXPECTED_CORE_ROWS} expected core grid rows present -- B4 (DeiT-S) core grid complete.")
+if len(audit_rows) == EXPECTED_AUDIT_ROWS:
+    print(f"Audit point (r=23) also present: {len(audit_rows)}/{EXPECTED_AUDIT_ROWS} rows.")
+else:
+    print(f"Audit point (r=23) not yet run: {len(audit_rows)}/{EXPECTED_AUDIT_ROWS} rows "
+          "(optional -- evidence only, not required for B4's core grid to be complete).")
+
+# %% [markdown]
+# ## Analysis (2026-07 follow-up, items #2-5) -- structural cost
+# split, attention-skip bias, staged Pareto-frontier dominance, comparison
+# table, and figure. Torch-free (pandas/numpy only) -- runs in the DEFAULT
+# Colab kernel, same as `compare_pareto.py`/B5, no `{VENV_B4_PYTHON}` needed.
+# Requires the core 6-point grid above to be complete first.
+
+# %%
+get_ipython().system('python experiments/phase2_2_baselines/b4_sequential_composites/analyze_deit_small.py')  # noqa: F821
+
+# %% [markdown]
+# ## Save your results (optional -- Colab sessions are ephemeral)
+#
+# `experiments/phase2_2_baselines/results.csv` only exists in THIS Colab VM's disk. Either
+# download it (Files sidebar -> right-click -> Download) or push it back to
+# your repo so it persists and B5 (`compare_pareto.py`) can read it later.
+# Not run automatically -- uncomment and run only if you want to push.
+
+# %%
+# get_ipython().system(
+#     'git add experiments/phase2_2_baselines/results.csv && '
+#     'git commit -m "B4 (sequential composites) Colab results" && '
+#     'git push'
+# )

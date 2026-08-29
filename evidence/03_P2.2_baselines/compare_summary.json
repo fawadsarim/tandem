@@ -1,0 +1,395 @@
+{
+  "row_filter_assertions": {
+    "counts": {
+      "deit_tiny_patch16_224": 3,
+      "deit_small_patch16_224": 12,
+      "deit_base_patch16_224": 3,
+      "vit_base_patch16_224": 3
+    },
+    "trained_with_tome_leaked": 0,
+    "per_order_leaked": 0
+  },
+  "pooled_pareto_fronts": {
+    "deit_tiny_patch16_224": {
+      "frontier": [
+        "repq_vit/w6a6",
+        "fq_vit/w8a8",
+        "repq_vit/w8a8"
+      ],
+      "dominated": []
+    },
+    "deit_small_patch16_224": {
+      "frontier": [
+        "sequential_composite/r17_w8a8_best",
+        "repq_vit/w6a6",
+        "sequential_composite/r10_w8a8_best",
+        "sequential_composite/r2_w8a8_best",
+        "r0"
+      ],
+      "dominated": [
+        "repq_vit/w8a8",
+        "fq_vit/w8a8",
+        "sequential_composite/r22_w16a16_best",
+        "tome/r16",
+        "sequential_composite/r15_w16a16_best",
+        "tome/r13",
+        "tome/r8",
+        "sequential_composite/r7_w16a16_best"
+      ]
+    },
+    "deit_base_patch16_224": {
+      "frontier": [
+        "repq_vit/w6a6",
+        "repq_vit/w8a8"
+      ],
+      "dominated": [
+        "fq_vit/w8a8"
+      ]
+    },
+    "vit_base_patch16_224": {
+      "frontier": [
+        "repq_vit/w6a6",
+        "repq_vit/w8a8"
+      ],
+      "dominated": [
+        "fq_vit/w8a8"
+      ]
+    }
+  },
+  "deit_small_saturation": {
+    "config": "r2_w8a8_best",
+    "top1_pct": 79.704,
+    "bops_frac_pct": 28.78
+  },
+  "comparison_table": [
+    {
+      "model": "deit_tiny_patch16_224",
+      "method": "repq_vit",
+      "config": "w6a6",
+      "baseline_bops": 83400000000.0,
+      "baseline_top1_pct": 70.988,
+      "tandem_top1_pct": 70.8292,
+      "delta_tandem_minus_baseline_pp": -0.1588,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_tiny_patch16_224",
+      "method": "fq_vit",
+      "config": "w8a8",
+      "baseline_bops": 112709500000.0,
+      "baseline_top1_pct": 71.042,
+      "tandem_top1_pct": 71.6044,
+      "delta_tandem_minus_baseline_pp": 0.5624,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": true,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_tiny_patch16_224",
+      "method": "repq_vit",
+      "config": "w8a8",
+      "baseline_bops": 113000000000.0,
+      "baseline_top1_pct": 72.01,
+      "tandem_top1_pct": 71.6112,
+      "delta_tandem_minus_baseline_pp": -0.3988,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "sequential_composite",
+      "config": "r17_w8a8_best",
+      "baseline_bops": 174522200000.0,
+      "baseline_top1_pct": 77.434,
+      "tandem_top1_pct": 77.4256,
+      "delta_tandem_minus_baseline_pp": -0.0084,
+      "extrapolated": false,
+      "attention_skip_bias_flag": true,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": true
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "repq_vit",
+      "config": "w6a6",
+      "baseline_bops": 242000000000.0,
+      "baseline_top1_pct": 78.864,
+      "tandem_top1_pct": 78.6979,
+      "delta_tandem_minus_baseline_pp": -0.1661,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "sequential_composite",
+      "config": "r10_w8a8_best",
+      "baseline_bops": 243355900000.0,
+      "baseline_top1_pct": 79.272,
+      "tandem_top1_pct": 78.7057,
+      "delta_tandem_minus_baseline_pp": -0.5663,
+      "extrapolated": false,
+      "attention_skip_bias_flag": true,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "sequential_composite",
+      "config": "r2_w8a8_best",
+      "baseline_bops": 334500200000.0,
+      "baseline_top1_pct": 79.704,
+      "tandem_top1_pct": 79.2334,
+      "delta_tandem_minus_baseline_pp": -0.4706,
+      "extrapolated": false,
+      "attention_skip_bias_flag": true,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "repq_vit",
+      "config": "w8a8",
+      "baseline_bops": 359000000000.0,
+      "baseline_top1_pct": 79.652,
+      "tandem_top1_pct": 79.3278,
+      "delta_tandem_minus_baseline_pp": -0.3242,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "fq_vit",
+      "config": "w8a8",
+      "baseline_bops": 359276000000.0,
+      "baseline_top1_pct": 78.454,
+      "tandem_top1_pct": 79.3288,
+      "delta_tandem_minus_baseline_pp": 0.8748,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": true,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "sequential_composite",
+      "config": "r22_w16a16_best",
+      "baseline_bops": 482031900000.0,
+      "baseline_top1_pct": 70.206,
+      "tandem_top1_pct": 79.601,
+      "delta_tandem_minus_baseline_pp": 9.395,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "tome",
+      "config": "r16",
+      "baseline_bops": 628000000000.0,
+      "baseline_top1_pct": 78.026,
+      "tandem_top1_pct": 79.6407,
+      "delta_tandem_minus_baseline_pp": 1.6147,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "sequential_composite",
+      "config": "r15_w16a16_best",
+      "baseline_bops": 659658000000.0,
+      "baseline_top1_pct": 78.3,
+      "tandem_top1_pct": 79.6627,
+      "delta_tandem_minus_baseline_pp": 1.3627,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "tome",
+      "config": "r13",
+      "baseline_bops": 724000000000.0,
+      "baseline_top1_pct": 78.938,
+      "tandem_top1_pct": 79.7074,
+      "delta_tandem_minus_baseline_pp": 0.7694,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "tome",
+      "config": "r8",
+      "baseline_bops": 889000000000.0,
+      "baseline_top1_pct": 79.422,
+      "tandem_top1_pct": 79.822,
+      "delta_tandem_minus_baseline_pp": 0.4,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "method": "sequential_composite",
+      "config": "r7_w16a16_best",
+      "baseline_bops": 922225600000.0,
+      "baseline_top1_pct": 79.564,
+      "tandem_top1_pct": 79.826,
+      "delta_tandem_minus_baseline_pp": 0.262,
+      "extrapolated": true,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_base_patch16_224",
+      "method": "repq_vit",
+      "config": "w6a6",
+      "baseline_bops": 785000000000.0,
+      "baseline_top1_pct": 81.244,
+      "tandem_top1_pct": 78.594,
+      "delta_tandem_minus_baseline_pp": -2.65,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_base_patch16_224",
+      "method": "repq_vit",
+      "config": "w8a8",
+      "baseline_bops": 1250000000000.0,
+      "baseline_top1_pct": 81.8,
+      "tandem_top1_pct": 81.066,
+      "delta_tandem_minus_baseline_pp": -0.734,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "deit_base_patch16_224",
+      "method": "fq_vit",
+      "config": "w8a8",
+      "baseline_bops": 1253980000000.0,
+      "baseline_top1_pct": 80.894,
+      "tandem_top1_pct": 81.0929,
+      "delta_tandem_minus_baseline_pp": 0.1989,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": true,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "vit_base_patch16_224",
+      "method": "repq_vit",
+      "config": "w6a6",
+      "baseline_bops": 785480400000.0,
+      "baseline_top1_pct": 84.438,
+      "tandem_top1_pct": 82.7115,
+      "delta_tandem_minus_baseline_pp": -1.7265,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "vit_base_patch16_224",
+      "method": "repq_vit",
+      "config": "w8a8",
+      "baseline_bops": 1253980000000.0,
+      "baseline_top1_pct": 85.006,
+      "tandem_top1_pct": 84.468,
+      "delta_tandem_minus_baseline_pp": -0.538,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": false,
+      "dominated_flag": false,
+      "tie_within_measurement_bias_flag": false
+    },
+    {
+      "model": "vit_base_patch16_224",
+      "method": "fq_vit",
+      "config": "w8a8",
+      "baseline_bops": 1253980000000.0,
+      "baseline_top1_pct": 83.526,
+      "tandem_top1_pct": 84.468,
+      "delta_tandem_minus_baseline_pp": 0.942,
+      "extrapolated": false,
+      "attention_skip_bias_flag": false,
+      "cost_under_credited_flag": true,
+      "dominated_flag": true,
+      "tie_within_measurement_bias_flag": false
+    }
+  ],
+  "attention_skip_bias_floor_pp": 0.052,
+  "quantizer_orthogonality": {
+    "note": "RepQ-ViT's matched-BOPs wins over TANDEM at its two published cost points (w6a6, w8a8; all 4 models) reflect a quantizer-quality difference -- RepQ-ViT's reparameterized PTQ pipeline vs TANDEM's own simple per-block symmetric quantizer -- not allocation regret. Uniform-bit, r=0 configurations already lie inside TANDEM's own (r, per-block-bits) plan search space, so TANDEM's allocator is not structurally prevented from reaching this region; RepQ-ViT simply quantizes better at a given nominal bit-width than TANDEM's current quantizer does.",
+    "delta_range_pp": [
+      -2.65,
+      -0.1588
+    ],
+    "max_delta_point": {
+      "model": "deit_base_patch16_224",
+      "config": "w6a6",
+      "delta_tandem_minus_baseline_pp": -2.65
+    },
+    "stated_limitation": "TANDEM's current quantizer (static per-tensor symmetric weight/activation quantization) is less sophisticated than RepQ-ViT's reparameterized, scale-search PTQ pipeline -- this is a quantizer-implementation limitation of TANDEM's current codebase, not evidence against TANDEM's cost-allocation search.",
+    "future_work": "Composability: pairing TANDEM's own (r, bits)-allocation search with a stronger per-block quantizer (e.g. RepQ-ViT's reparameterization) is left as future work; the two contributions are orthogonal."
+  },
+  "manifest_hash": "41ddeb0ebb2fea82",
+  "plans_csv_provenance": {
+    "deit_tiny_patch16_224": {
+      "path": "phase2_1_fleet/results/P2/deit_tiny_patch16_224/plans.csv",
+      "sha256_16": "d2fbaf0dfef7aaab"
+    },
+    "deit_small_patch16_224": {
+      "path": "phase2_1_fleet/results/P2/deit_small_patch16_224/plans.csv",
+      "sha256_16": "fc03e8e8e6fa4fe8"
+    },
+    "deit_base_patch16_224": {
+      "path": "phase2_1_fleet/results/P2/deit_base_patch16_224/plans.csv",
+      "sha256_16": "6cd9244345dfa392"
+    },
+    "vit_base_patch16_224": {
+      "path": "phase2_1_fleet/results/P2/vit_base_patch16_224/plans.csv",
+      "sha256_16": "ad9939d427559081"
+    }
+  },
+  "figure": "B5_all_models_pareto.png"
+}

@@ -1,0 +1,49 @@
+{
+  "device": "Jetson Orin Nano Super Developer Kit",
+  "nvpmodel_conf_path": "/etc/nvpmodel.conf",
+  "pm_config_default_id": 1,
+  "current_mode_at_enumeration": {
+    "name": "MAXN_SUPER",
+    "id": 2
+  },
+  "current_mode_verbose_raw": "NVPM VERB: Config file: /etc/nvpmodel.conf\nNVPM VERB: parsing done for /etc/nvpmodel.conf\nNVPM VERB: Current mode: NV Power Mode: MAXN_SUPER\n2\nNVPM VERB: PARAM CPU_ONLINE: ARG CORE_0: PATH /sys/devices/system/cpu/cpu0/online: REAL_VAL: 1 CONF_VAL: 1\nNVPM VERB: PARAM CPU_ONLINE: ARG CORE_1: PATH /sys/devices/system/cpu/cpu1/online: REAL_VAL: 1 CONF_VAL: 1\nNVPM VERB: PARAM CPU_ONLINE: ARG CORE_2: PATH /sys/devices/system/cpu/cpu2/online: REAL_VAL: 1 CONF_VAL: 1\nNVPM VERB: PARAM CPU_ONLINE: ARG CORE_3: PATH /sys/devices/system/cpu/cpu3/online: REAL_VAL: 1 CONF_VAL: 1\nNVPM VERB: PARAM CPU_ONLINE: ARG CORE_4: PATH /sys/devices/system/cpu/cpu4/online: REAL_VAL: 1 CONF_VAL: 1\nNVPM VERB: PARAM CPU_ONLINE: ARG CORE_5: PATH /sys/devices/system/cpu/cpu5/online: REAL_VAL: 1 CONF_VAL: 1\nNVPM VERB: PARAM FBP_POWER_GATING: ARG FBP_PG_MASK: PATH /sys/devices/platform/gpu.0/fbp_pg_mask: REAL_VAL: 0 CONF_VAL: 2\nNVPM VERB: PARAM TPC_POWER_GATING: ARG TPC_PG_MASK: PATH /sys/devices/platform/gpu.0/tpc_pg_mask: REAL_VAL: 0 CONF_VAL: 240\nNVPM VERB: PARAM GPU_POWER_CONTROL_ENABLE: ARG GPU_PWR_CNTL_EN: PATH /sys/devices/platform/gpu.0/power/control: REAL_VAL: auto CONF_VAL: on\nNVPM VERB: PARAM CPU_A78_0: ARG MIN_FREQ: PATH /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq: REAL_VAL: 1510400 CONF_VAL: 729600\nNVPM VERB: PARAM CPU_A78_0: ARG MAX_FREQ: PATH /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: REAL_VAL: 1510400 CONF_VAL: 9223372036854775807\nNVPM VERB: PARAM CPU_A78_1: ARG MIN_FREQ: PATH /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq: REAL_VAL: 1510400 CONF_VAL: 729600\nNVPM VERB: PARAM CPU_A78_1: ARG MAX_FREQ: PATH /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq: REAL_VAL: 1510400 CONF_VAL: 9223372036854775807\nNVPM VERB: PARAM CPU_A78_2: ARG MIN_FREQ: PATH /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq: REAL_VAL: 1510400 CONF_VAL: 729600\nNVPM VERB: PARAM CPU_A78_2: ARG MAX_FREQ: PATH /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq: REAL_VAL: 1510400 CONF_VAL: 9223372036854775807\nNVPM VERB: PARAM CPU_A78_3: ARG MIN_FREQ: PATH /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq: REAL_VAL: 1510400 CONF_VAL: 729600\nNVPM VERB: PARAM CPU_A78_3: ARG MAX_FREQ: PATH /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq: REAL_VAL: 1510400 CONF_VAL: 9223372036854775807\nNVPM VERB: PARAM CPU_A78_4: ARG MIN_FREQ: PATH /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq: REAL_VAL: 1510400 CONF_VAL: 729600\nNVPM VERB: PARAM CPU_A78_4: ARG MAX_FREQ: PATH /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq: REAL_VAL: 1510400 CONF_VAL: 9223372036854775807\nNVPM VERB: PARAM CPU_A78_5: ARG MIN_FREQ: PATH /sys/devices/system/cpu/cpu5/cpufreq/scaling_min_freq: REAL_VAL: 1510400 CONF_VAL: 729600\nNVPM VERB: PARAM CPU_A78_5: ARG MAX_FREQ: PATH /sys/devices/system/cpu/cpu5/cpufreq/scaling_max_freq: REAL_VAL: 1510400 CONF_VAL: 9223372036854775807\nNVPM VERB: PARAM GPU: ARG MIN_FREQ: PATH /sys/devices/platform/17000000.gpu/devfreq_dev/min_freq: REAL_VAL: 624750000 CONF_VAL: 0\nNVPM VERB: PARAM GPU: ARG MAX_FREQ: PATH /sys/devices/platform/17000000.gpu/devfreq_dev/max_freq: REAL_VAL: 624750000 CONF_VAL: 9223372036854775807\nNVPM VERB: PARAM GPU_POWER_CONTROL_DISABLE: ARG GPU_PWR_CNTL_DIS: PATH /sys/devices/platform/gpu.0/power/control: REAL_VAL: auto CONF_VAL: auto\nNVPM VERB: PARAM EMC: ARG MAX_FREQ: PATH /sys/kernel/nvpmodel_clk_cap/emc: REAL_VAL: 2133000000 CONF_VAL: 9223372036854775807\n",
+  "modes": [
+    {
+      "id": 0,
+      "name": "15W",
+      "cpu_max_freq_khz": 1497600,
+      "cpu_max_freq_uncapped": false,
+      "gpu_max_freq_hz": 612000000,
+      "gpu_max_freq_uncapped": false,
+      "emc_max_freq_hz": 2133000000,
+      "emc_max_freq_uncapped": false,
+      "reboot_required": true,
+      "reboot_test_evidence": "NVPM WARN: Golden image context is already created\nNVPM WARN: Reboot required for changing to this power mode: 0\nNVPM WARN: DO YOU WANT TO REBOOT NOW? enter YES/yes to confirm:\nNVPM ERROR: optMask is 1, no request for power mode"
+    },
+    {
+      "id": 1,
+      "name": "25W",
+      "cpu_max_freq_khz": 1344000,
+      "cpu_max_freq_uncapped": false,
+      "gpu_max_freq_hz": 918000000,
+      "gpu_max_freq_uncapped": false,
+      "emc_max_freq_hz": 3199000000,
+      "emc_max_freq_uncapped": false,
+      "reboot_required": true,
+      "reboot_test_evidence": "NVPM WARN: Golden image context is already created\nNVPM WARN: Reboot required for changing to this power mode: 1\nNVPM WARN: DO YOU WANT TO REBOOT NOW? enter YES/yes to confirm:\nNVPM ERROR: optMask is 1, no request for power mode"
+    },
+    {
+      "id": 2,
+      "name": "MAXN_SUPER",
+      "cpu_max_freq_khz": -1,
+      "cpu_max_freq_uncapped": true,
+      "gpu_max_freq_hz": -1,
+      "gpu_max_freq_uncapped": true,
+      "emc_max_freq_hz": -1,
+      "emc_max_freq_uncapped": true,
+      "reboot_required": false,
+      "reboot_test_evidence": "already the active mode at enumeration time -- no switch attempted"
+    }
+  ],
+  "reboot_test_method": "For each non-active mode, `sudo nvpmodel -m <id>` was actually invoked with stdin='no\\n' (a universal decline -- nvpmodel requires an exact 'YES'/'yes' to proceed, anything else aborts with the mode left unchanged). reboot_required=True iff the string 'Reboot required' appeared in the command's output. After every probe, the active mode was re-queried and asserted unchanged, so this is a safe, real, reproducible empirical test -- not an assumption from documentation."
+}

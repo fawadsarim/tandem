@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "TANDEM: Training-Free Joint Token and Bit-Width Allocation for Vision Transformers"
+abstract: >-
+  A theoretical model of end-to-end distortion for compressed Vision
+  Transformers, D ~ sum_l S_l * eps_l, used to jointly allocate per-block
+  bit-widths and token-merge budgets without any fine-tuning -- validated
+  against published baselines (ToMe, RepQ-ViT, FQ-ViT) and on real Jetson
+  Orin hardware (Orin Nano Super and Orin NX 8GB).
+authors:
+  - family-names: Sarim
+    given-names: Muhammad Fawad Ul Hassan
+repository-code: "https://github.com/fawadsarim/tandem"
+license: Apache-2.0
+type: software
+keywords:
+  - vision-transformers
+  - model-compression
+  - quantization
+  - token-merging
+  - efficient-inference
+  - edge-ai

@@ -1,0 +1,8 @@
+{
+  "manifest_hash": "41ddeb0ebb2fea82",
+  "n_images": 50000,
+  "source": "imagenet-1k",
+  "recorded_by": "B1 (ToMe) Colab run",
+  "date": "2026-07-24",
+  "note": "Frozen 2026-07 (P2.2 audit item #3 ruling, part 2) as the PERMANENT cross-baseline canonical for common/notebook_self_test.py's check_data_determinism (self-test item 5). Every baseline's materialized val/ split must hash-match this exactly -- the 'no canonical yet, recording this run' first-run-canonical path no longer exists once this file is committed; a mismatch now always means a real problem (different image set/order, or a corrupted/partial materialization), never a legitimate first run. Originally recorded during B1's real Colab run via common/equivalence_gate.py's own FINGERPRINT_PATH mechanism (key '_manifest_hashes'/'val_50k') before being promoted here to make it permanent and mandatory rather than session-local. See experiments/phase2_2_baselines/REPRODUCIBILITY.md for why P2.1 itself stores no equivalent manifest hash to compare against instead, and what establishes the baseline-to-P2.1 eval-set link in its place."
+}

@@ -1,0 +1,117 @@
+{
+  "model_name": "deit_base_patch16_224",
+  "d_model": 768,
+  "n_blocks": 12,
+  "checkpoint_hash": null,
+  "calibration_hash": null,
+  "batch_size": 1,
+  "buckets": [
+    197,
+    69
+  ],
+  "precisions": [
+    "fp16",
+    "int8_qdq"
+  ],
+  "borderline_rel_tol": 0.05,
+  "measurements": {
+    "197": {
+      "layer_fusion_check": {
+        "available": true,
+        "n_layers": 10,
+        "n_reformat_layers": 0,
+        "reformat_layer_names": [],
+        "n_layers_mentioning_int8": 7,
+        "fused_clean": true,
+        "raw_layer_names": [
+          "__myl_MoveMeanSubMulMeanAddSqrtDivMulMulAddMulMinMaxRounCast_myl0_0",
+          "__mye12414+__mye12402+__mye12390_myl0_1",
+          "/attn/MatMul_myl0_2",
+          "__myl_MaxrSubExpSumDivMul_myl0_3",
+          "/attn/MatMul_1_myl0_4",
+          "__myl_MulMinMaxRounCastReshTran_myl0_5",
+          "__myl_FcAdd_myl0_6",
+          "__myl_MeanSubMulMeanAddSqrtDivMulMulAddMulMinMaxRounCast_myl0_7",
+          "/mlp/fc1/MatMul_myl0_8",
+          "__myl_FcAdd_myl0_9"
+        ]
+      },
+      "fp16": {
+        "median_ms": 0.799971999981608,
+        "p99_ms": 0.8720219500190751,
+        "temp_c_before": 55.093,
+        "temp_c_after": 55.093,
+        "mean_power_w": 6.011,
+        "n_measure_iters": 200,
+        "n_warmup_iters": 20
+      },
+      "int8_qdq": {
+        "median_ms": 0.954404999987446,
+        "p99_ms": 0.9725745599928359,
+        "temp_c_before": 55.093,
+        "temp_c_after": 55.093,
+        "mean_power_w": 6.011,
+        "n_measure_iters": 200,
+        "n_warmup_iters": 20
+      }
+    },
+    "69": {
+      "layer_fusion_check": {
+        "available": true,
+        "n_layers": 10,
+        "n_reformat_layers": 0,
+        "reformat_layer_names": [],
+        "n_layers_mentioning_int8": 7,
+        "fused_clean": true,
+        "raw_layer_names": [
+          "__myl_MoveMeanSubMulMeanAddSqrtDivMulMulAddMulMinMaxRounCast_myl0_0",
+          "__mye12414+__mye12402+__mye12390_myl0_1",
+          "/attn/MatMul_myl0_2",
+          "__myl_MaxrSubExpSumDivMul_myl0_3",
+          "/attn/MatMul_1_myl0_4",
+          "__myl_MulMinMaxRounCastReshTran_myl0_5",
+          "__myl_FcAdd_myl0_6",
+          "__myl_MeanSubMulMeanAddSqrtDivMulMulAddMulMinMaxRounCast_myl0_7",
+          "/mlp/fc1/MatMul_myl0_8",
+          "__myl_FcAdd_myl0_9"
+        ]
+      },
+      "fp16": {
+        "median_ms": 0.5358269999931053,
+        "p99_ms": 0.5531268099827003,
+        "temp_c_before": 55.093,
+        "temp_c_after": 55.093,
+        "mean_power_w": 6.011,
+        "n_measure_iters": 200,
+        "n_warmup_iters": 20
+      },
+      "int8_qdq": {
+        "median_ms": 0.5192824999937784,
+        "p99_ms": 0.5357037700201772,
+        "temp_c_before": 55.093,
+        "temp_c_after": 55.093,
+        "mean_power_w": 6.011,
+        "n_measure_iters": 200,
+        "n_warmup_iters": 20
+      }
+    }
+  },
+  "bucket_verdicts": {
+    "197": "NO-GO",
+    "69": "BORDERLINE"
+  },
+  "overall_verdict": "BORDERLINE",
+  "decision_rule_note": "Pre-registered in jetson/out/pilot_deitb/PREREGISTRATION.md before any number was measured -- see this file's own module docstring for the identical registered text.",
+  "versions": {
+    "l4t": "# R39 (release), REVISION: 2.0, GCID: 45755727, BOARD: generic, EABI: aarch64, DATE: Mon Jun  1 09:28:48 PM UTC 2026\n# KERNEL_VARIANT: oot\nTARGET_USERSPACE_LIB_DIR=nvidia\nTARGET_USERSPACE_LIB_DIR_PATH=usr/lib/aarch64-linux-gnu/nvidia",
+    "tensorrt": "TensorRT v101602",
+    "cuda": "release 13.2",
+    "python": "Python 3.12.3",
+    "torch": "2.12.0",
+    "gpu_name": "Orin",
+    "pip_freeze_hash": "c7b62d2ccc2b0d9b",
+    "nvpmodel_q": "NV Power Mode: MAXN_SUPER\n2",
+    "jetson_clocks_show": "SOC family:tegra234  Machine:NVIDIA Jetson Orin Nano Developer Kit\nOnline CPUs: 0-5, Offline CPUs: \ncpu0:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu1:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu2:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu3:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu4:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu5:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \nGPU MinFreq=624750000 MaxFreq=624750000 CurrentFreq=624750000\nActive GPU TPCs: 8\nEMC MinFreq=2133000000 MaxFreq=2133000000 CurrentFreq=2133000000\nFAN Dynamic Speed Control=nvfancontrol hwmon0_pwm1=75\nFAN Dynamic Speed Control=nvfancontrol hwmon0_pwm1_enable=1\nNV Power Mode: MAXN_SUPER"
+  },
+  "timestamp": "2026-07-30T17:41:27Z"
+}

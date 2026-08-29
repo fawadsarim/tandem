@@ -1,0 +1,31 @@
+{
+  "model_name": "deit_base_patch16_224",
+  "resolved_pretrained_tag": "deit_base_patch16_224.fb_in1k",
+  "checkpoint_state_hash": "d0d329d779597c2bec332181ea0ab920d55a7113b0aef8c0e1ea653744a2a559",
+  "d_model": 768,
+  "n_blocks": 12,
+  "n_tokens_total": 197,
+  "buckets": [
+    197,
+    69
+  ],
+  "calibration": {
+    "n_calib_images": 128,
+    "calib_hash": "210f08d3f77a88a9d9559920d53b1132fe9fa491c8f5dafa4e7d57d34e88f0d9"
+  },
+  "max_abs_diff_tol": 0.0001,
+  "results": {
+    "197": {
+      "fp_onnx_path": "/content/tandem/jetson/out/pilot_deitb/block_seg_n197.onnx",
+      "fp_max_abs_diff": 1.33514404296875e-05,
+      "qdq_onnx_path": "/content/tandem/jetson/out/pilot_deitb/block_seg_n197_qdq.onnx",
+      "qdq_ops": 16
+    },
+    "69": {
+      "fp_onnx_path": "/content/tandem/jetson/out/pilot_deitb/block_seg_n69.onnx",
+      "fp_max_abs_diff": 1.3589859008789062e-05,
+      "qdq_onnx_path": "/content/tandem/jetson/out/pilot_deitb/block_seg_n69_qdq.onnx",
+      "qdq_ops": 16
+    }
+  }
+}

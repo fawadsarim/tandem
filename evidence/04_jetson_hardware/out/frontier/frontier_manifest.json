@@ -1,0 +1,53 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "latency_id_ms": 4.966751948813908,
+  "min_achievable_latency_ms": 3.795801996602677,
+  "min_achievable_fraction": 0.7642423128276294,
+  "budget_fractions": [
+    0.77,
+    0.79,
+    0.82,
+    0.85,
+    0.89,
+    0.94
+  ],
+  "n_degenerate_budgets": 0,
+  "n_arm_a_all_bits_16": 6,
+  "n_arm_b_infeasible": 4,
+  "n_plans_identical_arm_a_vs_arm_b": 0,
+  "arm_b_infeasibility_note": "A real finding, not a bug, if n_arm_b_infeasible > 0 -- ARM B (uniform-r ToMe) applies a merge operation at 11 SEPARATE blocks, paying this device's near-fixed per-merge-operation overhead 11 times over, vs ARM A/TANDEM's own <=2-point schedule concentrating the same token reduction into 1-2 operations. At tight budgets this can make even the smallest uniform-r candidate (r=1) cost more than the budget allows. See per-row arm_b_infeasible in frontier_plans.csv.",
+  "d_pred_note": "ARM B's D_pred is null in frontier_plans.csv -- P2.1's own Dm_table.csv only covers TANDEM's registered plan-space grid (MERGE_BLOCKS x MERGE_RS, 24 rows), not ARM B's uniform-every-block r in {1..11}. See this file's module docstring D_PRED NOTE. The real comparison is measured top-1 accuracy via frontier_paired_eval.py.",
+  "bops_reference_points": [
+    {
+      "budget_fraction": 0.15,
+      "latency_ms": 4.79683496087091,
+      "plan_json": "{\"bits\": {\"1\": 8, \"2\": 8, \"3\": 6, \"4\": 8, \"5\": 6, \"6\": 8, \"7\": 8, \"8\": 8, \"9\": 8, \"10\": 8, \"11\": 8, \"12\": 8}, \"merges\": [{\"block\": 3, \"r\": 64}, {\"block\": 5, \"r\": 64}]}"
+    },
+    {
+      "budget_fraction": 0.21,
+      "latency_ms": 4.980120495019946,
+      "plan_json": "{\"bits\": {\"1\": 8, \"2\": 8, \"3\": 8, \"4\": 8, \"5\": 8, \"6\": 8, \"7\": 8, \"8\": 8, \"9\": 8, \"10\": 8, \"11\": 8, \"12\": 8}, \"merges\": [{\"block\": 3, \"r\": 32}, {\"block\": 5, \"r\": 64}]}"
+    },
+    {
+      "budget_fraction": 0.293,
+      "latency_ms": 5.488686001626775,
+      "plan_json": "{\"bits\": {\"1\": 16, \"2\": 8, \"3\": 8, \"4\": 8, \"5\": 8, \"6\": 8, \"7\": 8, \"8\": 8, \"9\": 8, \"10\": 8, \"11\": 8, \"12\": 8}, \"merges\": [{\"block\": 3, \"r\": 32}, {\"block\": 5, \"r\": 32}]}"
+    },
+    {
+      "budget_fraction": 0.41,
+      "latency_ms": 6.534262964123627,
+      "plan_json": "{\"bits\": {\"1\": 16, \"2\": 8, \"3\": 8, \"4\": 8, \"5\": 8, \"6\": 8, \"7\": 8, \"8\": 8, \"9\": 8, \"10\": 8, \"11\": 8, \"12\": 8}, \"merges\": []}"
+    },
+    {
+      "budget_fraction": 0.572,
+      "latency_ms": 6.106759959948249,
+      "plan_json": "{\"bits\": {\"1\": 16, \"2\": 16, \"3\": 8, \"4\": 8, \"5\": 8, \"6\": 16, \"7\": 8, \"8\": 8, \"9\": 16, \"10\": 8, \"11\": 8, \"12\": 8}, \"merges\": []}"
+    },
+    {
+      "budget_fraction": 0.8,
+      "latency_ms": 5.536755954381079,
+      "plan_json": "{\"bits\": {\"1\": 16, \"2\": 16, \"3\": 16, \"4\": 16, \"5\": 16, \"6\": 16, \"7\": 8, \"8\": 16, \"9\": 16, \"10\": 8, \"11\": 8, \"12\": 8}, \"merges\": []}"
+    }
+  ],
+  "not_a_joint_vs_staged_test_note": "This is NOT a joint-vs-staged test -- that comparison is VOID on this device/LUT, see CHARACTERIZATION.md. This compares merge-PLACEMENT granularity (TANDEM's own <=2-point schedules, ARM A) against uniform-r merging (ARM B) at matched measured latency -- the hardware analogue of the P2.2 saturation finding."
+}

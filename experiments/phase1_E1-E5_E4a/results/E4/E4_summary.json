@@ -1,0 +1,136 @@
+{
+  "config": {
+    "N_IMAGES": 5000,
+    "BATCH_SIZE": 128,
+    "MODEL": "deit_small_patch16_224"
+  },
+  "config_hash": "57ae17451a78",
+  "environment": {
+    "torch_version": "2.11.0+cu128",
+    "timm_version": "1.0.28",
+    "cuda_version": "12.8",
+    "gpu_name": "Tesla T4",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "python_version": "3.12.13"
+  },
+  "data_source": "imagenet-1k",
+  "n_images_used": 5000,
+  "labels_available": true,
+  "gate_results": {
+    "a_data_source": {
+      "passed": true,
+      "data_source": "imagenet-1k"
+    },
+    "b_m_l_consistency": {
+      "passed": true,
+      "max_rel_err": 0.0
+    },
+    "c_r0_noop": {
+      "passed": true,
+      "mean_abs_diff": 0.0,
+      "max_abs_diff_diagnostic": 0.0,
+      "top1_agreement": 1.0
+    }
+  },
+  "verdicts": {
+    "V1_E4": {
+      "passed": true,
+      "all_gates_ok": true,
+      "fs_grid_complete": true,
+      "fs_configs_found": 24,
+      "fs_configs_expected": 24
+    },
+    "V2_E4": {
+      "slope": 0.3524663563365051,
+      "r2": 0.962211931528197,
+      "n_points": 3,
+      "passed": false,
+      "gating": false,
+      "note": "reclassified per design decision -- allocator consumes measured merge-damage tables (F_S/F_B/F_R/F_P grids); V2_E4 characterizes Gaussian->merge transfer anisotropy, not gated. See V2_E4_resolution."
+    },
+    "V2_E4_resolution": {
+      "measured_damage_refit": {
+        "slope": 1.149328279096902,
+        "r2": 0.9993432224249296,
+        "n_points": 4
+      },
+      "measured_damage_refit_in_regime": {
+        "slope": 1.1710471697386386,
+        "r2": 0.9999905556024519,
+        "n_points": 2
+      },
+      "statement": "The original V2_E4 slope=0.35 (Gaussian-sensitivity predictor D_pred_marginal) reflects Gaussian->merge transfer ANISOTROPY across blocks, not an additivity-structure failure: E4b's measured-damage predictor (P_damage_measured, summing matching F_S single-point D_mse) recovers slope=1.149, R\u00b2=0.9993 (n=4 valid F_M configs); the two uniform_r8/r16 configs are NaN by design (even blocks outside the F_S grid).",
+      "reference": "results/E4/E4b_additivity_reanalysis.json"
+    },
+    "transfer_informative": {
+      "n_in_band": 2,
+      "n_total": 9,
+      "mean_log_T": -1.3909954599245455,
+      "std_log_T": 0.9018478673712441
+    },
+    "merge_scaling_slopes_informative": {
+      "1": 1.2637979612753814,
+      "3": 1.1616372482542179,
+      "5": 1.1577799098569659,
+      "7": 1.0773154833274408,
+      "9": 1.0872160153168147,
+      "11": 1.0333375682726744
+    },
+    "prop_attn_effect_informative": [
+      {
+        "block": 3,
+        "r": 64,
+        "D_mse_ward": 0.0381809883789062,
+        "D_mse_ward_propattn": 0.0212401157958984,
+        "delta": -0.016940872583007797
+      },
+      {
+        "block": 3,
+        "r": 98,
+        "D_mse_ward": 0.0778391998779296,
+        "D_mse_ward_propattn": 0.0493557417846679,
+        "delta": -0.0284834580932617
+      },
+      {
+        "block": 7,
+        "r": 64,
+        "D_mse_ward": 0.0193446310516357,
+        "D_mse_ward_propattn": 0.0021593394315719,
+        "delta": -0.0171852916200638
+      },
+      {
+        "block": 7,
+        "r": 98,
+        "D_mse_ward": 0.0386137149597167,
+        "D_mse_ward_propattn": 0.0066392696670532,
+        "delta": -0.0319744452926635
+      },
+      {
+        "block": 11,
+        "r": 64,
+        "D_mse_ward": 0.0111135272628784,
+        "D_mse_ward_propattn": 0.0002408465582847,
+        "delta": -0.010872680704593699
+      },
+      {
+        "block": 11,
+        "r": 98,
+        "D_mse_ward": 0.0230334481079101,
+        "D_mse_ward_propattn": 0.0008319165622711,
+        "delta": -0.022201531545639
+      }
+    ]
+  },
+  "overall_pass": true,
+  "wall_clock_seconds_this_run": 344.851363517,
+  "eps_abs_divisor": 75264,
+  "eps_abs_rescale_provenance": {
+    "rescaled_this_run": false,
+    "factor": 1.0051020408163265,
+    "max_rel_change": null,
+    "in_regime_flips": 0,
+    "reanalysis_wall_clock_seconds": 0.005662750999931632,
+    "note": "one-time post-hoc rescale of E4_raw.csv (197/196 CLS-inclusion off-by-one); no re-sweep performed. rescaled_this_run=False means the data was already on the 196 basis when this cell ran (a fresh sweep with the fixed source, or a CSV already corrected previously)."
+  },
+  "notes": "eps_abs was corrected post-hoc from a 197*384 to a 196*384 per-element divisor (CLS is never a merge candidate, so the cost only ever ranges over 196 patch tokens); all T, D_pred, D_pred_marginal, and in_regime values in E4_raw.csv and the regenerated rho_curves.png/merge_transfer.png reflect the corrected 196 basis. damage_vs_r.png and ward_vs_bipartite.png were regenerated unchanged (D_mse-only, unaffected by eps_abs). schedule_additivity_measured.png and E4b_additivity_reanalysis.json are also unaffected, since P_damage_measured is built entirely from measured D_mse."
+}

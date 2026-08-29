@@ -1,0 +1,518 @@
+{
+  "config": {
+    "N_IMAGES": 5000,
+    "N_IMAGES_G1": 20000,
+    "BATCH_SIZE": 128,
+    "CALIB_IMAGES": 512,
+    "MODEL": "deit_small_patch16_224"
+  },
+  "environment": {
+    "torch_version": "2.11.0+cu128",
+    "timm_version": "1.0.28",
+    "cuda_version": "12.8",
+    "gpu_name": "Tesla T4",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "python_version": "3.12.13"
+  },
+  "data_source": "imagenet-1k",
+  "data_source_g1": "imagenet-1k",
+  "n_images_used": 5000,
+  "n_images_g1": 20000,
+  "gate_results": {
+    "a_artifact_loading": {
+      "passed": true,
+      "checked": [
+        "E3.overall_pass",
+        "E4.overall_pass",
+        "E4.eps_norm_note",
+        "E4b.slope_in_range",
+        "data_source_match_all"
+      ]
+    },
+    "b_m_l_consistency": {
+      "passed": true,
+      "max_rel_err": 0.0
+    },
+    "c_identity_plan": {
+      "passed": true,
+      "mean_abs_diff": 0.0,
+      "top1_agreement": 1.0,
+      "max_abs_diff_diagnostic_only": 0.0
+    },
+    "d_table_fidelity": {
+      "passed": true,
+      "n_dq_checked": 36,
+      "n_dm_checked": 24
+    },
+    "d_executor_reproduction": {
+      "passed": true,
+      "configs": [
+        {
+          "archived_config_id": "WA_b03_e8",
+          "archived_D_mse": 0.0017706056373596,
+          "measured_D_mse": 0.001770605637359619,
+          "rel_err": 1.0777079792991442e-14
+        },
+        {
+          "archived_config_id": "WA_b09_e6",
+          "archived_D_mse": 0.0206300444946289,
+          "measured_D_mse": 0.020630044494628907,
+          "rel_err": 3.363489548320554e-16
+        },
+        {
+          "archived_config_id": "FS_b03_r64",
+          "archived_D_mse": 0.0381809883789062,
+          "measured_D_mse": 0.03818098837890625,
+          "rel_err": 1.4538950820331828e-15
+        },
+        {
+          "archived_config_id": "FS_b09_r32",
+          "archived_D_mse": 0.0062475797927856,
+          "measured_D_mse": 0.006247579792785646,
+          "rel_err": 7.358076829441938e-15
+        }
+      ]
+    },
+    "e_solver_soundness_and_hull_completeness": {
+      "passed": true,
+      "n_plans": 162,
+      "n_true_frontier": 20,
+      "n_true_hull": 10,
+      "n_swept_hull": 10,
+      "soundness_passed": true,
+      "soundness_n_checked": 14,
+      "hull_completeness_passed": true,
+      "duality_gap_points": [
+        {
+          "cost": 588875563008.0,
+          "D_pred": 0.3695693991889951,
+          "plan": {
+            "bits": {
+              "1": 6,
+              "2": 6,
+              "3": 6,
+              "4": 8
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 598635970560.0,
+          "D_pred": 0.1520210152900694,
+          "plan": {
+            "bits": {
+              "1": 8,
+              "2": 6,
+              "3": 6,
+              "4": 8
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 663342022656.0,
+          "D_pred": 0.0687432409355162,
+          "plan": {
+            "bits": {
+              "1": 8,
+              "2": 8,
+              "3": 8,
+              "4": 16
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 675324887040.0,
+          "D_pred": 0.0678490332969664,
+          "plan": {
+            "bits": {
+              "1": 16,
+              "2": 8,
+              "3": 6,
+              "4": 8
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 752013803520.0,
+          "D_pred": 0.0419185418258666,
+          "plan": {
+            "bits": {
+              "1": 16,
+              "2": 16,
+              "3": 8,
+              "4": 8
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 951872126976.0,
+          "D_pred": 0.029668044918060202,
+          "plan": {
+            "bits": {
+              "1": 16,
+              "2": 8,
+              "3": 6,
+              "4": 8
+            },
+            "merges": []
+          }
+        }
+      ],
+      "n_duality_gap_points": 6,
+      "dp_exactness_passed": true,
+      "n_test_budgets_checked": 20,
+      "note": "6/20 true discrete Pareto-frontier points are in the Lagrangian duality gap: individually non-dominated (no other single plan beats them on both axes) yet unreachable by ANY lambda for their own schedule, because different blocks have different sensitivities and their local rate-distortion curves don't share a common marginal-rate breakpoint. Textbook property of discrete/integer rate allocation (Everett / Shoham-Gersho), not a bug. Reported here, never gated."
+    },
+    "f_mechanism_toggle": {
+      "passed": true,
+      "D_mse_merge_only": 0.024140673803710933,
+      "D_mse_quant_only": 0.06844909521484376,
+      "D_mse_both": 0.08995787883300783
+    },
+    "e_solver_soundness_and_hull_completeness_regression": {
+      "passed": true,
+      "n_plans": 162,
+      "n_true_frontier": 20,
+      "n_true_hull": 10,
+      "n_swept_hull": 10,
+      "soundness_passed": true,
+      "soundness_n_checked": 14,
+      "hull_completeness_passed": true,
+      "duality_gap_points": [
+        {
+          "cost": 588875563008.0,
+          "D_pred": 0.3695693991889951,
+          "plan": {
+            "bits": {
+              "1": 6,
+              "2": 6,
+              "3": 6,
+              "4": 8
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 598635970560.0,
+          "D_pred": 0.1520210152900694,
+          "plan": {
+            "bits": {
+              "1": 8,
+              "2": 6,
+              "3": 6,
+              "4": 8
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 663342022656.0,
+          "D_pred": 0.0687432409355162,
+          "plan": {
+            "bits": {
+              "1": 8,
+              "2": 8,
+              "3": 8,
+              "4": 16
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 675324887040.0,
+          "D_pred": 0.0678490332969664,
+          "plan": {
+            "bits": {
+              "1": 16,
+              "2": 8,
+              "3": 6,
+              "4": 8
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 752013803520.0,
+          "D_pred": 0.0419185418258666,
+          "plan": {
+            "bits": {
+              "1": 16,
+              "2": 16,
+              "3": 8,
+              "4": 8
+            },
+            "merges": [
+              {
+                "block": 3,
+                "r": 64
+              }
+            ]
+          }
+        },
+        {
+          "cost": 951872126976.0,
+          "D_pred": 0.029668044918060202,
+          "plan": {
+            "bits": {
+              "1": 16,
+              "2": 8,
+              "3": 6,
+              "4": 8
+            },
+            "merges": []
+          }
+        }
+      ],
+      "n_duality_gap_points": 6,
+      "dp_exactness_passed": true,
+      "n_test_budgets_checked": 20,
+      "note": "6/20 true discrete Pareto-frontier points are in the Lagrangian duality gap: individually non-dominated (no other single plan beats them on both axes) yet unreachable by ANY lambda for their own schedule, because different blocks have different sensitivities and their local rate-distortion curves don't share a common marginal-rate breakpoint. Textbook property of discrete/integer rate allocation (Everett / Shoham-Gersho), not a bug. Reported here, never gated."
+    }
+  },
+  "c_id": 1162418061312.0,
+  "c_min": 78824865792.0,
+  "budgets": [
+    174362709196.7997,
+    243698779378.4122,
+    340606631682.3339,
+    476050302106.11505,
+    665353722022.3142,
+    929934449049.5986
+  ],
+  "verdicts": {
+    "V1_E5_cross_axis_additivity": {
+      "slope": 0.9684339303094243,
+      "r2": 0.9967394353862783,
+      "n_points": 10,
+      "passed": true
+    },
+    "V2_E5_G1_kill_test": {
+      "mean_delta_top1_pp": 0.0,
+      "mean_ci_low_pp": 0.0,
+      "mean_ci_high_pp": 0.0,
+      "per_budget": {
+        "1.7436e+11": {
+          "delta_top1_pp": 0.0,
+          "ci_low_pp": 0.0,
+          "ci_high_pp": 0.0
+        },
+        "2.4370e+11": {
+          "delta_top1_pp": 0.0,
+          "ci_low_pp": 0.0,
+          "ci_high_pp": 0.0
+        },
+        "3.4061e+11": {
+          "delta_top1_pp": 0.0,
+          "ci_low_pp": 0.0,
+          "ci_high_pp": 0.0
+        },
+        "4.7605e+11": {
+          "delta_top1_pp": 0.0,
+          "ci_low_pp": 0.0,
+          "ci_high_pp": 0.0
+        },
+        "6.6535e+11": {
+          "delta_top1_pp": 0.0,
+          "ci_low_pp": 0.0,
+          "ci_high_pp": 0.0
+        },
+        "9.2993e+11": {
+          "delta_top1_pp": 0.0,
+          "ci_low_pp": 0.0,
+          "ci_high_pp": 0.0
+        }
+      },
+      "passed": false,
+      "mechanism": "exact_tie_via_plan_collapse"
+    }
+  },
+  "sequential_winners": {
+    "1.7436e+11": {
+      "order": "S1_tokens_then_bits",
+      "alpha": 0.5
+    },
+    "2.4370e+11": {
+      "order": "S1_tokens_then_bits",
+      "alpha": 0.4
+    },
+    "3.4061e+11": {
+      "order": "S1_tokens_then_bits",
+      "alpha": 0.3
+    },
+    "4.7605e+11": {
+      "order": "S1_tokens_then_bits",
+      "alpha": 0.0
+    },
+    "6.6535e+11": {
+      "order": "S2_bits_then_tokens",
+      "alpha": 1.0
+    },
+    "9.2993e+11": {
+      "order": "S1_tokens_then_bits",
+      "alpha": 0.0
+    }
+  },
+  "budget_utilization": {
+    "joint": {
+      "1.7436e+11": 0.9852934178838351,
+      "2.4370e+11": 0.9519940965143441,
+      "3.4061e+11": 0.9823674368620773,
+      "4.7605e+11": 0.8952929159343248,
+      "6.6535e+11": 0.9423408468841066,
+      "9.2993e+11": 0.9621151539384261
+    },
+    "best_sequential": {
+      "1.7436e+11": 0.9852934178838351,
+      "2.4370e+11": 0.9519940965143441,
+      "3.4061e+11": 0.9823674368620773,
+      "4.7605e+11": 0.8952929159343248,
+      "6.6535e+11": 0.9423408468841066,
+      "9.2993e+11": 0.9621151539384261
+    }
+  },
+  "exactness_refinement_trigger": {
+    "rule": "IF any G1 budget shows utilization < 97% (joint OR best-sequential), OR the final G1 margin lands within 0.15 points of the 0.4-point bar, THEN before finalizing G1 implement the exact per-schedule Pareto-set DP (multi-choice knapsack over the 12 blocks, dominance-pruned) for the joint arm AND for the sequential stages' bit allocation (fairness requires upgrading both arms together), and re-select plans.",
+    "utilization_threshold": 0.97,
+    "margin_tolerance_pp": 0.15,
+    "acceptance_bar_pp": 0.4,
+    "triggered": true,
+    "fired": "pre-emptively (89.0-95.2% at 4/6 budgets (old hull-based solver, old WA4-inclusive menu); menu restriction expected to widen gaps)",
+    "implemented_now": true,
+    "min_utilization_observed_post_upgrade": 0.8952929159343248,
+    "note": "Post-upgrade utilization (Section 25b) is retained as a granularity diagnostic, not an optimality concern -- gate (e)'s DP-exactness assertion (Section 18) proves the exact DP reaches the true per-schedule optimum, including duality-gap points the lambda-sweep could not reach. G1-dependent fields added retrospectively in Section 27b.",
+    "measured_margin_pp": 0.0,
+    "margin_within_tolerance_of_bar": false
+  },
+  "plan_audit_fidelity": {
+    "slope": 0.9708807751176256,
+    "r2": 0.998926251815775,
+    "n_points": 12
+  },
+  "pred_vs_measured_fidelity_all_plans": {
+    "slope": 0.9688428878140438,
+    "r2": 0.9971049173018565,
+    "n_points": 22
+  },
+  "pred_vs_measured_fidelity_all_plans_note": "Corrected: excludes the 2 retained WA4 evidence rows (X8/X9, excluded_out_of_menu=True; see F-X1) from the pooled fit. The uncorrected/polluted fit (includes those rows) is recorded separately below for the record and is never the reported fidelity number.",
+  "pred_vs_measured_fidelity_all_plans_polluted": {
+    "slope": 1.5069773303873137,
+    "r2": 0.8868548548560469,
+    "n_points": 24
+  },
+  "quota_correlation_informative": -0.8888405452977887,
+  "plans_identical": {
+    "1.7436e+11": true,
+    "2.4370e+11": true,
+    "3.4061e+11": true,
+    "4.7605e+11": true,
+    "6.6535e+11": true,
+    "9.2993e+11": true
+  },
+  "token_frontier_check": {
+    "1.7436e+11": true,
+    "2.4370e+11": true,
+    "3.4061e+11": true,
+    "4.7605e+11": true,
+    "6.6535e+11": true,
+    "9.2993e+11": true
+  },
+  "findings": {
+    "F_X1_wa4_menu_enforcement": {
+      "id": "F-X1",
+      "title": "WA4 superlinear composition -> menu enforcement",
+      "statement": "The two WA4 Family-X configs (X8: WA4 on blocks {2,3,4} + merge(11,32); X9: WA4 on blocks {6,7} + merge(5,64)) measured ratio_measured_over_pred of 2.068 and 1.351 respectively -- composition is superlinear (measured damage exceeds the summed-table prediction by up to ~2x), not merely offset. WA4 is out-of-regime at 12/12 blocks (eps_eff up to 0.69 vs E1 boundaries 0.03/0.003), so this is consistent with compounding a Gaussian-regime-violating quantizer with a second distortion mechanism (merging). Resolution: WA4 removed from the precision menu everywhere (plan space, both solvers, both sequential stages); X8/X9 retained in E5_familyX.csv as evidence, never fit.",
+      "wa4_exclusion_justification": "WA4 excluded: out-of-regime at 12/12 blocks (eps_eff up to 0.69 vs boundaries 0.03/0.003) and empirically superlinear in composition (Family X ratios 1.35/2.07). WA6 retained under a documented exemption: violates the strict boundary at 6/12 blocks but composition is validated by E3 family-M (b=6, 0.93-1.27) and Family X (WA6-on-all-12 + merge, ratio 0.963).",
+      "x8_ratio": 2.067852732950734,
+      "x9_ratio": 1.3513972584746008
+    },
+    "F_X2_structured_subadditivity": {
+      "id": "F-X2",
+      "title": "Structured mild sub-additivity on the menu-consistent subset",
+      "statement": "On the 10 menu-consistent configs, ratio_measured_over_pred correlates with n_quant_downstream_of_merge at r=-0.889 -- configs with MORE quantized blocks downstream of a merge point tend to measure BELOW their predicted damage (mild sub-additivity), not above. Mechanism: merging DELETES tokens whose quantization noise would otherwise have injected into the residual stream -- fewer surviving tokens carry quantization error forward, so downstream damage is structurally reduced. This sign is OPPOSITE to the QUOTA calibration-mismatch concern (which predicts downstream quantized blocks should measure ABOVE prediction, since their activation statistics have already been reshaped by an upstream merge relative to the clean-model calibration). The two mechanisms partially offset; the net effect measured here is mild sub-additivity, correctly captured within V1_E5's acceptance band.",
+      "correlation": -0.8888405452977887
+    },
+    "F_collapse_staging_collapse": {
+      "id": "F-collapse",
+      "title": "Staging collapse: JOINT ties (does not beat) BEST-SEQUENTIAL because the joint schedule is token-frontier-efficient",
+      "statement": "D_pred is separable in (schedule, bits) by construction (no cross term: DQ_TABLE entries don't depend on token count, DM_TABLE entries don't depend on bits), but the budget CONSTRAINT is coupled via N_l (a merge changes the token count, hence the BOPs cost, of every later block's bit choice). Conditional result: whenever the joint-optimal schedule is Pareto-efficient on the token axis ALONE (ignoring bits), a sufficiently strong staged search (both compression orders, a dense alpha grid, exact per-stage sub-solves) recovers it, because its stage-1 schedule selection is itself a token-axis Pareto search. Verified to hold at all 6 production budgets -- JOINT and BEST-SEQUENTIAL select bit-identical plans at every budget, which is why G1's measured delta_top1 is exactly 0.000pp with a zero-width CI: the necessary consequence of plan collapse, not a statistical artifact. Corollary: any joint>staged margin under the REAL (measured-cost) objective, rather than the predicted D_pred proxy, would have to come from cost-structure NON-additivity this predicted-cost model does not capture -- i.e. a case where the truly optimal schedule is NOT token-frontier-efficient, so no staged threshold search could reach it even in principle.",
+      "plans_identical": {
+        "1.7436e+11": true,
+        "2.4370e+11": true,
+        "3.4061e+11": true,
+        "4.7605e+11": true,
+        "6.6535e+11": true,
+        "9.2993e+11": true
+      },
+      "token_frontier_check": {
+        "1.7436e+11": true,
+        "2.4370e+11": true,
+        "3.4061e+11": true,
+        "4.7605e+11": true,
+        "6.6535e+11": true,
+        "9.2993e+11": true
+      }
+    }
+  },
+  "design_decision_amendments": {
+    "D4_amendment": {
+      "id": "D4-amendment",
+      "statement": "Design Decision D4 is amended to an operational 'validated composition territory' criterion: a precision menu entry is admissible only if its composition with the token axis has been empirically validated (E3 family-M and/or Family X measurements), not merely if it individually sits near the E1 linear regime boundary. WA8 and WA6 both satisfy this (WA6 under a documented exemption: violates the strict per-block regime boundary at 6/12 blocks, but E3 family-M (b=6, ratios 0.93-1.27) and Family X (WA6-on-all-12 + merge, ratio 0.963) empirically validate its composition behavior). WA4 does not satisfy this criterion (F-X1) and is excluded."
+    }
+  },
+  "spec_error_note": "The original E5 spec's precision menu {FP16,WA8,WA6,WA4} was itself a spec error: including WA4 violated Design Decision D4's (now-amended) validated-composition-territory requirement, since WA4 is out-of-regime at all 12 blocks and was never validated for quant+merge composition before being placed in the plan space. This is the second on-the-record spec correction this experiment (the first being gate (e)'s original 'recover every discrete Pareto-frontier point' criterion at STOP-1, corrected to the achievable convex-hull claim).",
+  "wa4_exclusion_justification": "WA4 excluded: out-of-regime at 12/12 blocks (eps_eff up to 0.69 vs boundaries 0.03/0.003) and empirically superlinear in composition (Family X ratios 1.35/2.07). WA6 retained under a documented exemption: violates the strict boundary at 6/12 blocks but composition is validated by E3 family-M (b=6, 0.93-1.27) and Family X (WA6-on-all-12 + merge, ratio 0.963).",
+  "overall_pass": false,
+  "wall_clock_seconds": {
+    "joint_solver": 1.7080029400000285,
+    "sequential_solver": 0.1913575440000841
+  }
+}

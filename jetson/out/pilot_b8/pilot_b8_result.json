@@ -1,0 +1,116 @@
+{
+  "batch_size": 8,
+  "buckets": [
+    197,
+    69
+  ],
+  "precisions": [
+    "fp16",
+    "int8_qdq"
+  ],
+  "borderline_rel_tol": 0.05,
+  "measurements": {
+    "197": {
+      "fp16": {
+        "median_ms": 1.6079609995358624,
+        "p99_ms": 1.6514160389488097,
+        "temp_c_before": 54.406,
+        "temp_c_after": 54.406,
+        "mean_power_w": 6.041,
+        "n_measure_iters": 200,
+        "n_warmup_iters": 20
+      },
+      "int8_qdq": {
+        "median_ms": 2.6043765028589405,
+        "p99_ms": 2.6444995698693674,
+        "temp_c_before": 54.406,
+        "temp_c_after": 54.625,
+        "mean_power_w": 6.14247,
+        "n_measure_iters": 200,
+        "n_warmup_iters": 20
+      },
+      "layer_fusion_check": {
+        "available": true,
+        "n_layers": 12,
+        "n_reformat_layers": 0,
+        "reformat_layer_names": [],
+        "n_layers_mentioning_int8": 7,
+        "fused_clean": true,
+        "raw_layer_names": [
+          "__myl_MoveMeanSubMulMean_myl0_0",
+          "__myl_AddSqrtDivMulMulAddMulMinMaxRounCastReshReshTran_myl0_1",
+          "__mye12578+__mye12566+__mye12554_myl0_2",
+          "/attn/MatMul_myl0_3",
+          "__myl_MaxrSubExpSumDivMul_myl0_4",
+          "/attn/MatMul_1_myl0_5",
+          "__myl_MulMinMaxRounCastReshTran_myl0_6",
+          "/attn/proj/MatMul_myl0_7",
+          "__myl_ReshAddMeanSubMulMeanAddSqrtDivMulMulAddMulMinMaxRounCast_myl0_8",
+          "/mlp/fc1/MatMul_myl0_9",
+          "/mlp/fc2/MatMul_myl0_10",
+          "__myl_Add_myl0_11"
+        ]
+      }
+    },
+    "69": {
+      "fp16": {
+        "median_ms": 0.7250030030263588,
+        "p99_ms": 0.758065732952673,
+        "temp_c_before": 54.625,
+        "temp_c_after": 54.625,
+        "mean_power_w": 6.319,
+        "n_measure_iters": 200,
+        "n_warmup_iters": 20
+      },
+      "int8_qdq": {
+        "median_ms": 0.9140785041381605,
+        "p99_ms": 0.9493167947221036,
+        "temp_c_before": 54.625,
+        "temp_c_after": 54.625,
+        "mean_power_w": 6.319,
+        "n_measure_iters": 200,
+        "n_warmup_iters": 20
+      },
+      "layer_fusion_check": {
+        "available": true,
+        "n_layers": 12,
+        "n_reformat_layers": 0,
+        "reformat_layer_names": [],
+        "n_layers_mentioning_int8": 7,
+        "fused_clean": true,
+        "raw_layer_names": [
+          "__myl_MoveMeanSubMulMean_myl0_0",
+          "__myl_AddSqrtDivMulMulAddMulMinMaxRounCastReshReshTran_myl0_1",
+          "__mye12578+__mye12566+__mye12554_myl0_2",
+          "/attn/MatMul_myl0_3",
+          "__myl_MaxrSubExpSumDivMul_myl0_4",
+          "/attn/MatMul_1_myl0_5",
+          "__myl_MulMinMaxRounCastReshTran_myl0_6",
+          "/attn/proj/MatMul_myl0_7",
+          "__myl_ReshAddMeanSubMulMeanAddSqrtDivMulMulAddMulMinMaxRounCast_myl0_8",
+          "/mlp/fc1/MatMul_myl0_9",
+          "/mlp/fc2/MatMul_myl0_10",
+          "__myl_Add_myl0_11"
+        ]
+      }
+    }
+  },
+  "bucket_verdicts": {
+    "197": "NO-GO",
+    "69": "NO-GO"
+  },
+  "overall_verdict": "NO-GO",
+  "decision_rule_note": "Pre-registered before any number was measured -- see this file's own module docstring and jetson/README.md's Batch-8 INT8 pilot section for the identical registered text.",
+  "versions": {
+    "l4t": "# R39 (release), REVISION: 2.0, GCID: 45755727, BOARD: generic, EABI: aarch64, DATE: Mon Jun  1 09:28:48 PM UTC 2026\n# KERNEL_VARIANT: oot\nTARGET_USERSPACE_LIB_DIR=nvidia\nTARGET_USERSPACE_LIB_DIR_PATH=usr/lib/aarch64-linux-gnu/nvidia",
+    "tensorrt": "TensorRT v101602",
+    "cuda": "release 13.2",
+    "python": "Python 3.12.3",
+    "torch": "2.12.0",
+    "gpu_name": "Orin",
+    "pip_freeze_hash": "c7b62d2ccc2b0d9b",
+    "nvpmodel_q": "NV Power Mode: MAXN_SUPER\n2",
+    "jetson_clocks_show": "SOC family:tegra234  Machine:NVIDIA Jetson Orin Nano Developer Kit\nOnline CPUs: 0-5, Offline CPUs: \ncpu0:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu1:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu2:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu3:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu4:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu5:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \nGPU MinFreq=624750000 MaxFreq=624750000 CurrentFreq=624750000\nActive GPU TPCs: 8\nEMC MinFreq=2133000000 MaxFreq=2133000000 CurrentFreq=2133000000\nFAN Dynamic Speed Control=nvfancontrol hwmon0_pwm1=75\nFAN Dynamic Speed Control=nvfancontrol hwmon0_pwm1_enable=1\nNV Power Mode: MAXN_SUPER"
+  },
+  "timestamp": "2026-07-29T18:43:51Z"
+}

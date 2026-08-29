@@ -1,0 +1,47 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "budgets": [
+    {
+      "budget_fraction": 0.15,
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 12,
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0
+    },
+    {
+      "budget_fraction": 0.21,
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 12,
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0
+    },
+    {
+      "budget_fraction": 0.293,
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 11,
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0
+    },
+    {
+      "budget_fraction": 0.41,
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 11,
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0
+    },
+    {
+      "budget_fraction": 0.572,
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 8,
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0
+    },
+    {
+      "budget_fraction": 0.8,
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 4,
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0
+    }
+  ]
+}

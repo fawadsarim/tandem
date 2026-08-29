@@ -1,0 +1,44 @@
+# jetson-orinnx/requirements-host.txt -- HOST-side dependencies for
+# export_segments.py AND paired_eval.py (both explicitly run on a
+# workstation/cloud GPU -- Colab in practice -- never on the Jetson
+# itself; see each file's own module docstring). Not installed by
+# setup.sh, which only ever touches the on-device venv.
+#
+# Install into your OWN isolated venv (e.g. `python3 -m venv venv_host
+# && venv_host/bin/pip install -r requirements-host.txt`), never
+# directly into a shared/pre-populated environment -- see both
+# jetson-orinnx/*_colab.py notebooks' own "Isolated venv" cell for why: an
+# earlier version of this project pip-installed this file straight into
+# Colab's shared default kernel, and the numpy pin below broke a long
+# list of Colab's own pre-installed, numpy>=2-requiring packages that
+# this project never touches (shap, opencv-python, jax, cupy-cuda12x,
+# ...), real bug found and fixed, 2026-07 (see jetson-orinnx/README.md).
+#
+# pip install -r requirements-host.txt   # in your own isolated host venv
+torch==2.11.0
+# torchvision unpinned deliberately: it must exactly match whichever torch build actually gets
+# installed by the line above -- pip's own resolver picks the torchvision release known to pair
+# with the torch version actually satisfied, which is safer than hardcoding a version here that
+# could silently mismatch. Real gap found and fixed, 2026-07: both export_segments.py and
+# paired_eval.py import torchvision.datasets/transforms, but it was missing from this file
+# entirely -- it only "worked" by accident, when this file used to be installed straight into
+# Colab's shared kernel, riding on whatever torchvision Colab happened to have pre-installed
+# before this file's torch pin overwrote it. An isolated, freshly-created venv has no such
+# pre-existing torchvision to ride on, so this line is now load-bearing, not just a safety net.
+torchvision
+timm==1.0.28
+onnx==1.16.2
+onnxruntime-gpu==1.18.1
+numpy==1.26.4
+# pandas pinned as a MATCHED PAIR with numpy above -- mirrors requirements.txt (on-device), which
+# pins the identical pair for the identical reason (paired_eval.py imports pandas directly, to
+# read plans_hw.csv). Real bug found and fixed, 2026-07: this file used to pin numpy==1.26.4 alone
+# and leave pandas unpinned, and used to be installed straight into Colab's shared default kernel
+# -- pandas there came pre-installed compiled against a newer numpy's C-API (its compiled .so
+# expects numpy>=2's larger dtype struct), and downgrading numpy without touching that pandas
+# build crashed with `ValueError: numpy.dtype size changed... Expected 96 from C header, got 88
+# from PyObject` the first time anything imported it. Now that this file is installed into its own
+# isolated, freshly-created venv (see the header above), that specific failure mode can't recur --
+# there's no pre-existing pandas to conflict with -- but the exact-version pin stays, for the same
+# cross-host/cross-device reproducibility reason every other pin in this file exists.
+pandas==2.2.2

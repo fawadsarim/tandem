@@ -1,0 +1,23 @@
+{
+  "batch_size": 8,
+  "buckets": [
+    197,
+    69
+  ],
+  "max_abs_diff_tol": 0.0001,
+  "results": {
+    "197": {
+      "fp_onnx_path": "/content/tandem/jetson/out/pilot_b8/block_seg_n197_b8_fp.onnx",
+      "fp_max_abs_diff": 9.298324584960938e-06,
+      "qdq_onnx_path": "/content/tandem/jetson/out/pilot_b8/block_seg_n197_b8_qdq.onnx",
+      "qdq_ops": 16
+    },
+    "69": {
+      "fp_onnx_path": "/content/tandem/jetson/out/pilot_b8/block_seg_n69_b8_fp.onnx",
+      "fp_max_abs_diff": 7.867813110351562e-06,
+      "qdq_onnx_path": "/content/tandem/jetson/out/pilot_b8/block_seg_n69_b8_qdq.onnx",
+      "qdq_ops": 16
+    }
+  },
+  "note": "Pilot export only -- see jetson/README.md's Batch-8 INT8 pilot section and jetson/CHARACTERIZATION.md. Does not touch any registered G1-HW out/ artifact."
+}

@@ -1,0 +1,23 @@
+# Pinned per ToMe's own INSTALL.md (facebookresearch/ToMe, commit
+# af95e4b1befa172dadccd8c81e223b10090f9579 -- see ../commits.md).
+# torch>=1.12.1 is a hard floor per their doc ("For scatter_reduce"); we
+# pin to that exact floor (not a newer release) since it's the version
+# closest to what ToMe's authors themselves tested against -- picking a
+# newer torch we cannot execution-verify here would be a bigger fidelity
+# risk than staying at the documented floor. torchvision==0.13.1 is
+# torch==1.12.1's own official companion release (confirmed: both
+# published within the same minute on PyPI, 2022-08-05). timm==0.4.12 is
+# what ToMe's patch was written and tested against (it directly reassigns
+# __class__ on timm.models.vision_transformer.Block/Attention instances)
+# -- NOT TANDEM's own modern timm pin. numpy/scipy/tqdm/Pillow pinned to
+# releases contemporaneous with torch 1.12.1 (Aug 2022) -- verified to
+# exist on PyPI, not execution-tested against ToMe's actual code (no GPU
+# in this environment); the host-equivalence gate (experiments/phase2_2_baselines/common/
+# equivalence_gate.py) is the real cross-host verification mechanism.
+torch==1.12.1
+torchvision==0.13.1
+timm==0.4.12
+scipy==1.9.3
+numpy==1.23.5
+tqdm==4.64.1
+Pillow==9.2.0

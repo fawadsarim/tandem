@@ -1,0 +1,79 @@
+# Manifest of Evidence: 06_orinnx_hardware
+
+This directory contains raw empirical artifacts and measurements captured directly from the physical NVIDIA Jetson Orin NX (8GB) hardware platform (JetPack 7.x, L4T R39.2, TensorRT 10.16.2 (`v101602`), CUDA 13.2).
+
+## Cryptographic Hashes (SHA-256)
+
+| File Path (relative to evidence/06_orinnx_hardware/) | Size (Bytes) | SHA-256 Hash |
+| :--- | :---: | :--- |
+| out/energy/energy_instrument.json | 2,478 | 22d8351c02539f0264a279ed8904ab71f044ad4330cc07cab0b3caa36b6bde90 |
+| out/energy/energy_lut.json | 34,330 | 2a0bb35468fe685e471f98d9a40e972b98478d3bff97acd9651deeb4ecf0dba1 |
+| out/energy/proxy_divergence.csv | 1,659 | 49c10ac5e4516e5a8c3a2ea2548aaaff93f582aa3ba2acfadc67a0e82065f5b1 |
+| out/energy/proxy_divergence_summary.json | 2,914 | 748849c03d5c20970694dea03dcbf03a7eab147164aa5aa216cfdacbd0d222c6 |
+| out/logs/n101_fp16_bench.log | 55,426 | 7b53c2c1b90112365655449942a808b66a591e0e3cb89d8152d9f4021a4ca6b1 |
+| out/logs/n101_fp16_build.log | 60,655 | c90572014baf4085361a831e6bf9021f9d33f8b5610ee4b21f578b78683b7fcc |
+| out/logs/n101_int8_bench.log | 54,996 | 64e32c7ab1f7895980458b05a9263ae53a10fb29bb36ec2da4f056a59da5bc21 |
+| out/logs/n101_int8_build.log | 2,686 | c6fbfcc8c00bbb900b39b524775220de2dd5755f8e35fc233ee45dbb1923d68b |
+| out/logs/n101_int8_qdq_bench.log | 55,422 | 970ea3047d3b820485e203a535e4e2bdf22e35a3ec416519ed673119d2a21165 |
+| out/logs/n101_int8_qdq_build.log | 60,998 | e63b90bf2a78ddc7df058568966d0d38c0906ff0768c72e56f7b2c1c74d36db2 |
+| out/logs/n133_fp16_bench.log | 55,078 | 630c7788a036ce94444208798f9e67629c3cf08387c3f78b7bad06c8fdbf2f80 |
+| out/logs/n133_fp16_build.log | 60,555 | f45d68fb9e1ed5ba7ad11d54117753b73cd18400cdbc979ab65a8f03010ba7dc |
+| out/logs/n133_int8_bench.log | 55,025 | 69ed58c3323b06f955a98e09cdbbacd1cf014d8f84c13390b1e68249b5d6f10b |
+| out/logs/n133_int8_build.log | 2,686 | 39c38f8f49d5bf02c6281241c0c8deeba254f9b5825af2550978e202049de14d |
+| out/logs/n133_int8_qdq_bench.log | 55,437 | 8dfc77e0dece0880c8591eaa10840549c974d44986063a118f833ac2ef246bbf |
+| out/logs/n133_int8_qdq_build.log | 61,020 | 6ad1a39c1e61a1e26adb5ae9c59e7b484f0b8424bc6c641627d179373656a538 |
+| out/logs/n165_fp16_bench.log | 55,291 | dabc10465c31c0b9831aae52d79bac47e2fb60820e5dcc24500a0491f9ef3ca7 |
+| out/logs/n165_fp16_build.log | 60,343 | c6ece6185affab9150d79d0cc4146cf57645b2579d47e96bf241b866b5ccb575 |
+| out/logs/n165_int8_bench.log | 55,011 | a16dd315d38eea243c76696a840d1403cb3388f6f441f7dc62da1b1e804c0310 |
+| out/logs/n165_int8_build.log | 2,686 | 3a4b7c5acfa3abb0c1cad5f7a000510bccb93449b8df7e4409765229b05ac46a |
+| out/logs/n165_int8_qdq_bench.log | 55,452 | bae04c356bf6640ea4e6cca71bf64f82bc87c58b4d0c4619618006ca17e6a555 |
+| out/logs/n165_int8_qdq_build.log | 61,014 | dca554eb5c66f1807e0b8b29c69cf9844a5f01e5640a36b0b76a0fd952fac1b7 |
+| out/logs/n197_fp16_bench.log | 55,239 | 4dfd07bd56d03a1fdbdbd2cebcdd4bb795d304b1fd87289b0792755462356507 |
+| out/logs/n197_fp16_build.log | 60,603 | 078eec347499e7eef45168b2176be1dd2a73fa1028d3dd6345bbd5c2d479f49d |
+| out/logs/n197_int8_bench.log | 55,230 | c70bffd57da221bcc4d47b3631e40168327014075fbbe115e3df46c7bc88e189 |
+| out/logs/n197_int8_build.log | 2,686 | 8f58d082682c6b438ad007d5fbfd073a55523475c65f5e2bef6c4e56a28073d6 |
+| out/logs/n197_int8_qdq_bench.log | 55,421 | 30910da5f253158b74435b7968cf499f3321bb3fc222a37449b7b48581774d95 |
+| out/logs/n197_int8_qdq_build.log | 61,005 | 4767a631652b4a38356fcf0ddbb0f8cd48c71c122f408f2ecc986f17da912263 |
+| out/logs/n69_fp16_bench.log | 55,429 | 16489737997cb809f96a427b05c40b223872dabd3e5478f265ebccdc1d7b4ff9 |
+| out/logs/n69_fp16_build.log | 60,682 | 0c6f2f015ab2c3677c30e0d9a197eb68f9a022b9ef44db1deab6c5cd09c05455 |
+| out/logs/n69_int8_bench.log | 55,021 | 68546df57a026eb5f1b9bf54c025819a0a40aa6c3eb40d6534930782df3681e3 |
+| out/logs/n69_int8_build.log | 2,682 | 05e1580ab52102f21cb15347a22f6679216fd43fd9cfc6d63be3271e5c5dc50a |
+| out/logs/n69_int8_qdq_bench.log | 55,407 | e1430916a61f1147434783b9176c0fd64734c92ee85bad4f0440ce514f24ecb9 |
+| out/logs/n69_int8_qdq_build.log | 61,008 | 0ef71827838991a462b9e42daa1915c1ece0862d001476d6c3b8426bedef2637 |
+| out/lut/archive/latency_lut_pb3_reference.json | 28,010 | f22bad2975eedda7d73762994ac90da80fd26ff86588ccc2fab7ddd4fa1309d2 |
+| out/lut/archive/latency_lut_pb3_superseded_unverified_clocks.json | 28,010 | f22bad2975eedda7d73762994ac90da80fd26ff86588ccc2fab7ddd4fa1309d2 |
+| out/lut/archive/latency_lut_remeasured_reprogate.json | 28,014 | 7d379ddc10b3c85c81b85be747cff263fbda20d9b3aa6b083d7fa60c06023da1 |
+| out/lut/archive/latency_lut_reprogate_verified_a.json | 29,927 | 593d656a36f03eca32ee1a7ea6f9c19f593828d93078602b780f7b9a68327701 |
+| out/lut/archive/latency_lut_reprogate_verified_b.json | 29,935 | e33b1d626e6d8c574598b62d3719a5816f710a04030222f4403ed57cf0456b88 |
+| out/lut/archive/README.md | 951 | 26e3c07ff3790ef91317a2602cecaa7168f690f744c852966cdd9fb7504ad124 |
+| out/lut/archive/reproduction_gate_orinnx.csv | 821 | e1ccd01e07a4d587ce8c26b40115779ed525076c3c6a64cb576d633ead611feb |
+| out/lut/archive/reproduction_gate_orinnx_verified_clocks.csv | 812 | 7d52d99354b2d5b396e5f4a000839fcc6b1f12c1dcad093072255d3331232484 |
+| out/lut/latency_lut.json | 36,540 | a20a9ef100f1a85c79ebf244cc4ecc0d35979dbbf88be4deb222a7a5f90682ab |
+| out/paired_eval/paired_eval_result.json | 43,685 | 048f179fffd6e3aeef3b84831512f718562744cf7545c55dc06b8ed5e478db42 |
+| out/powersweep/latency_lut_MAXN.json | 81,915 | 7573c0262044096ce1f2b0d943248bf7de844d80e686f7483de3d89f700b8718 |
+| out/powersweep/modes_available.json | 7,090 | 0e6d151fca9d344be921c664d1e918ba2bdc44a353e96de2b39dc1ff0f7adbc5 |
+| out/powersweep/powersweep_analysis_summary.json | 1,434 | f7fbadeefe9d4606d01bc3b24d3224a9106990db570e81b7d0f5f42b7734db83 |
+| out/powersweep/precision_axis_by_mode.csv | 560 | f3eec6fc777e6fd6ca96c876126397cfb8bd2278b28971c23f97d80bfac98b75 |
+| out/powersweep/proxy_divergence_by_mode.csv | 1,048 | 8972e21f6f0f60a5cf5c37bf09f1df0e1a8dbe4458a4c28b3dfa97869908a7f3 |
+| out/powersweep/reproduction_gate.csv | 811 | 7201b2abf3ac563e5d38b83d26bcec17563ac221c53860d7a3a0af04ac39093c |
+| out/replan/plans_hw.csv | 4,399 | d83ec9efab40356b32bca3dee00a5c7a9fe8823aee9e3a282ed20860b136369e |
+| out/replan/plans_hw_divergence.json | 1,364 | ceb3c36dcb34304abe476c7b22de94ebe6c2869210fd205b66f69f465028a183 |
+| out/replan/replan_manifest.json | 2,161 | 9ad028934fe320665ebf0aa6013feb55e298f58370a23505b95a54428c018d2b |
+| out/segments/block_seg_n101.onnx | 7,102,262 | c7faf21daf6cd721db9996b8be9c0ec1e49d0116e932bd6153dbabdbcc125da3 |
+| out/segments/block_seg_n101_qdq.onnx | 7,126,141 | e74f3ab427a7c97838a93f33306d5fe3c411b91166c58546c9cab5572275fb2f |
+| out/segments/block_seg_n133.onnx | 7,102,264 | 3b3d6a13bc8fbabf5d7f80fbe2f010cb9639915fefdabeb83172af8947b724f8 |
+| out/segments/block_seg_n133_qdq.onnx | 7,126,143 | ea90f7cb2bc8492bb2d7c9fb7851de0995d666345bb6e6a56c91351254c453f6 |
+| out/segments/block_seg_n165.onnx | 7,102,264 | 406b41374945510146768d2e51d7d58a9984a6963d5921675115bafb9656f905 |
+| out/segments/block_seg_n165_qdq.onnx | 7,126,143 | 00179de3497decfbcf998ef9d133197600a8fe6e19b9c9cc4599ad6c380332a8 |
+| out/segments/block_seg_n197.onnx | 7,102,264 | 04950806cc04b86beb724db0b0aafa7b87753364fdb92dc80fde36133eaeaedf |
+| out/segments/block_seg_n197_qdq.onnx | 7,126,143 | af81ce7a98fc775a9dcab4023e2a7ef74274da7bfdd2e5e7698e96d2200c31f8 |
+| out/segments/block_seg_n69.onnx | 7,102,262 | 1f8c2586dae751db8e5e63220454c9c6438381c6dfcbcf23907d02b6cb23d9e7 |
+| out/segments/block_seg_n69_qdq.onnx | 7,126,141 | e120e0a813cabb95d52ba2c79fc0ce4db66a70f6f40a58cb19fe5d3f542b6e66 |
+| out/segments/calib/calib_n101.npy | 19,857,536 | a34e7547c2a595d0a92233092097191a5531d00f1665da1c3bd25736b8f2f658 |
+| out/segments/calib/calib_n133.npy | 26,148,992 | 76d08ce8b813b0489db342e7010682ec6ef5f36dc8d6360236385ee0b38ff73d |
+| out/segments/calib/calib_n165.npy | 32,440,448 | b1123ac2921d7a9bc66d78de222af4366956d588729ed5045f8a61802baf8fb6 |
+| out/segments/calib/calib_n197.npy | 38,731,904 | f6689ee3bd274201776ffe28484670c96a05e4f69eba29b888afe2c4fcd8427f |
+| out/segments/calib/calib_n69.npy | 13,566,080 | 29a3d5b6841e56f79177542c02be39f4d4c3fbd99f930865e375a58e40eccfdb |
+| out/segments/manifest.json | 2,251 | 47b2e29e7e0115216871f7a465c8e004d222a3422d022711b9d637e6bc9a6635 |
+| out/transfer/transfer_experiment_result.json | 1,097 | 0130ae5036f5be188f43d7e01fbf2c36fa6690dd70e7c66e731db3c9264434b1 |
+| out/versions.json | 1,815 | 422dacb9aeda33717c3b87cd29c7d102a8841fc51e1bfd23bf22c2a0df2d0efc |

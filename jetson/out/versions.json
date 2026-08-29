@@ -1,0 +1,11 @@
+{
+  "l4t": "# R39 (release), REVISION: 2.0, GCID: 45755727, BOARD: generic, EABI: aarch64, DATE: Mon Jun  1 09:28:48 PM UTC 2026\n# KERNEL_VARIANT: oot\nTARGET_USERSPACE_LIB_DIR=nvidia\nTARGET_USERSPACE_LIB_DIR_PATH=usr/lib/aarch64-linux-gnu/nvidia",
+  "tensorrt": "TensorRT v101602",
+  "cuda": "release 13.2",
+  "python": "Python 3.12.3",
+  "torch": "2.12.0",
+  "gpu_name": "Orin",
+  "pip_freeze_hash": "c7b62d2ccc2b0d9b",
+  "nvpmodel_q": "NV Power Mode: MAXN_SUPER\n2",
+  "jetson_clocks_show": "SOC family:tegra234  Machine:NVIDIA Jetson Orin Nano Developer Kit\nOnline CPUs: 0-5, Offline CPUs: \ncpu0:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu1:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu2:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu3:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu4:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \ncpu5:  Governor=schedutil MinFreq=1510400 MaxFreq=1510400 CurrentFreq=1510400 IdleStates: WFI=0 c7=0 \nGPU MinFreq=624750000 MaxFreq=624750000 CurrentFreq=624750000\nActive GPU TPCs: 8\nEMC MinFreq=2133000000 MaxFreq=2133000000 CurrentFreq=2133000000\nFAN Dynamic Speed Control=nvfancontrol hwmon0_pwm1=75\nFAN Dynamic Speed Control=nvfancontrol hwmon0_pwm1_enable=1\nNV Power Mode: MAXN_SUPER"
+}

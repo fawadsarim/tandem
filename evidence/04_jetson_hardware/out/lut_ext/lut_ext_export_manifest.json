@@ -1,0 +1,31 @@
+{
+  "checkpoint_state_hash": "a17d00754ef1e5401cf33cf61af23094c48b8f4a4f5f8898d8ae36b9d81925e1",
+  "block_idx_exported": 0,
+  "d_model": 384,
+  "new_buckets": [
+    53,
+    37,
+    21
+  ],
+  "segments": [
+    {
+      "n_tokens": 53,
+      "onnx_path": "out/lut_ext/block_seg_n53.onnx",
+      "max_abs_diff": 5.066394805908203e-06,
+      "verified": true
+    },
+    {
+      "n_tokens": 37,
+      "onnx_path": "out/lut_ext/block_seg_n37.onnx",
+      "max_abs_diff": 8.58306884765625e-06,
+      "verified": true
+    },
+    {
+      "n_tokens": 21,
+      "onnx_path": "out/lut_ext/block_seg_n21.onnx",
+      "max_abs_diff": 4.5299530029296875e-06,
+      "verified": true
+    }
+  ],
+  "fp16_only_note": "INT8 is CLOSED per CHARACTERIZATION.md (batch-1 and batch-8 NO-GO, clean fused Q/DQ kernels confirmed, penalty worsens not improves with batch -- see jetson/README.md's Batch-8 INT8 pilot section). This LUT extension is FP16-only and does not re-litigate that finding."
+}

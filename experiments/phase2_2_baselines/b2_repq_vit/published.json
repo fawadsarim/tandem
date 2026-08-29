@@ -1,0 +1,27 @@
+{
+  "source": "zkkli/RepQ-ViT classification/README.md results table, as of pinned commit a160561b9233945e6680132f129d13041b787318",
+  "source_url": "https://github.com/zkkli/RepQ-ViT/blob/a160561b9233945e6680132f129d13041b787318/classification/README.md",
+  "note": "Table publishes W4/A4 and W6/A6 only -- no W8/A8 row exists in their README. See deviations.md #5.",
+  "checkpoint_identity_note": "original_top1_pct below is what THEIR checkpoint (Step A) measures at FP -- for deit_* this equals TANDEM's pinned tag (Step A==B). For vit_base_patch16_224, original_top1_pct=84.54 matches augreg_in21k_ft_in1k (FP 84.534), NOT TANDEM's pinned augreg2_in21k_ft_in1k (FP 85.108, P2.1 S8 measured 85.10) -- see common/checkpoint_pin.py's module docstring for the full source-verified evidence. Step B (comparison, pinned checkpoint) rows carry gate_status=not_applicable, not a number from this file.",
+  "setting_verbatim_quote": "Top-level README title: 'RepQ-ViT: Scale Reparameterization for Post-Training Quantization of Vision Transformers' -- 'decouples the quantization and inference processes and applies scale reparameterization to solve the extreme distribution issues in vision transformers'. classification/README.md results-table caption: 'Below are the experimental results of our proposed RepQ-ViT that you should get on ImageNet dataset.' Columns are bit-width configs (W4/A4, W6/A6), not training epochs/schedule -- a post-training (no retraining/fine-tuning) method applied to an off-the-shelf pretrained checkpoint, exactly matching what our harness runs (test_quant.py has no training loop). Applies to every reference in this file -- no per-config setting variation exists for a pure-PTQ method (unlike B1's ToMe, which has both off-the-shelf and trained-with-method DeiT numbers).",
+  "deit_tiny_patch16_224": {
+    "original_top1_pct": 72.21,
+    "w6a6": {"top1_pct": 70.76, "gate": true},
+    "w8a8": {"top1_pct": null, "gate": false, "reason": "no published reference located"}
+  },
+  "deit_small_patch16_224": {
+    "original_top1_pct": 79.85,
+    "w6a6": {"top1_pct": 78.90, "gate": true},
+    "w8a8": {"top1_pct": null, "gate": false, "reason": "no published reference located"}
+  },
+  "deit_base_patch16_224": {
+    "original_top1_pct": 81.80,
+    "w6a6": {"top1_pct": 81.27, "gate": true},
+    "w8a8": {"top1_pct": null, "gate": false, "reason": "no published reference located"}
+  },
+  "vit_base_patch16_224": {
+    "original_top1_pct": 84.54,
+    "w6a6": {"top1_pct": 83.62, "gate": true},
+    "w8a8": {"top1_pct": null, "gate": false, "reason": "no published reference located"}
+  }
+}

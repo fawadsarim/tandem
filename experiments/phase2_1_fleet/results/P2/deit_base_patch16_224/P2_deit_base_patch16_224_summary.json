@@ -1,0 +1,132 @@
+{
+  "model_name": "deit_base_patch16_224",
+  "pipeline_version": "2.2",
+  "resolved_pretrained_tag": "deit_base_patch16_224.fb_in1k",
+  "environment": {
+    "torch_version": "2.11.0+cu128",
+    "timm_version": "1.0.28",
+    "cuda_version": "12.8",
+    "gpu_name": "Tesla T4",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "python_version": "3.12.13"
+  },
+  "config": {
+    "MODEL_NAME": "deit_base_patch16_224",
+    "N_IMAGES": 5000,
+    "N_IMAGES_FINAL": 50000,
+    "BATCH_SIZE": 128,
+    "BATCH_SIZE_50K": 64,
+    "CALIB_IMAGES": 512,
+    "PHASE1_E3_RAW_CSV": "results/E3/E3_raw.csv",
+    "PHASE1_E4_RAW_CSV": "results/E4/E4_raw.csv",
+    "PHASE1_E5_SUMMARY_JSON": "results/E5/E5_summary.json"
+  },
+  "model_dims": {
+    "d": 768,
+    "n_patches": 196,
+    "n_tokens_total": 197,
+    "n_params": 86567656
+  },
+  "preprocessing": {
+    "input_size": [
+      3,
+      224,
+      224
+    ],
+    "interpolation": "bicubic",
+    "crop_pct": 0.9,
+    "mean": [
+      0.48500001430511475,
+      0.4560000002384186,
+      0.4059999883174896
+    ],
+    "std": [
+      0.2290000021457672,
+      0.2240000069141388,
+      0.22499999403953552
+    ]
+  },
+  "phase1_regression": null,
+  "data_source_working_set": "imagenet-1k",
+  "calibration": {
+    "source": "imagenet-1k-train",
+    "skip_n_applied_to_50k": 0
+  },
+  "data_source_50k": "imagenet-1k",
+  "s8_memory_note_mb": {
+    "peak_rss_before": 5177.39453125,
+    "peak_rss_after": 8026.98828125
+  },
+  "c_id": 4466548408320.0,
+  "c_min": 279446028288.0,
+  "budgets": [
+    669982261248.0,
+    937975165747.2,
+    1308698683637.76,
+    1831284847411.2,
+    2554865689559.0396,
+    3573238726656.0
+  ],
+  "budget_fractions": [
+    0.15,
+    0.21,
+    0.293,
+    0.41,
+    0.572,
+    0.8
+  ],
+  "fp_top1_5k": 0.829800009727478,
+  "fp_top1_50k": 0.8197,
+  "sanity_gate_s8": {
+    "resolved_tag": "deit_base_patch16_224.fb_in1k",
+    "measured_top1_pct": 81.97,
+    "published_top1_pct": 81.98,
+    "diff_pct_points": 0.010000000000005116,
+    "waived": false,
+    "waiver_reason": null,
+    "passed": true
+  },
+  "family_x_gate": {
+    "slope": 0.8299415099794,
+    "r2": 0.9929448351712763,
+    "n_points": 8,
+    "passed": true,
+    "exempted": false
+  },
+  "s7_binding_gate": {
+    "mode": "report_only",
+    "model_name": "deit_base_patch16_224",
+    "passed": null,
+    "per_budget_ratios": {
+      "6.6998e+11": 0.9081880254431633,
+      "9.3798e+11": 1.1994124635822867,
+      "1.3087e+12": 0.9730647953391701,
+      "1.8313e+12": 1.0869628344621667,
+      "2.5549e+12": 1.0432524640102938,
+      "3.5732e+12": 0.9563162636343712
+    }
+  },
+  "model_specific_measured_refinements": null,
+  "budget_utilization": {
+    "669982261248.0": 0.994238352721743,
+    "937975165747.2": 0.9955872283080088,
+    "1308698683637.76": 0.9911480910995044,
+    "1831284847411.2": 0.9771325600873074,
+    "2554865689559.0396": 0.9099641253647499,
+    "3573238726656.0": 0.950312174817898
+  },
+  "plan_audit_fidelity_5k": {
+    "slope": 0.9869044452722381,
+    "r2": 0.9837422493822832,
+    "n_points": 6
+  },
+  "wall_clock_seconds": {
+    "s2_quant_table": 646.85536057,
+    "s3_merge_table": 304.453888432,
+    "s6_allocator": 0.056827333999990515
+  },
+  "run_status": "pass",
+  "overall_pass": true,
+  "fidelity_scale_finding": "Per-budget prediction-fidelity excursions grow with model scale at heavy-merge budgets -- Tiny worst 1.136, Small worst 0.897 (all in band), DeiT-B 1.199@21%, ViT-B 1.334@21%/0.819@15% -- consistent with the measured Sigma_r-context dependence of the merge-quant coupling (kappa 1.15->1.60 on DeiT-B probes); headline fits and 50k measured Pareto remain valid; prediction-fidelity claims at Base-scale heavy-merge budgets are reported per-budget, not aggregate.",
+  "f_x2_scale_trend": "same-shape many-quant+merge configs show sub-additivity growing with model scale (DeiT-S 0.81-0.87 -> DeiT-B 0.74-0.76; ViT-B X2/X10 at 0.74/0.70 with X5 at 1.03); mechanism: token deletion removes quantization-noise carriers (opposite sign to QUOTA's calibration-mismatch concern); candidate refined objective (scale Dq by N_l/197 for quantized blocks downstream of merges) deferred to Phase-4 post-hoc analysis of existing Family-X data across all four models. Block-1 quant anomaly at Base scale (bit-insensitive component; WA6/WA8 ratio 2.5x vs ~16x law on DeiT-B) flagged for the same analysis."
+}

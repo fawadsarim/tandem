@@ -1,0 +1,23 @@
+{
+  "model_scope": "deit_small_patch16_224, batch=1, one representative transformer block",
+  "modes_analyzed": [
+    "MAXN"
+  ],
+  "proxy_divergence_headline_n69_fp16_by_mode": {
+    "MAXN": 2.2581561957689926
+  },
+  "established_maxn_super_reference_proxy_error_n69": null,
+  "established_reference_source_note": "Both established_* reference values below are read directly from this project's own prior committed artifacts (out/energy/proxy_divergence.csv, out/pilot_deitb/pilot_deitb_utilization.json), NOT from this task's own prompt text -- that prompt cited '1.84x' and '~2.5 TFLOPS', neither of which matches the real committed record (2.235x and 1.83 TFLOPS respectively). Likely a transcription mix-up between these two adjacent numbers from prior output; corrected here.",
+  "precision_axis_verdict": "AXIS_DOMINATION_CONFIRMED_ACROSS_OPERATING_POINTS",
+  "precision_axis_verdict_detail_by_mode": {
+    "MAXN": {
+      "n_buckets_int8_faster_over_5pct": 0,
+      "needs_manual_review": false
+    }
+  },
+  "decision_rule": "INT8 faster than FP16 by MORE than 5% at >=2 of the 5 buckets, at ANY mode -> NEEDS_MANUAL_REVIEW, do not proceed further. Otherwise -> axis domination confirmed across operating points, closes the question permanently. (Verbatim from out/powersweep/PREREGISTRATION.md.)",
+  "achieved_tflops_fp16_n197_by_mode": {
+    "MAXN": 2.433102885286402
+  },
+  "established_maxn_super_reference_tflops": null
+}

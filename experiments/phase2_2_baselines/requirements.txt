@@ -1,0 +1,13 @@
+# Orchestration environment ONLY -- for common/bops.py, common/results_io.py,
+# common/repro_gate.py, common/repo_utils.py, common/equivalence_gate.py, and
+# compare_pareto.py. Deliberately framework-free (no torch/timm): these run
+# identically regardless of which baseline-specific venv (b1/b2/b3/b4) last
+# produced a results.csv row. See deviations.md #1 for why there is no single
+# shared environment across the baselines themselves.
+#
+# Exact-pinned (this is OUR OWN orchestration code, not a legacy repo with a
+# documented floor -- pinned for cross-host reproducibility, not fidelity to
+# any external protocol).
+pandas==2.1.4
+numpy==1.26.4
+matplotlib==3.8.2

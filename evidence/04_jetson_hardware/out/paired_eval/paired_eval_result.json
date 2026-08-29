@@ -1,0 +1,2209 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "checkpoint_hash": "a17d00754ef1e5401cf33cf61af23094c48b8f4a4f5f8898d8ae36b9d81925e1",
+  "manifest_hash": "8a2c5f38ff1a3a6100a88c465d7fce9c2ccf5a176e396e04f53bc0ef02a1a1b2",
+  "calib_n": 512,
+  "paired_eval_n": 20000,
+  "n_budgets": 6,
+  "n_pooled_pairs": 120000,
+  "comparison_bops_vs_joint": {
+    "description": "Does the cost proxy matter? (originally registered comparison)",
+    "pre_registered_interpretation": "Locked in writing BEFORE this result was known, reviewed, 2026-07 -- see jetson/README.md's Budget pairing section. At this run's budgets, P2.1's own BOPs-selected plans mostly cost MORE real latency than doing nothing at all (tau_b exceeds Latency_id at most budgets). A positive delta here means the latency-aware planner wins by DECLINING TO COMPRESS, because BOPs-selected compression costs more latency than it saves on this device -- a PROXY-DIVERGENCE result, not an ALLOCATION-QUALITY result. Must not be reported without this sentence.",
+    "pooled_mean_diff_pp": 0.88,
+    "pooled_ci_low_pp": 0.7775729980189953,
+    "pooled_ci_high_pp": 0.9824270019810047,
+    "gate_mean_threshold_pp": 0.4,
+    "gate_mean_ok": true,
+    "gate_ci_ok": true,
+    "gate_pass": true,
+    "all_plans_identical": false
+  },
+  "comparison_joint_vs_staged": {
+    "description": "Does joint beat staged under real hardware cost? (thesis's central claim -- added on review, 2026-07)",
+    "status_note": "CORRECTED, reviewed, 2026-07: this run does NOT re-test experiments/phase1_E1-E5_E4a/E5_allocator_G1.py's 'staging collapse' finding, and must not be reported as such. At budgets where JOINT converges on the literal identity plan (tau_b >= Latency_id), every selection rule trivially agrees -- a degenerate coincidence, not a joint-vs-staged result. Correct framing: 'not tested -- at these budgets the latency-optimal plan is identity, so all selection rules coincide trivially.' See per_budget entries and jetson/README.md's 'Joint vs staged' section for the planned follow-up sweep (budgets set directly inside the achievable range) that actually forces compression and makes this a live test.",
+    "pooled_mean_diff_pp": 0.0,
+    "pooled_ci_low_pp": 0.0,
+    "pooled_ci_high_pp": 0.0,
+    "gate_mean_threshold_pp": 0.4,
+    "gate_mean_ok": false,
+    "gate_ci_ok": false,
+    "gate_pass": false,
+    "all_plans_identical": true
+  },
+  "per_budget": [
+    {
+      "budget_fraction": 0.15,
+      "tau_ms": 4.79683496087091,
+      "bops_plan": {
+        "bits": {
+          "1": 8,
+          "2": 8,
+          "3": 6,
+          "4": 8,
+          "5": 6,
+          "6": 8,
+          "7": 8,
+          "8": 8,
+          "9": 8,
+          "10": 8,
+          "11": 8,
+          "12": 8
+        },
+        "merges": [
+          {
+            "block": 3,
+            "r": 64
+          },
+          {
+            "block": 5,
+            "r": 64
+          }
+        ]
+      },
+      "joint_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": [
+          {
+            "block": 3,
+            "r": 32
+          }
+        ]
+      },
+      "staged_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": [
+          {
+            "block": 3,
+            "r": 32
+          }
+        ]
+      },
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 12,
+      "bops_vs_joint_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 6
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 133,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 133,
+            "bits": 6
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 69,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 69,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 69,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 69,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 69,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 69,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 69,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": true
+        }
+      ],
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0,
+      "joint_vs_staged_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 165,
+            "bits": 16
+          },
+          "differs": false
+        }
+      ],
+      "bops_top1_pct": 76.95,
+      "joint_top1_pct": 79.545,
+      "staged_top1_pct": 79.545,
+      "mean_diff_bj_pp": 2.595,
+      "mean_diff_js_pp": 0.0
+    },
+    {
+      "budget_fraction": 0.21,
+      "tau_ms": 4.980120495019946,
+      "bops_plan": {
+        "bits": {
+          "1": 8,
+          "2": 8,
+          "3": 8,
+          "4": 8,
+          "5": 8,
+          "6": 8,
+          "7": 8,
+          "8": 8,
+          "9": 8,
+          "10": 8,
+          "11": 8,
+          "12": 8
+        },
+        "merges": [
+          {
+            "block": 3,
+            "r": 32
+          },
+          {
+            "block": 5,
+            "r": 64
+          }
+        ]
+      },
+      "joint_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "staged_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 12,
+      "bops_vs_joint_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 165,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 165,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 101,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 101,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 101,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 101,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 101,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 101,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 101,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        }
+      ],
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0,
+      "joint_vs_staged_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        }
+      ],
+      "bops_top1_pct": 78.67,
+      "joint_top1_pct": 79.825,
+      "staged_top1_pct": 79.825,
+      "mean_diff_bj_pp": 1.155,
+      "mean_diff_js_pp": 0.0
+    },
+    {
+      "budget_fraction": 0.293,
+      "tau_ms": 5.488686001626775,
+      "bops_plan": {
+        "bits": {
+          "1": 16,
+          "2": 8,
+          "3": 8,
+          "4": 8,
+          "5": 8,
+          "6": 8,
+          "7": 8,
+          "8": 8,
+          "9": 8,
+          "10": 8,
+          "11": 8,
+          "12": 8
+        },
+        "merges": [
+          {
+            "block": 3,
+            "r": 32
+          },
+          {
+            "block": 5,
+            "r": 32
+          }
+        ]
+      },
+      "joint_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "staged_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 11,
+      "bops_vs_joint_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 165,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 165,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 133,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 133,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 133,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 133,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 133,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 133,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 133,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        }
+      ],
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0,
+      "joint_vs_staged_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        }
+      ],
+      "bops_top1_pct": 78.965,
+      "joint_top1_pct": 79.825,
+      "staged_top1_pct": 79.825,
+      "mean_diff_bj_pp": 0.86,
+      "mean_diff_js_pp": 0.0
+    },
+    {
+      "budget_fraction": 0.41,
+      "tau_ms": 6.534262964123627,
+      "bops_plan": {
+        "bits": {
+          "1": 16,
+          "2": 8,
+          "3": 8,
+          "4": 8,
+          "5": 8,
+          "6": 8,
+          "7": 8,
+          "8": 8,
+          "9": 8,
+          "10": 8,
+          "11": 8,
+          "12": 8
+        },
+        "merges": []
+      },
+      "joint_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "staged_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 11,
+      "bops_vs_joint_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        }
+      ],
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0,
+      "joint_vs_staged_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        }
+      ],
+      "bops_top1_pct": 79.49000000000001,
+      "joint_top1_pct": 79.825,
+      "staged_top1_pct": 79.825,
+      "mean_diff_bj_pp": 0.335,
+      "mean_diff_js_pp": 0.0
+    },
+    {
+      "budget_fraction": 0.572,
+      "tau_ms": 6.106759959948249,
+      "bops_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 8,
+          "4": 8,
+          "5": 8,
+          "6": 16,
+          "7": 8,
+          "8": 8,
+          "9": 16,
+          "10": 8,
+          "11": 8,
+          "12": 8
+        },
+        "merges": []
+      },
+      "joint_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "staged_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 8,
+      "bops_vs_joint_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        }
+      ],
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0,
+      "joint_vs_staged_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        }
+      ],
+      "bops_top1_pct": 79.675,
+      "joint_top1_pct": 79.825,
+      "staged_top1_pct": 79.825,
+      "mean_diff_bj_pp": 0.15,
+      "mean_diff_js_pp": 0.0
+    },
+    {
+      "budget_fraction": 0.8,
+      "tau_ms": 5.536755954381079,
+      "bops_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 8,
+          "8": 16,
+          "9": 16,
+          "10": 8,
+          "11": 8,
+          "12": 8
+        },
+        "merges": []
+      },
+      "joint_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "staged_plan": {
+        "bits": {
+          "1": 16,
+          "2": 16,
+          "3": 16,
+          "4": 16,
+          "5": 16,
+          "6": 16,
+          "7": 16,
+          "8": 16,
+          "9": 16,
+          "10": 16,
+          "11": 16,
+          "12": 16
+        },
+        "merges": []
+      },
+      "bops_vs_joint_identical": false,
+      "bops_vs_joint_n_blocks_differing": 4,
+      "bops_vs_joint_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 197,
+            "bits": 8
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": true
+        }
+      ],
+      "joint_vs_staged_identical": true,
+      "joint_vs_staged_n_blocks_differing": 0,
+      "joint_vs_staged_per_block_diff": [
+        {
+          "block": 1,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 2,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 3,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 4,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 5,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 6,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 7,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 8,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 9,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 10,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 11,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        },
+        {
+          "block": 12,
+          "a": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "b": {
+            "n_l": 197,
+            "bits": 16
+          },
+          "differs": false
+        }
+      ],
+      "bops_top1_pct": 79.64,
+      "joint_top1_pct": 79.825,
+      "staged_top1_pct": 79.825,
+      "mean_diff_bj_pp": 0.185,
+      "mean_diff_js_pp": 0.0
+    }
+  ],
+  "timestamp": "2026-07-29T12:41:46Z"
+}

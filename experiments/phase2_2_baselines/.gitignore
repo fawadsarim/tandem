@@ -1,0 +1,24 @@
+# Third-party repos cloned by common/repo_utils.py -- large trees with
+# their own licenses, not TANDEM code. commits.md pins the exact SHA each
+# clone must be checked out at; re-clone via any baseline's run.py.
+external/
+
+# Per-baseline virtual environments.
+*/.venv/
+.venv_orch/
+
+# Local ImageNet copies should never live inside the repo.
+imagenet/
+
+# Runtime scratch state created by a real run (checkpoints, calibration-
+# index captures, the TF32/checkpoint-override sitecustomize.py injection,
+# downloaded pinned-checkpoint weights, host-equivalence smoke subsets and
+# their separate results CSVs) -- all regenerable from source + the pinned
+# commits/seeds, none of it the actual scientific record (that's
+# results.csv, which IS committed). Every one of these is deliberately
+# named with a leading underscore for exactly this reason.
+_*/
+_*.csv
+
+__pycache__/
+*.pyc

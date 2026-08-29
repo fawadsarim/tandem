@@ -1,0 +1,737 @@
+{
+  "config": {
+    "N_IMAGES": 5000,
+    "BATCH_SIZE": 128,
+    "CALIB_IMAGES": 512,
+    "MODEL": "deit_small_patch16_224"
+  },
+  "config_hash": "2324ce485d52",
+  "environment": {
+    "torch_version": "2.11.0+cu128",
+    "timm_version": "1.0.28",
+    "cuda_version": "12.8",
+    "gpu_name": "Tesla T4",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "python_version": "3.12.13"
+  },
+  "data_source": "imagenet-1k",
+  "n_images_used": 5000,
+  "labels_available": true,
+  "activation_quantizer": {
+    "method": "per-tensor absmax (static, calibrated once over CALIB_IMAGES, frozen)",
+    "lookup_name": "AMAX_LOOKUP",
+    "note": "Replaces an earlier percentile-clipped (p999) design: with scale=p999/(2^(b-1)-1), clamp range=scale*qmax=p999 cancels b, so ~0.1% of activations clip at every bit-width including b=16, making Gate (c) unpassable in principle and making the A/WA arms clipping- rather than rounding-dominated. Absmax clamps only at/above the calibrated max, matching the weight quantizer's existing per-row absmax approach."
+  },
+  "gate_results": {
+    "a_data_source": {
+      "passed": true,
+      "data_source": "imagenet-1k"
+    },
+    "b_m_l_consistency": {
+      "passed": true,
+      "max_rel_err": 0.0
+    },
+    "c_b16_idempotence": {
+      "passed": true,
+      "A_6_b16": 2.143566963241028e-07,
+      "criterion": "A_6 mean metric",
+      "max_abs_diff": 0.03369140625,
+      "p999_abs_diff": 0.00390625,
+      "mean_abs_diff": 0.0005004279082641006,
+      "top1_agreement": 0.9995999932289124,
+      "note": "max-abs-diff is fp16-ULP-limited at logit scale (~1-3 ULP on the single most extreme value of 5M), reported not gated; idempotence is asserted on A_6, the mean output-energy metric, consistent with the MSE/KL (average) basis of the E1/E2 validation."
+    },
+    "d_weight_restoration": {
+      "passed": true,
+      "n_checked": 110
+    }
+  },
+  "per_block_arm": {
+    "W_block1": {
+      "fitted_slope": -2.186370137084828,
+      "r2": 0.998835856202861,
+      "c_l": 7.759658990732828,
+      "median_in_regime_T": 0.9705219410940595
+    },
+    "W_block2": {
+      "fitted_slope": -2.086064036775207,
+      "r2": 0.999680962561519,
+      "c_l": 2.975762670262655,
+      "median_in_regime_T": 1.2610091496605758
+    },
+    "W_block3": {
+      "fitted_slope": -2.0877937171889682,
+      "r2": 0.9997014713994926,
+      "c_l": 2.8111756708780926,
+      "median_in_regime_T": 1.3412120680075754
+    },
+    "W_block4": {
+      "fitted_slope": -2.099686299733265,
+      "r2": 0.9998080441483717,
+      "c_l": 2.4335814683278403,
+      "median_in_regime_T": 1.2967092384800392
+    },
+    "W_block5": {
+      "fitted_slope": -2.104366205243255,
+      "r2": 0.9994626932036214,
+      "c_l": 3.226357981618245,
+      "median_in_regime_T": 1.0409554171454707
+    },
+    "W_block6": {
+      "fitted_slope": -2.0829802405290665,
+      "r2": 0.999859809434485,
+      "c_l": 4.13410600751241,
+      "median_in_regime_T": 0.7942680713690202
+    },
+    "W_block7": {
+      "fitted_slope": -2.0935834062664354,
+      "r2": 0.9997689698096015,
+      "c_l": 5.587879181162516,
+      "median_in_regime_T": 0.487243873731621
+    },
+    "W_block8": {
+      "fitted_slope": -2.0938544476313954,
+      "r2": 0.9997587101254832,
+      "c_l": 8.075286609395347,
+      "median_in_regime_T": 0.34819745113175743
+    },
+    "W_block9": {
+      "fitted_slope": -2.0865750477332865,
+      "r2": 0.9999998730516519,
+      "c_l": 10.243601138305664,
+      "median_in_regime_T": 0.33636900974725636
+    },
+    "W_block10": {
+      "fitted_slope": -2.044451962605973,
+      "r2": 0.9999242304303579,
+      "c_l": 7.034381656138102,
+      "median_in_regime_T": 0.40931630435286204
+    },
+    "W_block11": {
+      "fitted_slope": -2.1404070420211085,
+      "r2": 0.9992302120789374,
+      "c_l": 3.5781046137491863,
+      "median_in_regime_T": 0.8323812346673081
+    },
+    "W_block12": {
+      "fitted_slope": -2.116508930198837,
+      "r2": 0.9992402772710985,
+      "c_l": 2.8199861946105957,
+      "median_in_regime_T": 0.7894383800091961
+    },
+    "A_block1": {
+      "fitted_slope": -1.6189789381933737,
+      "r2": 0.9505114425456744,
+      "c_l": 459.94439093424484,
+      "median_in_regime_T": NaN
+    },
+    "A_block2": {
+      "fitted_slope": -1.7376927028245164,
+      "r2": 0.9810936376782875,
+      "c_l": 121.62135879109701,
+      "median_in_regime_T": 1.2675603890022953
+    },
+    "A_block3": {
+      "fitted_slope": -1.6235845502529676,
+      "r2": 0.976742188726059,
+      "c_l": 121.21977751871744,
+      "median_in_regime_T": 0.9616890541089608
+    },
+    "A_block4": {
+      "fitted_slope": -1.5468058892735497,
+      "r2": 0.9417413837113447,
+      "c_l": 125.69840008138021,
+      "median_in_regime_T": 1.2718202801694578
+    },
+    "A_block5": {
+      "fitted_slope": -1.6103667566994568,
+      "r2": 0.9574901731986049,
+      "c_l": 137.22838692626954,
+      "median_in_regime_T": 1.1508577908394086
+    },
+    "A_block6": {
+      "fitted_slope": -1.4159404673740696,
+      "r2": 0.9823036284736972,
+      "c_l": 219.77032070719397,
+      "median_in_regime_T": 0.7913791125295779
+    },
+    "A_block7": {
+      "fitted_slope": -1.6628137780930625,
+      "r2": 0.986505425386531,
+      "c_l": 146.82134904785156,
+      "median_in_regime_T": 0.6700239822434797
+    },
+    "A_block8": {
+      "fitted_slope": -1.8307721386558855,
+      "r2": 0.9993020812256292,
+      "c_l": 112.82316398518878,
+      "median_in_regime_T": 0.9496309854855248
+    },
+    "A_block9": {
+      "fitted_slope": -1.8482286769702556,
+      "r2": 0.9984179999851504,
+      "c_l": 111.67622321370443,
+      "median_in_regime_T": 1.426825497350356
+    },
+    "A_block10": {
+      "fitted_slope": -1.7461349361018417,
+      "r2": 0.9995815782983599,
+      "c_l": 104.34570073242189,
+      "median_in_regime_T": 1.2044787384730067
+    },
+    "A_block11": {
+      "fitted_slope": -1.7702896398614978,
+      "r2": 0.992586477194591,
+      "c_l": 111.85071545613607,
+      "median_in_regime_T": 0.877540441890554
+    },
+    "A_block12": {
+      "fitted_slope": -1.750403007978782,
+      "r2": 0.9921559104035125,
+      "c_l": 117.23769728597006,
+      "median_in_regime_T": 0.6420433699636587
+    },
+    "WA_block1": {
+      "fitted_slope": -1.6325552028099066,
+      "r2": 0.9530348358561052,
+      "c_l": 468.1784643229166,
+      "median_in_regime_T": NaN
+    },
+    "WA_block2": {
+      "fitted_slope": -1.734614733437824,
+      "r2": 0.9809158016319259,
+      "c_l": 123.77630367431641,
+      "median_in_regime_T": 1.244083904641847
+    },
+    "WA_block3": {
+      "fitted_slope": -1.6229991558728512,
+      "r2": 0.9764562285046512,
+      "c_l": 123.37754723714193,
+      "median_in_regime_T": 0.9682581449554879
+    },
+    "WA_block4": {
+      "fitted_slope": -1.5501977736548842,
+      "r2": 0.9424889920785052,
+      "c_l": 127.67714119262696,
+      "median_in_regime_T": 1.268024059804114
+    },
+    "WA_block5": {
+      "fitted_slope": -1.6171543985982644,
+      "r2": 0.9588913517477149,
+      "c_l": 139.78053084309894,
+      "median_in_regime_T": 1.1511574743903557
+    },
+    "WA_block6": {
+      "fitted_slope": -1.4215553647126722,
+      "r2": 0.9826722770470157,
+      "c_l": 222.94993317464196,
+      "median_in_regime_T": 0.7873349380139205
+    },
+    "WA_block7": {
+      "fitted_slope": -1.6824793779797813,
+      "r2": 0.9885377696687242,
+      "c_l": 152.0029382080078,
+      "median_in_regime_T": 0.6682520195102315
+    },
+    "WA_block8": {
+      "fitted_slope": -1.8651351943960965,
+      "r2": 0.9989335155077586,
+      "c_l": 122.50777504475911,
+      "median_in_regime_T": 0.9177717201008471
+    },
+    "WA_block9": {
+      "fitted_slope": -1.889953509979581,
+      "r2": 0.9981881917610635,
+      "c_l": 124.1889323445638,
+      "median_in_regime_T": 1.345749623760796
+    },
+    "WA_block10": {
+      "fitted_slope": -1.7777149098952352,
+      "r2": 0.9995531923637776,
+      "c_l": 111.65867506917319,
+      "median_in_regime_T": 1.1629693178985692
+    },
+    "WA_block11": {
+      "fitted_slope": -1.788440547274094,
+      "r2": 0.9936776832623383,
+      "c_l": 115.82602697347005,
+      "median_in_regime_T": 0.8759527684568343
+    },
+    "WA_block12": {
+      "fitted_slope": -1.7586414669172388,
+      "r2": 0.993310278258529,
+      "c_l": 120.44723193359376,
+      "median_in_regime_T": 0.6437596539475126
+    }
+  },
+  "q3_fit": {
+    "slope": 1.118393480136294,
+    "r2": 0.9949623226202264,
+    "n_points": 8
+  },
+  "q3_energy_fit": {
+    "slope": 0.8331613482292698,
+    "r2": 0.9936393911246342,
+    "n_points": 8
+  },
+  "amplification_factors": [
+    {
+      "config_id": "M_p3-4_e6",
+      "block": 3,
+      "bits": 6,
+      "A_accum": 0.04025900910496712,
+      "A_single": 0.04025900910496712,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p3-4_e6",
+      "block": 4,
+      "bits": 6,
+      "A_accum": 0.09537816642522812,
+      "A_single": 0.04776996794939041,
+      "amplification": 1.9966135737473367
+    },
+    {
+      "config_id": "M_p3-4_e8",
+      "block": 3,
+      "bits": 8,
+      "A_accum": 0.002316953004896641,
+      "A_single": 0.002316953004896641,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p3-4_e8",
+      "block": 4,
+      "bits": 8,
+      "A_accum": 0.004937963707000017,
+      "A_single": 0.002220850931853056,
+      "amplification": 2.2234557196866107
+    },
+    {
+      "config_id": "M_p7-8_e6",
+      "block": 7,
+      "bits": 6,
+      "A_accum": 0.04596705462932587,
+      "A_single": 0.04596705462932587,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p7-8_e6",
+      "block": 8,
+      "bits": 6,
+      "A_accum": 0.09199837880134583,
+      "A_single": 0.026738485124707223,
+      "amplification": 3.440672811951353
+    },
+    {
+      "config_id": "M_p7-8_e8",
+      "block": 7,
+      "bits": 8,
+      "A_accum": 0.0028878108654171227,
+      "A_single": 0.0028878108654171227,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p7-8_e8",
+      "block": 8,
+      "bits": 8,
+      "A_accum": 0.006464086003601551,
+      "A_single": 0.002332191053777933,
+      "amplification": 2.7716794441563146
+    },
+    {
+      "config_id": "M_p2-10_e6",
+      "block": 2,
+      "bits": 6,
+      "A_accum": 0.04129570410847664,
+      "A_single": 0.04129570410847664,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p2-10_e6",
+      "block": 10,
+      "bits": 6,
+      "A_accum": 0.8435327764511108,
+      "A_single": 0.0248300400018692,
+      "amplification": 33.97226812311256
+    },
+    {
+      "config_id": "M_p2-10_e8",
+      "block": 2,
+      "bits": 8,
+      "A_accum": 0.0020857320740818976,
+      "A_single": 0.0020857320740818976,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p2-10_e8",
+      "block": 10,
+      "bits": 8,
+      "A_accum": 0.06903903908133507,
+      "A_single": 0.002311428263783455,
+      "amplification": 29.86856229244541
+    },
+    {
+      "config_id": "M_p6-12_e6",
+      "block": 6,
+      "bits": 6,
+      "A_accum": 0.060430583643913266,
+      "A_single": 0.060430583643913266,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p6-12_e6",
+      "block": 12,
+      "bits": 6,
+      "A_accum": 0.28474663634300235,
+      "A_single": 0.03536981422305107,
+      "amplification": 8.05055504525179
+    },
+    {
+      "config_id": "M_p6-12_e8",
+      "block": 6,
+      "bits": 8,
+      "A_accum": 0.005352385385334492,
+      "A_single": 0.005352385385334492,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p6-12_e8",
+      "block": 12,
+      "bits": 8,
+      "A_accum": 0.021784014964103697,
+      "A_single": 0.0021843596905469892,
+      "amplification": 9.972723383596556
+    },
+    {
+      "config_id": "M_p2-6-10_e6",
+      "block": 2,
+      "bits": 6,
+      "A_accum": 0.04129570410847664,
+      "A_single": 0.04129570410847664,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p2-6-10_e6",
+      "block": 6,
+      "bits": 6,
+      "A_accum": 0.29072568359375,
+      "A_single": 0.060430583643913266,
+      "amplification": 4.810903123273619
+    },
+    {
+      "config_id": "M_p2-6-10_e6",
+      "block": 10,
+      "bits": 6,
+      "A_accum": 1.0026185038566588,
+      "A_single": 0.0248300400018692,
+      "amplification": 40.37925447486923
+    },
+    {
+      "config_id": "M_p2-6-10_e8",
+      "block": 2,
+      "bits": 8,
+      "A_accum": 0.0020857320740818976,
+      "A_single": 0.0020857320740818976,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p2-6-10_e8",
+      "block": 6,
+      "bits": 8,
+      "A_accum": 0.021606544557213784,
+      "A_single": 0.005352385385334492,
+      "amplification": 4.036806582802427
+    },
+    {
+      "config_id": "M_p2-6-10_e8",
+      "block": 10,
+      "bits": 8,
+      "A_accum": 0.08640261814594269,
+      "A_single": 0.002311428263783455,
+      "amplification": 37.38061851182645
+    },
+    {
+      "config_id": "M_p4-8-12_e6",
+      "block": 4,
+      "bits": 6,
+      "A_accum": 0.04776996794939041,
+      "A_single": 0.04776996794939041,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p4-8-12_e6",
+      "block": 8,
+      "bits": 6,
+      "A_accum": 0.2091031367301941,
+      "A_single": 0.026738485124707223,
+      "amplification": 7.820306040336446
+    },
+    {
+      "config_id": "M_p4-8-12_e6",
+      "block": 12,
+      "bits": 6,
+      "A_accum": 0.42112729229927065,
+      "A_single": 0.03536981422305107,
+      "amplification": 11.90640385170062
+    },
+    {
+      "config_id": "M_p4-8-12_e8",
+      "block": 4,
+      "bits": 8,
+      "A_accum": 0.002220850931853056,
+      "A_single": 0.002220850931853056,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_p4-8-12_e8",
+      "block": 8,
+      "bits": 8,
+      "A_accum": 0.012970577631890775,
+      "A_single": 0.002332191053777933,
+      "amplification": 5.561541628795652
+    },
+    {
+      "config_id": "M_p4-8-12_e8",
+      "block": 12,
+      "bits": 8,
+      "A_accum": 0.029459049117565157,
+      "A_single": 0.0021843596905469892,
+      "amplification": 13.486354488709809
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 2,
+      "bits": 8,
+      "A_accum": 0.0020857320740818976,
+      "A_single": 0.0020857320740818976,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 3,
+      "bits": 8,
+      "A_accum": 0.004763441227376461,
+      "A_single": 0.002316953004896641,
+      "amplification": 2.0559075722767877
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 4,
+      "bits": 8,
+      "A_accum": 0.008422057721018792,
+      "A_single": 0.002220850931853056,
+      "amplification": 3.7922661085548457
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 5,
+      "bits": 8,
+      "A_accum": 0.016626851619780062,
+      "A_single": 0.0024053464978933334,
+      "amplification": 6.912455912003656
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 6,
+      "bits": 8,
+      "A_accum": 0.036732346975803375,
+      "A_single": 0.005352385385334492,
+      "amplification": 6.8627993560497
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 7,
+      "bits": 8,
+      "A_accum": 0.06048725527524948,
+      "A_single": 0.0028878108654171227,
+      "amplification": 20.945712200065618
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 8,
+      "bits": 8,
+      "A_accum": 0.08923349453210831,
+      "A_single": 0.002332191053777933,
+      "amplification": 38.261657160359285
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 9,
+      "bits": 8,
+      "A_accum": 0.12430600107908249,
+      "A_single": 0.002325475110858679,
+      "amplification": 53.454023437465494
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 10,
+      "bits": 8,
+      "A_accum": 0.15970152852535247,
+      "A_single": 0.002311428263783455,
+      "amplification": 69.09214143810176
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 11,
+      "bits": 8,
+      "A_accum": 0.17458743598461152,
+      "A_single": 0.002034011231176555,
+      "amplification": 85.83405701433765
+    },
+    {
+      "config_id": "M_full_e8",
+      "block": 12,
+      "bits": 8,
+      "A_accum": 0.16903358447551728,
+      "A_single": 0.0021843596905469892,
+      "amplification": 77.38358531656904
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 2,
+      "bits": 6,
+      "A_accum": 0.04129570410847664,
+      "A_single": 0.04129570410847664,
+      "amplification": 1.0
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 3,
+      "bits": 6,
+      "A_accum": 0.09166222198009491,
+      "A_single": 0.04025900910496712,
+      "amplification": 2.2768126692116155
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 4,
+      "bits": 6,
+      "A_accum": 0.16181479160785675,
+      "A_single": 0.04776996794939041,
+      "amplification": 3.387374925168265
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 5,
+      "bits": 6,
+      "A_accum": 0.29317844624519346,
+      "A_single": 0.050578865331411364,
+      "amplification": 5.796461512613623
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 6,
+      "bits": 6,
+      "A_accum": 0.5137476238250732,
+      "A_single": 0.060430583643913266,
+      "amplification": 8.501450637186082
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 7,
+      "bits": 6,
+      "A_accum": 0.7916051704406738,
+      "A_single": 0.04596705462932587,
+      "amplification": 17.22114189878176
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 8,
+      "bits": 6,
+      "A_accum": 1.0853501649856567,
+      "A_single": 0.026738485124707223,
+      "amplification": 40.591310985780495
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 9,
+      "bits": 6,
+      "A_accum": 1.4196123481750489,
+      "A_single": 0.026327612987160683,
+      "amplification": 53.9210428559307
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 10,
+      "bits": 6,
+      "A_accum": 1.766294380760193,
+      "A_single": 0.0248300400018692,
+      "amplification": 71.13538200611947
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 11,
+      "bits": 6,
+      "A_accum": 1.905808157157898,
+      "A_single": 0.034187177586555484,
+      "amplification": 55.74628535311964
+    },
+    {
+      "config_id": "M_full_e6",
+      "block": 12,
+      "bits": 6,
+      "A_accum": 1.9009483085632324,
+      "A_single": 0.03536981422305107,
+      "amplification": 53.74493336536538
+    }
+  ],
+  "analysis_correction": "Family M's original per-block A_l is measured against the fully clean forward, so for a downstream member it reflects BOTH local quantization AND already-propagated error from upstream members (accumulated deviation, amplified up to ~86x by depth here) -- not the marginal injected energy the additive model D~=Sum(S_l*eps_l) is defined over. V3 (q3_fit above) is now fit on P_damage = Sum(D_mse of each member's own single-block WA row) over in_regime_corrected configs (each member's OWN single-block eps_eff vs. its regime boundary), with P_energy = Sum(S_abs*A_single) reported alongside (q3_energy_fit). The original A_l/D_pred/in_regime columns are kept in E3_raw.csv as accumulated-deviation diagnostics (see amplification_factors). V1, V2, and the single-block W/A/WA arms are unaffected -- a single-block config's own A_l has no upstream member to be contaminated by, so it already was the pure local measurement.",
+  "verdicts": {
+    "V1_scaling_informative": {
+      "W": {
+        "n_in_range": 12,
+        "n_blocks": 12,
+        "slopes": [
+          -2.186370137084828,
+          -2.086064036775207,
+          -2.0877937171889682,
+          -2.099686299733265,
+          -2.104366205243255,
+          -2.0829802405290665,
+          -2.0935834062664354,
+          -2.0938544476313954,
+          -2.0865750477332865,
+          -2.044451962605973,
+          -2.1404070420211085,
+          -2.116508930198837
+        ]
+      },
+      "WA": {
+        "n_in_range": 10,
+        "n_blocks": 12,
+        "slopes": [
+          -1.6325552028099066,
+          -1.734614733437824,
+          -1.6229991558728512,
+          -1.5501977736548842,
+          -1.6171543985982644,
+          -1.4215553647126722,
+          -1.6824793779797813,
+          -1.8651351943960965,
+          -1.889953509979581,
+          -1.7777149098952352,
+          -1.788440547274094,
+          -1.7586414669172388
+        ]
+      }
+    },
+    "V2_transfer": {
+      "n_in_range": 9,
+      "n_blocks": 12,
+      "passed": false,
+      "gating": false,
+      "note": "reclassified per design decision -- allocator consumes measured D_l(b) tables; V2 characterizes Gaussian->quant transfer anisotropy",
+      "mean_log_T": -0.05666033031887078,
+      "std_log_T": 0.2711968540340185
+    },
+    "V3_quant_additivity": {
+      "slope": 1.118393480136294,
+      "r2": 0.9949623226202264,
+      "n_points": 8,
+      "passed": true
+    }
+  },
+  "overall_pass": true,
+  "wall_clock_seconds_this_run": 1552.206298476
+}

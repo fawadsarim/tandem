@@ -1,0 +1,58 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "latency_id_ms": 4.966751948813908,
+  "min_achievable_ms_v2": 3.795801996602677,
+  "min_achievable_ms_unchanged_from_v1": true,
+  "extended_fp16_floor": 21,
+  "extended_fp16_ceiling": 197,
+  "arm_b_max_r_derivation": "floor((197 - 21) / 11) = 16. The task's own '1..18' was a loose estimate, not derived from the actual floor (21) -- 16 is the correct integer bound; r values beyond this would need n_l < the measured floor and are not evaluated.",
+  "arm_a_any_plan_changed": false,
+  "arm_b_feasibility": [
+    {
+      "budget_fraction": 0.77,
+      "tau_ms": 3.824399000586709,
+      "feasible": false,
+      "best_r": null,
+      "cost_ms": null
+    },
+    {
+      "budget_fraction": 0.79,
+      "tau_ms": 3.923734039562987,
+      "feasible": false,
+      "best_r": null,
+      "cost_ms": null
+    },
+    {
+      "budget_fraction": 0.82,
+      "tau_ms": 4.072736598027404,
+      "feasible": true,
+      "best_r": 16,
+      "cost_ms": 4.057830501551507
+    },
+    {
+      "budget_fraction": 0.85,
+      "tau_ms": 4.221739156491822,
+      "feasible": true,
+      "best_r": 14,
+      "cost_ms": 4.172009429339596
+    },
+    {
+      "budget_fraction": 0.89,
+      "tau_ms": 4.420409234444378,
+      "feasible": true,
+      "best_r": 11,
+      "cost_ms": 4.366397197941296
+    },
+    {
+      "budget_fraction": 0.94,
+      "tau_ms": 4.668746831885073,
+      "feasible": true,
+      "best_r": 8,
+      "cost_ms": 4.589118996591424
+    }
+  ],
+  "verbatim_note": "The original ARM B feasibility bound at r<=11 was set by the measured LUT's floor (N=69), not by any property of uniform merging. The LUT was extended to N=21 to remove that confound; the feasibility results below supersede the earlier ones.",
+  "arm_b_feasibility_sentence": "LUT EXTENSION RESULT (supersedes the earlier v1 sentence, per this task's own instruction): the original ARM B feasibility bound at r<=11 was set by the measured LUT's floor (N=69), not by any property of uniform merging. The LUT was extended to N=21 to remove that confound (max feasible r rose from 11 to 16). Result: ARM B is now feasible at 4/6 budgets (82%, 85%, 89%, 94%); still INFEASIBLE at 77%, 79% even with r up to 16. Newly feasible (were infeasible in v1): 82%, 85%. The feasibility results above supersede the earlier v1 ones.",
+  "d_pred_note": "ARM B's D_pred remains null -- P2.1's own Dm_table.csv still only covers TANDEM's registered plan-space grid (MERGE_BLOCKS x MERGE_RS), not ARM B's uniform-every-block r values, extended range or not. Unchanged from frontier.py v1.",
+  "int8_still_closed_note": "INT8 remains CLOSED per CHARACTERIZATION.md -- this extension is FP16-only and does not re-litigate the batch-1/batch-8 NO-GO finding."
+}

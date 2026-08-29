@@ -1,0 +1,26 @@
+{
+  "seed": 0,
+  "claim1_two_point_identity": {
+    "n_trials": 10000,
+    "max_rel_err": 7.621233241254114e-16,
+    "tol": 1e-09,
+    "passed": true
+  },
+  "claim2_telescoping": {
+    "n_trials": 1000,
+    "max_rel_err": 5.260598650420539e-16,
+    "tol": 1e-08,
+    "passed": true
+  },
+  "claim3_greedy_equals_ward": {
+    "n_trials": 200,
+    "n_steps_compared": 2394,
+    "sequence_match": true,
+    "fitted_constant_deltaSSE_over_height_sq": 0.5,
+    "constant_rel_std": 2.4363741129123196e-16,
+    "const_rel_std_tol": 1e-06,
+    "passed": true
+  },
+  "all_passed": true,
+  "wall_clock_seconds": 0.0001440409999986514
+}

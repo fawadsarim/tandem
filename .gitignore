@@ -1,0 +1,29 @@
+# Secrets
+.env
+.env.*
+*.token
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.venv_orch/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+
+# OS cruft
+.DS_Store
+Thumbs.db

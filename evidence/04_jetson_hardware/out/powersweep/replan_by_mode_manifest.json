@@ -1,0 +1,32 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "budget_fractions": [
+    0.15,
+    0.21,
+    0.293,
+    0.41,
+    0.572,
+    0.8
+  ],
+  "per_mode_summary": {
+    "15W": {
+      "n_budgets_bops_dominated_by_identity": 4,
+      "n_budgets_total": 6,
+      "n_budgets_joint_staged_identical": 6,
+      "joint_ever_separates_from_staged": false
+    },
+    "25W": {
+      "n_budgets_bops_dominated_by_identity": 5,
+      "n_budgets_total": 6,
+      "n_budgets_joint_staged_identical": 6,
+      "joint_ever_separates_from_staged": false
+    },
+    "MAXN_SUPER": {
+      "n_budgets_bops_dominated_by_identity": 5,
+      "n_budgets_total": 6,
+      "n_budgets_joint_staged_identical": 6,
+      "joint_ever_separates_from_staged": false
+    }
+  },
+  "no_paired_eval_note": "NO paired accuracy evaluation was computed -- plan selection only, per this task's own scope."
+}

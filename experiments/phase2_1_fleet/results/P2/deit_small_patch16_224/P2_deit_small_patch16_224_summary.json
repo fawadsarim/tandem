@@ -1,0 +1,203 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "pipeline_version": "2.2",
+  "resolved_pretrained_tag": "deit_small_patch16_224.fb_in1k",
+  "environment": {
+    "torch_version": "2.11.0+cu128",
+    "timm_version": "1.0.28",
+    "cuda_version": "12.8",
+    "gpu_name": "Tesla T4",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "python_version": "3.12.13"
+  },
+  "config": {
+    "MODEL_NAME": "deit_small_patch16_224",
+    "N_IMAGES": 5000,
+    "N_IMAGES_FINAL": 50000,
+    "BATCH_SIZE": 128,
+    "BATCH_SIZE_50K": 64,
+    "CALIB_IMAGES": 512,
+    "PHASE1_E3_RAW_CSV": "results/E3/E3_raw.csv",
+    "PHASE1_E4_RAW_CSV": "results/E4/E4_raw.csv",
+    "PHASE1_E5_SUMMARY_JSON": "results/E5/E5_summary.json"
+  },
+  "model_dims": {
+    "d": 384,
+    "n_patches": 196,
+    "n_tokens_total": 197,
+    "n_params": 22050664
+  },
+  "preprocessing": {
+    "input_size": [
+      3,
+      224,
+      224
+    ],
+    "interpolation": "bicubic",
+    "crop_pct": 0.9,
+    "mean": [
+      0.48500001430511475,
+      0.4560000002384186,
+      0.4059999883174896
+    ],
+    "std": [
+      0.2290000021457672,
+      0.2240000069141388,
+      0.22499999403953552
+    ]
+  },
+  "phase1_regression": {
+    "phase1_source": {
+      "e3_raw": "results/E3/E3_raw.csv",
+      "e4_raw": "results/E4/E4_raw.csv",
+      "e5_summary": null
+    },
+    "environment": {
+      "torch_version": "2.11.0+cu128",
+      "timm_version": "1.0.28"
+    },
+    "dq_ratios": {
+      "block=1,bits=6": 0.9499902331102815,
+      "block=1,bits=8": 1.1179897130411172,
+      "block=2,bits=6": 0.795436851561078,
+      "block=2,bits=8": 0.93869186617176,
+      "block=3,bits=6": 1.0075779917002796,
+      "block=3,bits=8": 1.023249734941982,
+      "block=4,bits=6": 1.0969119256823792,
+      "block=4,bits=8": 0.9986398616249905,
+      "block=5,bits=6": 1.0073719627017488,
+      "block=5,bits=8": 1.0016640179038163,
+      "block=6,bits=6": 0.9830785516712715,
+      "block=6,bits=8": 1.0084044152423894,
+      "block=7,bits=6": 0.9839515686252891,
+      "block=7,bits=8": 0.9425238009081764,
+      "block=8,bits=6": 1.0390040043089426,
+      "block=8,bits=8": 0.9470795986757563,
+      "block=9,bits=6": 1.020523407643471,
+      "block=9,bits=8": 0.9449669468555338,
+      "block=10,bits=6": 0.9475740686866074,
+      "block=10,bits=8": 0.991356621688239,
+      "block=11,bits=6": 0.9788114272617625,
+      "block=11,bits=8": 0.9905530568194864,
+      "block=12,bits=6": 1.0443505689771462,
+      "block=12,bits=8": 1.0203028216867611
+    },
+    "dm_ratios": {
+      "block=1,r=32": 0.9432754183529801,
+      "block=1,r=64": 0.9705688916307538,
+      "block=1,r=98": 1.0045404864421135,
+      "block=1,r=128": 1.0032095611461271,
+      "block=3,r=32": 0.9725992225690054,
+      "block=3,r=64": 0.990270961161057,
+      "block=3,r=98": 1.0043805181184469,
+      "block=3,r=128": 1.0076921591621018,
+      "block=5,r=32": 0.9749530456567423,
+      "block=5,r=64": 0.9936869240441346,
+      "block=5,r=98": 0.9883481479079849,
+      "block=5,r=128": 1.005026325333868,
+      "block=7,r=32": 0.9900606436025564,
+      "block=7,r=64": 1.002958827995238,
+      "block=7,r=98": 1.0055612758948709,
+      "block=7,r=128": 1.009306715203086,
+      "block=9,r=32": 1.0044643034333387,
+      "block=9,r=64": 1.0158227767317116,
+      "block=9,r=98": 1.0117368838574112,
+      "block=9,r=128": 1.0077053524311077,
+      "block=11,r=32": 1.0415059652891645,
+      "block=11,r=64": 1.0293246261366589,
+      "block=11,r=98": 1.019652057684039,
+      "block=11,r=128": 1.0018929074180427
+    },
+    "dq_anomalies_outside_0.9_1.1": [
+      "block=1,bits=8",
+      "block=2,bits=6"
+    ],
+    "dm_anomalies_outside_0.9_1.1": [],
+    "combined_median_ratio": 1.0030841945706825,
+    "anomaly_note": "2 entries outside [0.9,1.1] (block=1,bits=8: ratio=1.1180; block=2,bits=6: ratio=0.7954) -- interpolation-sensitive single-cell outliers, not a systemic environment-drift signal: combined median ratio across all 48 Dq+Dm entries is 1.0031, toolchain certified (torch 2.11.0+cu128, timm 1.0.28).",
+    "fp_top1_5k_fresh": 0.8073999881744385,
+    "fp_top1_5k_phase1": null,
+    "fp_top1_5k_delta": null
+  },
+  "data_source_working_set": "imagenet-1k",
+  "calibration": {
+    "source": "imagenet-1k-train",
+    "skip_n_applied_to_50k": 0
+  },
+  "data_source_50k": "imagenet-1k",
+  "s8_memory_note_mb": {
+    "peak_rss_before": 5226.34375,
+    "peak_rss_after": 7771.3671875
+  },
+  "c_id": 1162418061312.0,
+  "c_min": 78824865792.0,
+  "budgets": [
+    174362709196.8,
+    244107792875.52,
+    340588491964.41595,
+    476591405137.92,
+    664903131070.464,
+    929934449049.6001
+  ],
+  "budget_fractions": [
+    0.15,
+    0.21,
+    0.293,
+    0.41,
+    0.572,
+    0.8
+  ],
+  "fp_top1_5k": 0.8073999881744385,
+  "fp_top1_50k": 0.79848,
+  "sanity_gate_s8": {
+    "resolved_tag": "deit_small_patch16_224.fb_in1k",
+    "measured_top1_pct": 79.848,
+    "published_top1_pct": 79.856,
+    "diff_pct_points": 0.007999999999995566,
+    "waived": false,
+    "waiver_reason": null,
+    "passed": true
+  },
+  "family_x_gate": {
+    "slope": 0.9830546720203629,
+    "r2": 0.9967542921242675,
+    "n_points": 8,
+    "passed": true,
+    "exempted": false
+  },
+  "s7_binding_gate": {
+    "mode": "report_only",
+    "model_name": "deit_small_patch16_224",
+    "passed": null,
+    "per_budget_ratios": {
+      "1.7436e+11": 0.982366545138722,
+      "2.4411e+11": 0.8973389763846502,
+      "3.4059e+11": 0.9784616416227933,
+      "4.7659e+11": 0.9633433329523899,
+      "6.6490e+11": 0.967799007013083,
+      "9.2993e+11": 0.9743379325882305
+    }
+  },
+  "model_specific_measured_refinements": null,
+  "budget_utilization": {
+    "174362709196.8": 0.9852934178838335,
+    "244107792875.52": 0.9503989879352425,
+    "340588491964.41595": 0.9824197576791833,
+    "476591405137.92": 0.8942764357671565,
+    "664903131070.464": 0.9429794515760129,
+    "929934449049.6001": 0.9621151539384245
+  },
+  "plan_audit_fidelity_5k": {
+    "slope": 0.9623802006879715,
+    "r2": 0.9986401779792563,
+    "n_points": 6
+  },
+  "wall_clock_seconds": {
+    "s2_quant_table": 234.66355358000004,
+    "s3_merge_table": 144.41049393699996,
+    "s6_allocator": 0.0815244000000348
+  },
+  "run_status": "pass",
+  "overall_pass": true,
+  "fidelity_scale_finding": "Per-budget prediction-fidelity excursions grow with model scale at heavy-merge budgets -- Tiny worst 1.136, Small worst 0.897 (all in band), DeiT-B 1.199@21%, ViT-B 1.334@21%/0.819@15% -- consistent with the measured Sigma_r-context dependence of the merge-quant coupling (kappa 1.15->1.60 on DeiT-B probes); headline fits and 50k measured Pareto remain valid; prediction-fidelity claims at Base-scale heavy-merge budgets are reported per-budget, not aggregate."
+}

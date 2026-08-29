@@ -1,0 +1,314 @@
+{
+  "predictor_all_6_nan_dropped": {
+    "slope": 1.149328279096902,
+    "r2": 0.9993432224249296,
+    "n_points": 4
+  },
+  "predictor_in_regime_subset": {
+    "slope": 1.1710471697386386,
+    "r2": 0.9999905556024519,
+    "n_points": 2
+  },
+  "acceptance_criterion": {
+    "slope_range": [
+      0.7,
+      1.3
+    ],
+    "min_r2": 0.9
+  },
+  "passed_all": true,
+  "passed_in_regime": true,
+  "per_config": [
+    {
+      "config_id": "FM_sched0_3x32-9x32",
+      "D_mse": 0.0240770417602539,
+      "P_damage_measured": 0.0205154774917602,
+      "D_pred_marginal": 0.0567373954779299,
+      "in_regime": true,
+      "ratio_D_mse_over_P_damage_measured": 1.173603771587776
+    },
+    {
+      "config_id": "FM_sched1_3x64-9x32",
+      "D_mse": 0.0519807632690429,
+      "P_damage_measured": 0.044428568171691794,
+      "D_pred_marginal": 0.0907171814589107,
+      "in_regime": false,
+      "ratio_D_mse_over_P_damage_measured": 1.1699851111151287
+    },
+    {
+      "config_id": "FM_sched2_1x32-7x32",
+      "D_mse": 0.0402080315795898,
+      "P_damage_measured": 0.0362912538864135,
+      "D_pred_marginal": 0.0555678870765289,
+      "in_regime": false,
+      "ratio_D_mse_over_P_damage_measured": 1.1079262156506153
+    },
+    {
+      "config_id": "FM_sched3_5x32-11x32",
+      "D_mse": 0.0169931034149169,
+      "P_damage_measured": 0.014574080320739601,
+      "D_pred_marginal": 0.070267818374369,
+      "in_regime": true,
+      "ratio_D_mse_over_P_damage_measured": 1.1659811830963298
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "D_mse": 0.0379570246582031,
+      "P_damage_measured": NaN,
+      "D_pred_marginal": 0.0986340293912888,
+      "in_regime": true,
+      "ratio_D_mse_over_P_damage_measured": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "D_mse": 0.1965579050292968,
+      "P_damage_measured": NaN,
+      "D_pred_marginal": 0.5403327048323191,
+      "in_regime": false,
+      "ratio_D_mse_over_P_damage_measured": NaN
+    }
+  ],
+  "sequential_context_diagnostic": [
+    {
+      "config_id": "FM_sched0_3x32-9x32",
+      "block": 3,
+      "r": 32,
+      "eps_abs_in_schedule": 0.01488713491786094,
+      "eps_abs_fs_single": 0.01488713491786094,
+      "ratio_schedule_over_single": 1.0
+    },
+    {
+      "config_id": "FM_sched0_3x32-9x32",
+      "block": 9,
+      "r": 32,
+      "eps_abs_in_schedule": 0.06753166629116551,
+      "eps_abs_fs_single": 0.046051223615764754,
+      "ratio_schedule_over_single": 1.4664467301591382
+    },
+    {
+      "config_id": "FM_sched1_3x64-9x32",
+      "block": 3,
+      "r": 64,
+      "eps_abs_in_schedule": 0.03752208629007242,
+      "eps_abs_fs_single": 0.03752208629007242,
+      "ratio_schedule_over_single": 1.0
+    },
+    {
+      "config_id": "FM_sched1_3x64-9x32",
+      "block": 9,
+      "r": 32,
+      "eps_abs_in_schedule": 0.0917223848722419,
+      "eps_abs_fs_single": 0.046051223615764754,
+      "ratio_schedule_over_single": 1.9917469650218478
+    },
+    {
+      "config_id": "FM_sched2_1x32-7x32",
+      "block": 1,
+      "r": 32,
+      "eps_abs_in_schedule": 0.01636407764525641,
+      "eps_abs_fs_single": 0.01636407764525641,
+      "ratio_schedule_over_single": 1.0
+    },
+    {
+      "config_id": "FM_sched2_1x32-7x32",
+      "block": 7,
+      "r": 32,
+      "eps_abs_in_schedule": 0.04134386468022858,
+      "eps_abs_fs_single": 0.030589412945265678,
+      "ratio_schedule_over_single": 1.3515743095235624
+    },
+    {
+      "config_id": "FM_sched3_5x32-11x32",
+      "block": 5,
+      "r": 32,
+      "eps_abs_in_schedule": 0.02013807568170992,
+      "eps_abs_fs_single": 0.02013807568170992,
+      "ratio_schedule_over_single": 1.0
+    },
+    {
+      "config_id": "FM_sched3_5x32-11x32",
+      "block": 11,
+      "r": 32,
+      "eps_abs_in_schedule": 0.08003370527718341,
+      "eps_abs_fs_single": 0.05316611928599221,
+      "ratio_schedule_over_single": 1.505351647854239
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 1,
+      "r": 8,
+      "eps_abs_in_schedule": 0.0026125860203488342,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 2,
+      "r": 8,
+      "eps_abs_in_schedule": 0.003138628237395465,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 3,
+      "r": 8,
+      "eps_abs_in_schedule": 0.0038250052932016295,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 4,
+      "r": 8,
+      "eps_abs_in_schedule": 0.004961437897237182,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 5,
+      "r": 8,
+      "eps_abs_in_schedule": 0.006321989390213474,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 6,
+      "r": 8,
+      "eps_abs_in_schedule": 0.008366350363326721,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 7,
+      "r": 8,
+      "eps_abs_in_schedule": 0.011683027152767799,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 8,
+      "r": 8,
+      "eps_abs_in_schedule": 0.016149598115723147,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 9,
+      "r": 8,
+      "eps_abs_in_schedule": 0.02145866932581071,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 10,
+      "r": 8,
+      "eps_abs_in_schedule": 0.027270480768453505,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r8",
+      "block": 11,
+      "r": 8,
+      "eps_abs_in_schedule": 0.031203799327133463,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 1,
+      "r": 16,
+      "eps_abs_in_schedule": 0.006370951532445797,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 2,
+      "r": 16,
+      "eps_abs_in_schedule": 0.007872965558005027,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 3,
+      "r": 16,
+      "eps_abs_in_schedule": 0.009949573960849622,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 4,
+      "r": 16,
+      "eps_abs_in_schedule": 0.013269843670360897,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 5,
+      "r": 16,
+      "eps_abs_in_schedule": 0.017897324595605436,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 6,
+      "r": 16,
+      "eps_abs_in_schedule": 0.025935738635063172,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 7,
+      "r": 16,
+      "eps_abs_in_schedule": 0.041114283217053835,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 8,
+      "r": 16,
+      "eps_abs_in_schedule": 0.06626502862236128,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 9,
+      "r": 16,
+      "eps_abs_in_schedule": 0.10765535983747365,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 10,
+      "r": 16,
+      "eps_abs_in_schedule": 0.18023290781034093,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    },
+    {
+      "config_id": "FM_uniform_r16",
+      "block": 11,
+      "r": 16,
+      "eps_abs_in_schedule": 0.3000468549793269,
+      "eps_abs_fs_single": NaN,
+      "ratio_schedule_over_single": NaN
+    }
+  ],
+  "note": "This reanalysis isolates the token-axis ADDITIVITY STRUCTURE from the Gaussian-sensitivity SCALING that V2_E4 used and failed on (slope=0.35): P_damage_measured sums the MEASURED D_mse of matching F_S single-point configs at the same (block, r), rather than S_abs * eps_abs. Caveat: F_S singles always merge from the full 196-token input, while later schedule points merge fewer tokens -- the sequential-context diagnostic (26b) quantifies how much this shifts the per-point energy; P_damage_measured itself is unaffected since it is built from measured damages (D_mse), not those energies. Separately, a notebook audit found eps_abs is normalized by 197*384 in MergeScheduler (197 = 196 patch tokens + CLS) when the merge cost is only ever computed over the 196 patch tokens (CLS is never a merge candidate) -- the correct divisor is 196*384, so every eps_abs value reported anywhere in E4 is ~0.51% too small (197/196 = 1.00510...). This is flagged here for the camera-ready fix; it is IRRELEVANT to this reanalysis's verdict because P_damage_measured is built entirely from measured D_mse, never from eps_abs, and no re-sweep was performed to produce this file."
+}

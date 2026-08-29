@@ -1,0 +1,26 @@
+{
+  "model_name": "deit_small_patch16_224",
+  "energy_id_mj": 48.02137565784987,
+  "budget_fractions": [
+    0.15,
+    0.21,
+    0.293,
+    0.41,
+    0.572,
+    0.8
+  ],
+  "taus_mj": [
+    39.91463779013908,
+    42.75173415863738,
+    49.25649286912248,
+    61.23248452235014,
+    57.62945483203188,
+    52.825415244940885
+  ],
+  "n_budgets_identical": 6,
+  "n_budgets_total": 6,
+  "precision_axis_exercised_anywhere": false,
+  "interpretation": "Plans are identical at all six budgets -- the axis-domination characterization holds on the energy axis as well. Device work is closed.",
+  "pre_registered_note": "See out/energy_replan/PREREGISTRATION.md, written before this script was run: 'If plans are identical at all six budgets, the axis-domination characterization holds on the energy axis as well and device work is closed. If plans differ at any budget, joint-vs-staged is a live test on this axis and whether a paired evaluation is warranted is a follow-up decision.'",
+  "no_paired_eval_note": "NO paired evaluation, NO accuracy numbers were computed -- plan selection only."
+}

@@ -1,0 +1,29 @@
+# PROVENANCE NOTE (read before using this file): this is NOT a separately saved device
+# artifact. powersweep_repro_gate.py overwrites out/powersweep/reproduction_gate.csv on every
+# run, so only the SECOND (passing) run's CSV persisted as a file on the device -- see
+# reproduction_gate.csv (the clean re-run) in this same folder for the official, current Part 1
+# result. This file transcribes the FIRST attempt's real, actually-captured terminal output
+# (the live SSH command's stdout during this session) verbatim, at the precision it was printed
+# at, so the halt-and-diagnose record is preserved rather than tidied away, per this package's
+# own "every gap named honestly" principle. The one failing row (69/int8) is reproduced at full
+# float precision because that row's exact values also appeared in the script's own
+# AssertionError message; the other 9 rows are reproduced at the 4-decimal precision the
+# printed table actually showed (their full-precision values were never separately displayed).
+#
+# Verdict at the time: 9/10 rows within 3%; bucket=69 precision=int8 at +3.19% caused a HALT per
+# the pre-registered hard-stop rule ("no lower-mode numbers are trusted until it is explained").
+# Diagnosis (5 repeat measurements of just that config, see n69_diagnostic_repeats.log in this
+# folder) pointed to single-run measurement noise at the smallest/fastest bucket, not drift. A
+# full, clean re-run (not just the failing row) was then done and gated again -- see
+# reproduction_gate.csv -- and passed 10/10.
+bucket_n_tokens,precision,committed_median_ms,remeasured_median_ms,pct_delta,within_3pct
+197,fp16,0.4139,0.4140,0.03,True
+197,int8,0.5564,0.5583,0.33,True
+165,fp16,0.3942,0.3967,0.61,True
+165,int8,0.4616,0.4680,1.38,True
+133,fp16,0.3776,0.3818,1.12,True
+133,int8,0.4341,0.4372,0.71,True
+101,fp16,0.3113,0.3105,-0.26,True
+101,int8,0.3411,0.3397,-0.40,True
+69,fp16,0.3074,0.2996,-2.54,True
+69,int8,0.32277599530061707,0.3330790004838491,3.191998578963818,False

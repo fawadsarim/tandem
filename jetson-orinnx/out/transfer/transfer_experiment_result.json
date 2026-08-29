@@ -1,0 +1,42 @@
+{
+  "definition": "cost-side transfer experiment (accuracy unavailable -- see 06_MISSING.md)",
+  "budget_fractions_used_of_nx_latency_id": [
+    0.8,
+    0.85,
+    0.9,
+    0.95
+  ],
+  "note": "NOT the pre-registered BUDGET_FRACTIONS -- those do not reach this device's achievable range. See PORT_NOTES.md / FINDINGS.md.",
+  "latency_id_nx_ms": 3.7201559971435927,
+  "latency_id_nano_ms": 4.966751948813908,
+  "nx_achievable_range_frac": [
+    0.7692610197194298,
+    1.0
+  ],
+  "rows": [
+    {
+      "budget_fraction_nx": 0.8,
+      "budget_ms": 2.976124797714874,
+      "feasible_nano": false,
+      "feasible_nx": true
+    },
+    {
+      "budget_fraction_nx": 0.85,
+      "budget_ms": 3.162132597572054,
+      "feasible_nano": false,
+      "feasible_nx": true
+    },
+    {
+      "budget_fraction_nx": 0.9,
+      "budget_ms": 3.3481403974292334,
+      "feasible_nano": false,
+      "feasible_nx": true
+    },
+    {
+      "budget_fraction_nx": 0.95,
+      "budget_ms": 3.534148197286413,
+      "feasible_nano": false,
+      "feasible_nx": true
+    }
+  ]
+}

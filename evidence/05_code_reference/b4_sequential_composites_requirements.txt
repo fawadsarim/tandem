@@ -1,0 +1,16 @@
+# B4 imports BOTH ToMe (facebookresearch/ToMe) and RepQ-ViT (zkkli/RepQ-ViT)
+# as libraries in the SAME process (see run.py) -- needs an environment
+# satisfying both simultaneously. ToMe's torch>=1.12.1 floor and
+# RepQ-ViT's unpinned-but-timm==0.4.12-compatible expectation are NOT in
+# conflict (RepQ-ViT doesn't pin an upper torch bound), so this is the
+# identical, exactly-pinned environment as b1_tome/requirements.txt (see
+# that file's header for the version-selection reasoning). Kept as a
+# separate file (rather than a symlink/reference) so each baseline's
+# environment is self-contained and independently reproducible.
+torch==1.12.1
+torchvision==0.13.1
+timm==0.4.12
+scipy==1.9.3
+numpy==1.23.5
+tqdm==4.64.1
+Pillow==9.2.0

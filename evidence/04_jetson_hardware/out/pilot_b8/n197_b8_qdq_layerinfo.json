@@ -1,0 +1,260 @@
+{"Layers": [{
+  "Name": "__myl_MoveMeanSubMulMean_myl0_0",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "tokens_in",
+    "Dimensions": [8,197,384],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_3_myl0",
+    "Dimensions": [8,197,1],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_2_myl0",
+    "Dimensions": [8,197,384],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "__myl_MoveMeanSubMulMean_0xac18daf394fed06c5459e99e3511168a",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /norm1/LayerNormalization]"
+},{
+  "Name": "__myl_AddSqrtDivMulMulAddMulMinMaxRounCastReshReshTran_myl0_1",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__myln_k_arg__bb1_2_myl0",
+    "Dimensions": [8,197,384],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_3_myl0",
+    "Dimensions": [8,197,1],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "__tran13542_myl0",
+    "Dimensions": [197,8,384],
+    "Format/Datatype": "Int8"
+  }],
+  "TacticName": "__myl_AddSqrtDivMulMulAddMulMinMaxRounCastReshReshTran_0x1f9998e31e65e57bfde9474e3839cbcf",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /norm1/LayerNormalization]\u001f[ONNX Layer: /attn/qkv/input_quantizer/QuantizeLinear]"
+},{
+  "Name": "__mye12578+__mye12566+__mye12554_myl0_2",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "__tran13542_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Int8"
+  }],
+  "Outputs": [
+  {
+    "Name": "__mye13164_myl0",
+    "Dimensions": [3,1576,384],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "sm80_xmma_gemm_i8f32_i8i32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /attn/qkv/MatMul]\u001f[ONNX Layer: /attn/qkv/input_quantizer/DequantizeLinear]\u001f[ONNX Layer: /attn/qkv/weight_quantizer/DequantizeLinear]\u001f[ONNX Layer: /attn/qkv/Add]\u001f[ONNX Layer: /attn/qkv/weight_quantizer/QuantizeLinear]\u001f[ONNX Layer: /attn/qkv/Transpose]"
+},{
+  "Name": "/attn/MatMul_myl0_3",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "__mye13164_myl0",
+    "Dimensions": [48,197,64],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye13164_myl0",
+    "Dimensions": [48,64,197],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "__mye12335_myl0",
+    "Dimensions": [48,197,197],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x128x16_stage4_warpsize2x2x1_tensor16x8x8_aligna4_alignc4",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /attn/MatMul]\u001f[ONNX Layer: /attn/Mul]"
+},{
+  "Name": "__myl_MaxrSubExpSumDivMul_myl0_4",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__mye12335_myl0",
+    "Dimensions": [8,6,197,197],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye12335_myl0",
+    "Dimensions": [8,6,197,197],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "/attn/Softmax_output.1_myl0",
+    "Dimensions": [8,6,197,197],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "__myl_MaxrSubExpSumDivMul_0x128888a53fe4f52d7e34595f183117b8",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /attn/Softmax]"
+},{
+  "Name": "/attn/MatMul_1_myl0_5",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "/attn/Softmax_output.1_myl0",
+    "Dimensions": [48,197,197],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__mye13164_myl0",
+    "Dimensions": [48,197,64],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_8_myl0",
+    "Dimensions": [48,197,64],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize128x64x8_stage3_warpsize2x2x1_ffma_aligna4_alignc4",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /attn/MatMul_1]"
+},{
+  "Name": "__myl_MulMinMaxRounCastReshTran_myl0_6",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__myln_k_arg__bb1_8_myl0",
+    "Dimensions": [48,197,64],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "__mye12781_q8_myl0",
+    "Dimensions": [8,197,6,64],
+    "Format/Datatype": "Int8"
+  }],
+  "TacticName": "__myl_MulMinMaxRounCastReshTran_0x588f2a1fb8751a9cd64c9c18513542b0",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /attn/proj/input_quantizer/QuantizeLinear]\u001f[ONNX Layer: /attn/Transpose_2]\u001e[ONNX Layer: /attn/Reshape_1]"
+},{
+  "Name": "/attn/proj/MatMul_myl0_7",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "__mye12781_q8_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Int8"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_10_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "sm80_xmma_gemm_i8f32_i8i32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /attn/proj/MatMul]\u001f[ONNX Layer: /attn/proj/input_quantizer/DequantizeLinear]\u001f[ONNX Layer: /attn/proj/weight_quantizer/DequantizeLinear]\u001f[ONNX Layer: /attn/proj/Add]\u001f[ONNX Layer: /attn/proj/Transpose]\u001f[ONNX Layer: /attn/proj/weight_quantizer/QuantizeLinear]"
+},{
+  "Name": "__myl_ReshAddMeanSubMulMeanAddSqrtDivMulMulAddMulMinMaxRounCast_myl0_8",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__myln_k_arg__bb1_10_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "tokens_in",
+    "Dimensions": [8,197,384],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "/mlp/fc2/input_quantizer/QuantizeLinear_output_0.1_12_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Int8"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_11_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "__myl_ReshAddMeanSubMulMeanAddSqrtDivMulMulAddMulMinMaxRounCast_0xd9d3f4ce85b1b49ff67e2827f02d7847",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /Add]\u001f[ONNX Layer: /norm2/LayerNormalization]\u001f[ONNX Layer: /mlp/fc1/input_quantizer/QuantizeLinear]"
+},{
+  "Name": "/mlp/fc1/MatMul_myl0_9",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "/mlp/fc2/input_quantizer/QuantizeLinear_output_0.1_12_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Int8"
+  }],
+  "Outputs": [
+  {
+    "Name": "/mlp/fc2/Add_output_0.1_13_myl0",
+    "Dimensions": [1576,1536],
+    "Format/Datatype": "Int8"
+  }],
+  "TacticName": "sm80_xmma_gemm_i8i8_i8i32_f32_tn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x32_gelu_erf",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /mlp/fc1/MatMul]\u001f[ONNX Layer: /mlp/fc1/input_quantizer/DequantizeLinear]\u001f[ONNX Layer: /mlp/fc1/weight_quantizer/DequantizeLinear]\u001f[ONNX Layer: /mlp/fc2/input_quantizer/QuantizeLinear]\u001f[ONNX Layer: /mlp/act/Mul_1]\u001f[ONNX Layer: /mlp/act/Mul]\u001f[ONNX Layer: /mlp/act/Add]\u001f[ONNX Layer: /mlp/act/Div]\u001f[ONNX Layer: /mlp/act/Erf]\u001f[ONNX Layer: /mlp/fc1/Add]\u001f[ONNX Layer: /mlp/fc1/Transpose]\u001f[ONNX Layer: /mlp/fc1/weight_quantizer/QuantizeLinear]"
+},{
+  "Name": "/mlp/fc2/MatMul_myl0_10",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "/mlp/fc2/Add_output_0.1_13_myl0",
+    "Dimensions": [1576,1536],
+    "Format/Datatype": "Int8"
+  }],
+  "Outputs": [
+  {
+    "Name": "__myln_k_arg__bb1_14_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "sm80_xmma_gemm_i8f32_i8i32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /mlp/fc2/MatMul]\u001f[ONNX Layer: /mlp/fc2/input_quantizer/DequantizeLinear]\u001f[ONNX Layer: /mlp/fc2/weight_quantizer/DequantizeLinear]\u001f[ONNX Layer: /mlp/fc2/Add]\u001f[ONNX Layer: /mlp/fc2/Transpose]\u001f[ONNX Layer: /mlp/fc2/weight_quantizer/QuantizeLinear]"
+},{
+  "Name": "__myl_Add_myl0_11",
+  "LayerType": "kgen",
+  "Inputs": [
+  {
+    "Name": "__myln_k_arg__bb1_11_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Float"
+  },
+  {
+    "Name": "__myln_k_arg__bb1_14_myl0",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "tokens_out",
+    "Dimensions": [1576,384],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "__myl_Add_0xc5eb3877114d6e9c3ce56f27cc10610e",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /Add_1]"
+}],
+"Bindings": ["tokens_in"
+,"tokens_out"
+]}
