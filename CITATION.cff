@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
-title: "TANDEM: Training-Free Joint Token and Bit-Width Allocation for Vision Transformers"
+title: "TANDEM: Training-Free Token and Precision Allocation with Device-Calibrated Cost"
 abstract: >-
-  A theoretical model of end-to-end distortion for compressed Vision
-  Transformers, D ~ sum_l S_l * eps_l, used to jointly allocate per-block
-  bit-widths and token-merge budgets without any fine-tuning -- validated
-  against published baselines (ToMe, RepQ-ViT, FQ-ViT) and on real Jetson
-  Orin hardware (Orin Nano Super and Orin NX 8GB).
+  Training-free token and precision allocation for fixed Vision Transformers
+  using classifier-logit distortion and exact finite-surrogate search.
+  A controlled comparison of analytical bit-operations and device-calibrated
+  block costs on two Jetson Orin modules, with software accuracy evaluation.
+  Block-sum estimates are not end-to-end classifier measurements.
 authors:
   - family-names: Sarim
     given-names: Muhammad Fawad Ul Hassan

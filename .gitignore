@@ -27,3 +27,10 @@ venv/
 # OS cruft
 .DS_Store
 Thumbs.db
+
+# Private author workspace and generated artifacts (not public release content)
+/output/
+/tmp/
+/paper/
+/IPO Filing/
+/START_HERE_LOCAL.md

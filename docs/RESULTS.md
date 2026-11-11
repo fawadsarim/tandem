@@ -1,5 +1,8 @@
 # Results
 
+Current interpretation: [INTERPRETATION.md](INTERPRETATION.md). Historical
+artifact labels and pooled intervals must be read with those qualifications.
+
 The canonical numbers, where each lives, and what does/doesn't regenerate
 in a GPU-free environment. See `README.md`'s results table for the
 headline claims; this document is the fuller index.
@@ -12,12 +15,12 @@ headline claims; this document is the fuller index.
 | P2.1 fleet (4 models) | `experiments/phase2_1_fleet/results/P2/<model>/` | Per-model `Dq_table.csv`, `Dm_table.csv`, `plans.csv`, `familyX.csv`, `P2_<model>_summary.json` |
 | P2.2 baselines, unified | `experiments/phase2_2_baselines/results.csv` | Every B1-B4 reproduction + comparison row, 52 rows |
 | P2.2 cross-baseline comparison | `experiments/phase2_2_baselines/compare_summary.json` | Pooled Pareto fronts, saturation point, quantizer-orthogonality finding |
-| G1-HW registered gate | `jetson/out/paired_eval/paired_eval_result.json` | The +0.88pp hardware-latency gate, n=120,000 paired predictions |
-| G1-HW vs ToMe on hardware | `jetson/out/frontier_v2/frontier_result_v2.json` | The +0.31pp TANDEM-vs-uniform-r-ToMe result, n=80,000 paired predictions |
+| G1-HW registered gate | `jetson/out/paired_eval/paired_eval_result.json` | +0.880pp mean software accuracy across six block-cost ceilings; 20,000 unique images |
+| G1-HW Ward schedule comparison | `jetson/out/frontier_v2/frontier_result_v2.json` | +0.31pp concentrated vs uniform-rate Ward merging; four shared ceilings, 20,000 unique images |
 | G1-HW energy | `jetson/out/energy/proxy_divergence_summary.json` | R²(BOPs→energy) vs R²(latency→energy) |
 | G1-HW power-mode sweep | `jetson/out/powersweep/` | Proxy divergence + precision axis, replicated across 3 power modes |
-| G1-HW-2 latency LUT (Orin NX 8GB) | `jetson-orinnx/out/lut/latency_lut.json` | 15-engine measured table, achieved-clock gated; superseded first pass archived in `lut/archive/` |
-| G1-HW-2 registered gate | `jetson-orinnx/out/paired_eval/paired_eval_result.json` | +0.93pp, n=120,000; identity at 6/6 budgets (proxy-divergence result) |
+| G1-HW-2 latency LUT (Orin NX 8GB) | `jetson-orinnx/out/lut/latency_lut.json` | Canonical main lookup table: five token counts by two engine configurations; achieved-clock gated |
+| G1-HW-2 registered gate | `jetson-orinnx/out/paired_eval/paired_eval_result.json` | +0.927pp mean across six ceilings; 20,000 unique images; identity at 6/6 budgets |
 | G1-HW-2 replan + transfer | `jetson-orinnx/out/replan/`, `jetson-orinnx/out/transfer/transfer_experiment_result.json` | L_id 3.7202 ms, achievable 76.9–100%; Nano table infeasible at 4/4 NX budgets |
 | G1-HW-2 energy | `jetson-orinnx/out/energy/proxy_divergence_summary.json` | R²(BOPs→energy)=0.024 vs R²(latency→energy)=0.992 |
 | G1-HW-2 reproduction gate | `jetson-orinnx/out/powersweep/reproduction_gate.csv` | 10/10 within 3%, max 1.88% |
@@ -55,12 +58,11 @@ one supports; the second device has its own manifest at
   before any number from it is trusted (`common/notebook_self_test.py`'s
   data-determinism check).
 
-## No genuine post-run audit report exists
+## Historical baseline-audit scope
 
 `docs/archive/` contains two **pre-run** audit checklists
 (`baselines_AUDIT_REPORT_pre-run.md`, `P22_AUDIT_REPORT_pre-run.md`) —
-criteria fixed before results were known. No post-run audit document was
-ever written; `docs/deviations.md` and `results.csv`'s own
+criteria fixed before results were known. The original baseline package did not include a post-run audit; `docs/deviations.md` and `results.csv`'s own
 `gate_status`/`gate_diff_pct_points` columns are the closest real
 substitute (see `evidence/00_MISSING.md` item 2 for the full account of
 this gap). Not fabricated here.
